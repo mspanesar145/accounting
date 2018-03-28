@@ -37,9 +37,6 @@ dependencies {
        compile("mysql:mysql-connector-java:5.1.28")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
-    // https://mvnrepository.com/artifact/com.google.guava/guava
-compile group: 'com.google.guava', name: 'guava', version: 'r05'
-
     compile('io.jsonwebtoken:jjwt:0.4')    
     testCompile("junit:junit")
    	compile group: 'net.sf.flexjson', name: 'flexjson', version:'2.1'

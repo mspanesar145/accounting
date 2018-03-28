@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +28,7 @@ import com.accounting.stateless.security.UserService;
 import com.accounting.user.bo.User;
 import com.google.common.collect.Sets;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 @RestController
-@Api(value = "User", description = "fetch User data")
 public class UserDetailController {
 
 	// @Autowired
@@ -48,16 +40,13 @@ public class UserDetailController {
 	@Autowired
 	TokenAuthenticationService tokenAuthenticationService;
 
-	@Value("${cenes.salt}")
+	@Value("${accounting.salt}")
 	private String salt;
 	/*
 	 * { "username":"Blue", "password":200, "name":"1234" }
 	 */
 
 	
-	@ApiOperation(value = "create a token", notes = "Create  ", code = 200, httpMethod = "GET", produces = "application/json")
-	@ModelAttribute(value = "user")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "product updated successfuly", response = User.class) })
 	@RequestMapping(value = "/auth/user/authenticate", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> createToken(
@@ -86,13 +75,9 @@ public class UserDetailController {
 	}
 	
 	
-	@ApiOperation(value = "fetch user detail", notes = "Fecth user detail", code = 200, httpMethod = "GET", produces = "application/json")
-	@ModelAttribute(value = "product")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "product updated successfuly", response = User.class) })
 	@RequestMapping(value = "/api/users/{userId}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<User> getUserDetail(@ApiParam(name = "userId", value = "User id", required = true) 
-		@PathVariable("userId") Long userId) {
+	public ResponseEntity<User> getUserDetail(@PathVariable("userId") Long userId) {
 		User user = new User();
 		try {
 			return new ResponseEntity<User>(userRepository.findOne(userId),
@@ -106,9 +91,6 @@ public class UserDetailController {
 	}
 	
 
-	@ApiOperation(value = "fetch own user detail", notes = "Fecth own user detail", code = 200, httpMethod = "GET", produces = "application/json")
-	@ModelAttribute(value = "user")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "User fetched successfuly", response = User.class) })
 	@RequestMapping(value = "/api/users/me", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<User> getUserDetail() {

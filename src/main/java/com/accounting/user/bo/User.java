@@ -13,8 +13,6 @@ import javax.persistence.Transient;
 import com.accounting.bo.AccountingGeneral;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 
-import io.swagger.annotations.ApiModelProperty;
-
 
 @Entity
 @Table(name="users")
@@ -23,24 +21,19 @@ public class User extends AccountingGeneral{
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	@Column(name="user_id")
-	@ApiModelProperty(hidden=true,readOnly=true)
 	private Long userId;
 	
 	
-	@ApiModelProperty(required=true)
 	@Column(unique=true,nullable=true)
 	private String username;
 	
-	@ApiModelProperty(required=true)
-	//@Column(unique=true,nullable=true)
+	@Column(name="email")
 	private String email;
 	//@JsonIgnore
-	@ApiModelProperty(required=true)
 	@Column(nullable=true)
 	private String password;
 	
 	
-	@ApiModelProperty(required=true)
 	@Column(name="facebook_id")
 	private String facebookID;
 	
@@ -49,11 +42,9 @@ public class User extends AccountingGeneral{
 	private AuthenticateType authType;
 	
 	
-	@ApiModelProperty(required=true)
 	@Column(name="facebook_auth_token")
 	private String facebookAuthToken;
 	
-	@ApiModelProperty(required=true)
 	@Column(nullable=false)
 	private String name;
 	
@@ -104,7 +95,6 @@ public class User extends AccountingGeneral{
 		this.token = token;
 	}
 
-	@ApiModelProperty(hidden=true)
 	private String token;
 
 	public String getEmail() {

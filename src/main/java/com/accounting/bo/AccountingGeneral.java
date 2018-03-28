@@ -1,7 +1,5 @@
 package com.accounting.bo;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,19 +13,16 @@ import javax.persistence.Transient;
 public class AccountingGeneral {
 
 	
-	@ApiModelProperty(readOnly=true,hidden=true)
 	@Column
 	Date createdAt;
 	
-	@ApiModelProperty(readOnly=true,hidden=true)
 	@Column
 	Date updateAt;
+	
 	@Transient
-	@ApiModelProperty(readOnly=true,hidden=true)
     int errorCode;
 	
 	@Transient
-	@ApiModelProperty(readOnly=true,hidden=true)
     String errorDetail;
 
 	public Date getCreatedAt() {

@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,40 +37,28 @@ import com.accounting.user.bo.User;
 import com.accounting.utils.CenesUtils;
 import com.google.common.collect.Sets;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 @RestController
-@Api(value = "User", description = "Create User data")
 public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
 	
-
 	@Autowired
 	UserService userService;
 	
-	@Value("${cenes.imageUploadPath}")
+	@Value("${accounting.imageUploadPath}")
 	private String imageUploadPath;
 	
-	@Value("${cenes.domain}")
+	@Value("${accounting.domain}")
 	private String domain;
 	
-	@Value("${cenes.salt}")
+	@Value("${accounting.salt}")
 	private String salt;
 	
-	@ApiOperation(value = "Create user", notes = "create user ", code = 200, httpMethod = "POST", produces = "application/json")
-	@ModelAttribute(value = "user")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "product updated successfuly") })
 	@RequestMapping(value = "/api/users/", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> createUser(
-			HttpServletResponse httpServletResponse,
-			@ApiParam(name = "User", value = "user dummy data", required = true) @RequestBody User user) {
+			HttpServletResponse httpServletResponse, @RequestBody User user) {
 		
 		User userInfo = null;
 		

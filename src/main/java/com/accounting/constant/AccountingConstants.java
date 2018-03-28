@@ -1,5 +1,8 @@
 package com.accounting.constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AccountingConstants {
 	public enum ErrorCodes {
 		UserNotFound(99),
@@ -34,5 +37,23 @@ public class AccountingConstants {
 		public int getErrorCode() {
 			return errorCode;
 		}
+	}
+	
+	public static Map<Object, String> errorMessages = new HashMap<>();
+	static {
+		errorMessages.put(ErrorCodes.UserNotFound, "User Not Found");
+		errorMessages.put(ErrorCodes.IncorrectPassword, "Incorrect Password");
+		errorMessages.put(ErrorCodes.UserNameOrEmailAlreadyTaken, "User Name Or Email Already Exist");
+		errorMessages.put(ErrorCodes.EmailLenghtMustBeSixCharater, "Email Lenght Must Be Six Charater");
+		errorMessages.put(ErrorCodes.NameLenghtMustBeSixCharater, "Name Lenght Must Be Six Charater");
+		errorMessages.put(ErrorCodes.PasswordLenghtMustBeSixCharater, "Password Lenght Must Be Six Charater");
+		errorMessages.put(ErrorCodes.UserNameLenghtMustBeSixCharater, "User Name Lenght Must Be Six Charater");
+		errorMessages.put(ErrorCodes.RowNotFound, "Row Not Found"); 
+		errorMessages.put(ErrorCodes.FriendAlreadyNotYourFriend, "Friend Already Not Your Friend");
+		errorMessages.put(ErrorCodes.FriendAlreadyYourFriend, "Friend Already Your Friend");
+		errorMessages.put(ErrorCodes.CantFollowYourSelf, "Cant Follow Your Self");
+		errorMessages.put(ErrorCodes.FacebookLoginNeedAcessToekn, "Facebook Login Need Acess Toekn");
+		errorMessages.put(ErrorCodes.AuthTypeNotPresent, "Auth Type Not Present");
+		errorMessages.put(ErrorCodes.FacebookAcessTokenExpires, "Facebook Acess Token Expires");
 	}
 }
