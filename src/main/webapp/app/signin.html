@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Accounting App | Login</title>
+	<!--/tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!--//tags -->
+</head>
+
+<div>
+
+	<!-- Fixed navbar -->
+	<div ng-include="'app/includes/header.html'"></div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="banner_bottom">
+		<div class="container" style="width:100%;">
+				
+			<div class="inner_sec_info_wthree_agile">
+				<div class="signin-form">
+					<div class="login-form-rec">
+						<form action="#" method="post">
+							Name : Abhishek Dubey
+                            <select name="">
+                            	<option value="">---Select Your File Type---</option>
+                                <option value="PDF">PDF</option>
+                                <option value="Word">Word</option>
+                                <option value="Excel">Excel</option>
+                                <option value="Videos">Videos</option>
+                            </select>
+                            
+                            <select name="">
+                            	<option value="">---Select Category---</option>
+                                <option value="">Category 1</option>
+                                <option value="">Category 2</option>
+                                <option value="">Category 3</option>
+                                <option value="">Category 4</option>
+                            </select>
+                            
+                            <select name="">
+                            	<option value="">---Select Sub Category---</option>
+                                <option value="">Sub Category 1</option>
+                                <option value="">Sub Category 2</option>
+                                <option value="">Sub Category 3</option>
+                                <option value="">Sub Category 4</option>
+                            </select>
+                            
+                            <input type="text" name="name" placeholder="Title of Document" required="">
+                            <input type="text" name="name" placeholder="Cover Image" required="">
+							<input type="text" name="name" placeholder="Uploading of file " required="">
+                            <textarea placeholder="Content of Article "></textarea>
+							
+							<input type="submit" value="Upload">
+						</form>
+					</div>
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+      </div>
+      <!-- Modal content-->
+      
+    </div>
+  </div>
+	<!--/banner_info-->
+	<div class="banner_inner_con">
+	</div>
+	<div class="services-breadcrumb">
+		<div class="inner_breadcrumb">
+
+			<ul class="short">
+				<li><a href="#!/app/signup">Sign up</a><span>|</span></li>
+				<li>Signin</li>
+			</ul>
+		</div>
+	</div>
+	<!--//banner_info-->
+	<!-- /inner_content -->
+	<div class="banner_bottom">
+		<div class="container">
+			<div class="tittle-w3ls_head">
+				<h3 class="tittle-w3ls three">SignIn to <span>your Account </span></h3>
+			</div>
+			<div class="inner_sec_info_wthree_agile">
+				<div class="signin-form">
+					<div class="login-form-rec">
+						<form action="profile.html" method="post">
+							<input type="email" name="email" placeholder="E-mail" required="">
+							<input type="password" name="password" placeholder="Password" required="">
+							<div class="tp">
+								<input type="submit" value="Signin">
+							</div>
+						</form>
+					</div>
+					<div class="login-social-grids">
+						<ul>
+							<li><a href="#" title="Login WIth Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" title="Login WIth Gmail"><i class="fa fa-envelope-square"></i></a></li>
+						</ul>
+					</div>
+					<p><a href="#!/app/signup"> Don't have an account?</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer -->
+		<div ng-include="'app/includes/footer.html'">	</div>
+	<!-- //footer -->
+</div>
+
