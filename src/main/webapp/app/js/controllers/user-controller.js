@@ -9,7 +9,7 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 		signupData['authType'] = 'email';
 		UserService.signup(signupData).then(function(response) {
 			if (response.data.errorCode != 0) {
-				console.log("error");
+				toastr["error"](response.data.errorDetail);
 				return;
 			}
 			window.location.href="#!/app/login";
@@ -17,10 +17,11 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 	}
 	
 	$scope.login = function(loginData) {
-		login['authType'] = 'email';
+		loginData['authType'] = 'email';
 		UserService.login(loginData).then(function(response) {
 			if (response.data.errorCode != 0) {
-				console.log("error");
+				//console.log("error");
+				toastr["error"](response.data.errorDetail);
 				return;
 			}
 			window.location.href="#!/app/home";

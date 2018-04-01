@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module("accounting", ['ngRoute']);
+var app = angular.module("accounting", ['ngRoute','angular-loading-bar']);
 
 app.config(function($routeProvider) {
 	

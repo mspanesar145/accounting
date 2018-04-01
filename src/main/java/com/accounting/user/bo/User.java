@@ -45,8 +45,11 @@ public class User extends AccountingGeneral{
 	@Column(name="facebook_auth_token")
 	private String facebookAuthToken;
 	
-	@Column(nullable=false)
-	private String name;
+	@Column(name="first_name")
+	private String firstName;
+	
+	@Column(name="last_name")
+	private String lastName;
 	
 	@Column(name="photo")
 	private String photo;
@@ -129,12 +132,20 @@ public class User extends AccountingGeneral{
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPhoto() {

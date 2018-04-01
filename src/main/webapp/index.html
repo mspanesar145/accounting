@@ -25,6 +25,8 @@
 <link href="app/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="app/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 <link href="app/css/font-awesome.css" rel="stylesheet">
+<link href="app/css/toastr.css" rel="stylesheet" type="text/css" />
+<link href="app/css/loading-bar.css" rel="stylesheet" type="text/css" />
 <!-- //for bootstrap working -->
 <link
 	href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800"
@@ -36,9 +38,12 @@
 
 
 <script type="text/javascript" src="app/js/angular.min.js"></script>
+<script type="text/javascript" src="app/js/loading-bar.js"></script>
 <script type="text/javascript" src="app/js/angular-route.min.js"></script>
 <script type="text/javascript" src="app/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="app/js/bootstrap.js"></script>
+<script type="text/javascript" src="app/js/toastr.js"></script>
+
 
 
 <script type="text/javascript" src="app/js/app.js"></script>
@@ -90,6 +95,23 @@
 				easingType : 'easeOutQuart'
 			});
 
+			 toastr.options = {
+					  "closeButton": false,
+					  "debug": false,
+					  "newestOnTop": false,
+					  "progressBar": false,
+					  "positionClass": "toast-top-center",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
 		});
 	</script>
 

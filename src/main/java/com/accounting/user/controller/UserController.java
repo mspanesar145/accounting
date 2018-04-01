@@ -88,6 +88,7 @@ public class UserController {
 				user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.EmailNotPresent));
 				return new ResponseEntity<User>(user,HttpStatus.PARTIAL_CONTENT);
 			}
+			
 			/*if (user.getName() == null) {
 				user.setErrorCode(ErrorCodes.NameNotPresent.getErrorCode());
 				user.setErrorDetail(ErrorCodes.NameNotPresent.toString());
@@ -98,7 +99,7 @@ public class UserController {
 			if (userInfo == null) {
 				System.out.println("[ Date : "+new Date()+" ] ,UserType : Email, Message : New signup request");
 				try {
-					user.setUsername(user.getName().toLowerCase().replaceAll(" ",".")+System.currentTimeMillis());
+					user.setUsername(user.getFirstName().toLowerCase().replaceAll(" ",".")+System.currentTimeMillis());
 					user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPassword(), salt));
 					user.setToken(establishUserAndLogin(httpServletResponse, user));
 					userInfo = userService.saveUser(user);
@@ -144,7 +145,7 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user) {
 		
 		User dbUser = userService.findUserById(user.getUserId());
-		dbUser.setName(user.getName());
+		dbUser.setFirstName(user.getFirstName());
 		dbUser.setEmail(user.getEmail());
 		if (user.getPhoto() != null && user.getPhoto().length() > 0) {
 			dbUser.setPhoto(user.getPhoto());

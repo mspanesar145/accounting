@@ -55,5 +55,10 @@ public class AccountingConstants {
 		errorMessages.put(ErrorCodes.FacebookLoginNeedAcessToekn, "Facebook Login Need Acess Toekn");
 		errorMessages.put(ErrorCodes.AuthTypeNotPresent, "Auth Type Not Present");
 		errorMessages.put(ErrorCodes.FacebookAcessTokenExpires, "Facebook Acess Token Expires");
+		errorMessages.put(ErrorCodes.EmailNotPresent, "Email Not Found");
+		errorMessages.put(ErrorCodes.IncorrectEmailOrPassword, "Incorrect Email Or Password");
+		errorMessages.put(ErrorCodes.EmailAlreadyTaken, "Email Already Exists");
+
+
 	}
 }
