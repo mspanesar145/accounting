@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 import com.accounting.repository.UserRepository;
@@ -63,7 +64,7 @@ public class UserDetailController {
 		if (user == null) {
 			user = new User();
 			user.setErrorCode(ErrorCodes.IncorrectEmailOrPassword.getErrorCode());
-			user.setErrorDetail(ErrorCodes.IncorrectEmailOrPassword.toString());
+			user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.IncorrectEmailOrPassword));
 		} else if (user.getUserId() == null) {
 			user = new User();
 			user.setErrorCode(HttpStatus.BAD_REQUEST.ordinal());

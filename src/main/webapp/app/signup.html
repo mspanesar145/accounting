@@ -16,7 +16,7 @@
 	<!--//tags -->
 </head>
 
-<div>
+<div ng-controller="UserController">
 	<div ng-include="'app/includes/header.html'"></div>
     
     <div class="modal fade" id="myModal" role="dialog">
@@ -97,12 +97,12 @@
 			<div class="inner_sec_info_wthree_agile">
 				<div class="signin-form">
 					<div class="login-form-rec">
-						<form action="#" method="post">
-							<input type="text" name="name" placeholder="First Name" required>
-							<input type="text" name="name" placeholder="Last Name" required>
-							<input type="email" name="email" placeholder="Email" required>
-							<input type="password" name="password" id="password1" placeholder="Password" required>
-							<input type="password" name="password" id="password2" placeholder="Confirm Password" required>
+						<form ng-submit="signup(signupData)">
+							<input type="text" name="name" placeholder="First Name" required ng-model="signupData.firstName">
+							<input type="text" name="name" placeholder="Last Name" required ng-model="signupData.lastName">
+							<input type="email" name="email" placeholder="Email" required ng-model="signupData.email">
+							<input type="password" name="password" id="password1" placeholder="Password" required ng-model="signupData.password">
+							<input type="password" name="password" id="password2" placeholder="Confirm Password" required ng-model="signupData.confirmPassword">
 							<input type="submit" value="Sign Up">
 						</form>
 					</div>

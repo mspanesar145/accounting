@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 import com.accounting.repository.UserRepository;
@@ -71,7 +72,7 @@ public class UserController {
 			}
 			if (user.getAuthType() == null) {
 				user.setErrorCode(ErrorCodes.AuthTypeNotPresent.getErrorCode());
-				user.setErrorDetail(ErrorCodes.AuthTypeNotPresent.toString());
+				user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.AuthTypeNotPresent));
 				return new ResponseEntity<User>(user,HttpStatus.PARTIAL_CONTENT);
 			}
 		}
@@ -79,19 +80,19 @@ public class UserController {
 		if (user.getAuthType().equals(AuthenticateType.email)) {
 			if (user.getPassword() == null) {
 				user.setErrorCode(ErrorCodes.PasswordNotPresent.getErrorCode());
-				user.setErrorDetail(ErrorCodes.PasswordNotPresent.toString());
+				user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.PasswordNotPresent));
 				return new ResponseEntity<User>(user,HttpStatus.PARTIAL_CONTENT);
 			}
 			if (user.getEmail() == null) {
 				user.setErrorCode(ErrorCodes.EmailNotPresent.getErrorCode());
-				user.setErrorDetail(ErrorCodes.EmailNotPresent.toString());
+				user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.EmailNotPresent));
 				return new ResponseEntity<User>(user,HttpStatus.PARTIAL_CONTENT);
 			}
-			if (user.getName() == null) {
+			/*if (user.getName() == null) {
 				user.setErrorCode(ErrorCodes.NameNotPresent.getErrorCode());
 				user.setErrorDetail(ErrorCodes.NameNotPresent.toString());
 				return new ResponseEntity<User>(user,HttpStatus.PARTIAL_CONTENT);
-			}
+			}*/
 			System.out.println("[ Date : "+new Date()+" ] ,UserType : Email, Message : Email Type User");
 			userInfo = userService.findUserByEmail(user.getEmail());
 			if (userInfo == null) {
@@ -105,13 +106,13 @@ public class UserController {
 					e.printStackTrace();
 					user.setPassword(null);
 					user.setErrorCode(ErrorCodes.EmailAlreadyTaken.getErrorCode());
-					user.setErrorDetail(ErrorCodes.EmailAlreadyTaken.toString());
+					user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.EmailAlreadyTaken));
 					return new ResponseEntity<User>(user, HttpStatus.OK);
 				}
 			} else {
 				user.setPassword(null);
 				user.setErrorCode(ErrorCodes.EmailAlreadyTaken.getErrorCode());
-				user.setErrorDetail(ErrorCodes.EmailAlreadyTaken.toString());
+				user.setErrorDetail(AccountingConstants.errorMessages.get(ErrorCodes.EmailAlreadyTaken));
 				System.out.println("[ Date : "+new Date()+" ] ,UserType : Email, Message : Email Already Exists");
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}

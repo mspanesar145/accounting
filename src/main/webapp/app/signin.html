@@ -19,7 +19,7 @@
 	<!--//tags -->
 </head>
 
-<div>
+<div ng-controller="UserController">
 
 	<!-- Fixed navbar -->
 	<div ng-include="'app/includes/header.html'"></div>
@@ -102,9 +102,9 @@
 			<div class="inner_sec_info_wthree_agile">
 				<div class="signin-form">
 					<div class="login-form-rec">
-						<form action="profile.html" method="post">
-							<input type="email" name="email" placeholder="E-mail" required="">
-							<input type="password" name="password" placeholder="Password" required="">
+						<form ng-submit="login(loginData)">
+							<input type="email" name="email" placeholder="E-mail" required ng-model="loginData.email">
+							<input type="password" name="password" placeholder="Password" required ng-model="loginData.password">
 							<div class="tp">
 								<input type="submit" value="Signin">
 							</div>
@@ -112,8 +112,8 @@
 					</div>
 					<div class="login-social-grids">
 						<ul>
-							<li><a href="#" title="Login WIth Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#" title="Login WIth Gmail"><i class="fa fa-envelope-square"></i></a></li>
+							<li><a title="Login WIth Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a title="Login WIth Gmail"><i class="fa fa-envelope-square"></i></a></li>
 						</ul>
 					</div>
 					<p><a href="#!/app/signup"> Don't have an account?</a></p>
