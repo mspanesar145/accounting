@@ -3,3 +3,5 @@ build
 
 .classpath
 .settings
+.gradle
+src/main/resources/application.properties
