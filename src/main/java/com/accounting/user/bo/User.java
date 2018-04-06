@@ -63,6 +63,39 @@ public class User extends AccountingGeneral{
 	@Column(name="reset_token_created_at")
 	private Date resetTokenCreatedAt;
 	
+	@Column(name="phone")
+	private String phone;
+	
+	@Column(name="city")
+	private String city;
+	
+	@Column(name="age")
+	private Integer age;
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
 	@Transient
 	private Boolean isNew;
 	
@@ -187,4 +220,5 @@ public class User extends AccountingGeneral{
 	public void setResetTokenCreatedAt(Date resetTokenCreatedAt) {
 		this.resetTokenCreatedAt = resetTokenCreatedAt;
 	}
+	
 }
