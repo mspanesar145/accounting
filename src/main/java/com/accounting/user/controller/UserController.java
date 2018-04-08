@@ -119,6 +119,8 @@ public class UserController {
 			}
 			System.out.println("[ Date : "+new Date()+" ] ,UserType : Email, Message : User Details -> "+userInfo.toString());
 			return new ResponseEntity<User>(userInfo, HttpStatus.ACCEPTED);
+		} if (user.getAuthType().equals(AuthenticateType.phone)) { 
+			
 		} else if (user.getAuthType().equals(AuthenticateType.facebook)) {
 			if (user.getFacebookAuthToken() == null) {
 				user.setErrorCode(ErrorCodes.FacebookTokenNotPresent.getErrorCode());

@@ -25,7 +25,7 @@ angular.module("accounting").service('UserService', function($q, $http){
 		  var validateResponse = {valid:true};
 		  if (signup.password != signup.confirmPassword) {
 			  validateResponse['valid'] = false;
-			  validateResponse['message'] = 'Passowrd/Confirm Password did not match.';
+			  validateResponse['message'] = 'Password/Confirm Password did not match.';
 		  }
 		  return validateResponse;
 	  }

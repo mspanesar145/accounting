@@ -7,6 +7,10 @@ public class AccountingEnums {
 	}
 	
 	public enum AuthenticateType{
-		email,facebook
+		email,facebook,phone
+	}
+	
+	public enum FileType {
+		PDF, WORD, EXCEL, VIDEOS
 	}
 }

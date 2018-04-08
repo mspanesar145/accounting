@@ -54,6 +54,9 @@ public class User extends AccountingGeneral{
 	@Column(name="photo")
 	private String photo;
 	
+	@Column(name="phone")
+	private String phone;
+	
 	@Column(name="gender")
 	private String gender;
 	
