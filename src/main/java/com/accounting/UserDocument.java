@@ -49,6 +49,10 @@ public class UserDocument extends AccountingGeneral {
 	@Column(name="created_by_id")
 	private Long createdById;
 	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name="contains_video")
+	private Boolean containsVideo = false;
+	
 	@Transient
 	private MultipartFile uploadFile;
 
@@ -130,5 +134,13 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+
+	public Boolean getContainsVideo() {
+		return containsVideo;
+	}
+
+	public void setContainsVideo(Boolean containsVideo) {
+		this.containsVideo = containsVideo;
 	}
 }
