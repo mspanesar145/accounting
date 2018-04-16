@@ -10,4 +10,12 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 			
 	}
 	
+	$scope.isCategorySelected = function(document) {
+		if (!document.categoryId) {
+			toastr["error"]("Please select category.");
+			document.categorySubId = '';
+			return false;
+		}
+	}
+	
 });

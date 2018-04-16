@@ -49,7 +49,6 @@ public class UserDocument extends AccountingGeneral {
 	@Column(name="created_by_id")
 	private Long createdById;
 	
-	@Enumerated(EnumType.ORDINAL)
 	@Column(name="contains_video")
 	private Boolean containsVideo = false;
 	
