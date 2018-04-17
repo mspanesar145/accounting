@@ -71,7 +71,7 @@ public class ProfileService {
 		File file = new File(storagePathDir);
 		if (file != null) {
 			File[] files = file.listFiles(); 
-	        if (files != null && files.length > 0) {
+	        /*if (files != null && files.length > 0) {
 	            for (File f:files) {
 	            	if (f.isFile() && f.exists()) { 
 	            		f.delete();
@@ -80,7 +80,7 @@ public class ProfileService {
 	                	System.out.println("cant delete a file due to open or error");
 	                } 
 	            }
-	        }
+	        }*/
 		}
 		InputStream inputStream = null;
         OutputStream outputStream = null;
