@@ -57,7 +57,7 @@ public class ProfileService {
 	}
 	
 	public String uploadUserDocument(MultipartFile uploadedFile) {
-		String storagePathDir = null;//imageUploadPath.replaceAll("\\[userId\\]", userId);
+		String storagePathDir = "/home/accounting/garage/accounting/src/main/webapp/assets/uploads/";//imageUploadPath.replaceAll("\\[userId\\]", userId);
 		
 		String fileName = uploadFile(uploadedFile,storagePathDir);
 		if (fileName != null) {
