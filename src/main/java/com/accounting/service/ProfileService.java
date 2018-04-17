@@ -85,7 +85,7 @@ public class ProfileService {
 		InputStream inputStream = null;
         OutputStream outputStream = null;
         String extension = uploadfile.getOriginalFilename().substring(uploadfile.getOriginalFilename().trim().lastIndexOf("."),uploadfile.getOriginalFilename().length());
-        
+        System.out.println("File Name : "+extension);
         String fileName = UUID.randomUUID().toString()+extension;
 
         File f = new File(storagePathDir);
@@ -96,7 +96,8 @@ public class ProfileService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }        
+        }
+        System.out.println(storagePathDir+fileName);
         File newFile = new File(storagePathDir+fileName);
         try {
             inputStream = uploadfile.getInputStream();
