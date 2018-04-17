@@ -35,12 +35,12 @@ public class ProfileService {
 	private String domain;
 	
 	public UserDocument saveUserDocument(UserDocument userDocument) {
-		if (userDocument.getUploadFile() != null) {
+		/*if (userDocument.getUploadFile() != null) {
 			String coverPhotoUrl = uploadUserDocument(userDocument);
 			if (coverPhotoUrl != null) {
 				userDocument.setCoverImageUrl(coverPhotoUrl);
 			}
-		}
+		}*/
 		return userDocumentRepository.save(userDocument);
 	}
 	
@@ -56,12 +56,12 @@ public class ProfileService {
 		return documentRatingRepository.save(documentRating);
 	}
 	
-	public String uploadUserDocument(UserDocument userDocument) {
+	public String uploadUserDocument(MultipartFile uploadedFile) {
 		String storagePathDir = null;//imageUploadPath.replaceAll("\\[userId\\]", userId);
 		
-		String fileName = uploadFile(userDocument.getUploadFile(),storagePathDir);
+		String fileName = uploadFile(uploadedFile,storagePathDir);
 		if (fileName != null) {
-	        return "http://"+domain+"/assets/uploads/"+userDocument.getCreatedById()+"/"+fileName;
+	        return "http://"+domain+"/assets/uploads/"+fileName;
 		}
 		return null;
 	}

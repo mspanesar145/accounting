@@ -1,9 +1,12 @@
 package com.accounting.controller;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.DocumentRating;
 import com.accounting.UserDocument;
@@ -29,5 +32,18 @@ public class SaveController {
 	@RequestMapping(value="/save/documentRating",produces="application/json")
 	public DocumentRating saveUserDocument(@RequestBody DocumentRating documentRating) {
 		return profileService.saveDocumentRating(documentRating);
+	}
+	
+	@RequestMapping(value="/save/coverimage",produces="application/json")
+	public String saveUserDocument(@RequestParam("mediaFile") MultipartFile uploadfile) {
+		JSONObject response = new JSONObject();
+		try {
+			response.put("coverImageUrl",profileService.uploadUserDocument(uploadfile));
+			return response.toString();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
