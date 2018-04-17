@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accounting.DocumentRating;
 import com.accounting.UserDocument;
+import com.accounting.bo.MyAccount;
+import com.accounting.repository.DocumentRatingRepository;
+import com.accounting.repository.MyAccountRepository;
 import com.accounting.repository.UserDocumentRepository;
 
 @Service
@@ -19,6 +24,12 @@ public class ProfileService {
 	
 	@Autowired
 	private UserDocumentRepository userDocumentRepository;
+	
+	@Autowired
+	private MyAccountRepository myAccountRepository;
+	
+	@Autowired
+	private DocumentRatingRepository documentRatingRepository;
 	
 	@Value("${accounting.domain}")
 	private String domain;
@@ -31,6 +42,18 @@ public class ProfileService {
 			}
 		}
 		return userDocumentRepository.save(userDocument);
+	}
+	
+	public List<UserDocument> findAllUserDocuments() {
+		return userDocumentRepository.findAll();
+	}
+	
+	public MyAccount saveMyAccount(MyAccount myAccount) {
+		return myAccountRepository.save(myAccount);
+	}
+	
+	public DocumentRating saveDocumentRating(DocumentRating documentRating) {
+		return documentRatingRepository.save(documentRating);
 	}
 	
 	public String uploadUserDocument(UserDocument userDocument) {
