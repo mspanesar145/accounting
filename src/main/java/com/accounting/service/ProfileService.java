@@ -61,7 +61,7 @@ public class ProfileService {
 		
 		String fileName = uploadFile(uploadedFile,storagePathDir);
 		if (fileName != null) {
-	        return "http://"+domain+"/assets/uploads/"+fileName;
+	        return "http://159.203.95.8:8181/assets/uploads/"+fileName;
 		}
 		return null;
 	}
