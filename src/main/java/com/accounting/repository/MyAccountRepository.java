@@ -7,5 +7,5 @@ import com.accounting.bo.MyAccount;
 
 @Repository
 public interface MyAccountRepository extends JpaRepository<MyAccount, Long>{
-
+	public MyAccount findByCreatedById(Long createdById);
 }

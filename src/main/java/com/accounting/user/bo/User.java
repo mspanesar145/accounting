@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.accounting.bo.AccountingGeneral;
+import com.accounting.bo.MyAccount;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 
 
@@ -71,6 +74,10 @@ public class User extends AccountingGeneral{
 	
 	@Column(name="age")
 	private Integer age;
+	
+	@ManyToOne
+	@JoinColumn(name="created_by_id",insertable=false,updatable=false)
+	public MyAccount myAccount;
 	
 	public String getPhone() {
 		return phone;
@@ -220,5 +227,12 @@ public class User extends AccountingGeneral{
 	public void setResetTokenCreatedAt(Date resetTokenCreatedAt) {
 		this.resetTokenCreatedAt = resetTokenCreatedAt;
 	}
-	
+
+	public MyAccount getMyAccount() {
+		return myAccount;
+	}
+
+	public void setMyAccount(MyAccount myAccount) {
+		this.myAccount = myAccount;
+	}
 }

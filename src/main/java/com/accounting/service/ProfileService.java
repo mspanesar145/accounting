@@ -56,6 +56,10 @@ public class ProfileService {
 		return documentRatingRepository.save(documentRating);
 	}
 	
+	public MyAccount findMyAccountByCreatedById(Long createdById) {
+		return myAccountRepository.findByCreatedById(createdById);
+	}
+	
 	public String uploadUserDocument(MultipartFile uploadedFile) {
 		String storagePathDir = "/home/accounting/garage/accounting/src/main/webapp/assets/uploads/";//imageUploadPath.replaceAll("\\[userId\\]", userId);
 		
