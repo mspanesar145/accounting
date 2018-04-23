@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.MyAccount;
 import com.accounting.service.ProfileService;
 
 @RestController
@@ -18,5 +19,10 @@ public class SearchController {
 	@RequestMapping(value="/find/allUserDocuments",produces="application/json")
 	public List<UserDocument> findAllUserDocument() {
 		return profileService.findAllUserDocuments();
+	}
+	
+	@RequestMapping(value="/find/myAccountByCreatedById",produces="application/json")
+	public MyAccount findMyAccountByCreatedById(Long createdById) {
+		return profileService.findMyAccountByCreatedById(createdById);
 	}
 }
