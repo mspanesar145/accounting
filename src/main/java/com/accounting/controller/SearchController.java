@@ -25,4 +25,9 @@ public class SearchController {
 	public MyAccount findMyAccountByCreatedById(Long createdById) {
 		return profileService.findMyAccountByCreatedById(createdById);
 	}
+	
+	@RequestMapping(value="/find/allContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId",produces="application/json")
+	public List<UserDocument> findAllContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId(Long categoryId,Long subCategoryId) {
+		return profileService.findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(categoryId, subCategoryId);
+	}
 }

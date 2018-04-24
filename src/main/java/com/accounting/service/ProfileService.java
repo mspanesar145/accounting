@@ -48,6 +48,10 @@ public class ProfileService {
 		return userDocumentRepository.findAll();
 	}
 	
+	public List<UserDocument> findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(Long categoryId,Long subCategoryId) {
+		return userDocumentRepository.findByNullContentLinkAndCategoryIdAndSubcategoryId(categoryId, subCategoryId);
+	}
+	
 	public MyAccount saveMyAccount(MyAccount myAccount) {
 		return myAccountRepository.save(myAccount);
 	}

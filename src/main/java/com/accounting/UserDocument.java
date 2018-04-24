@@ -40,6 +40,9 @@ public class UserDocument extends AccountingGeneral {
 	@Column(name="cover_image_url")
 	private String coverImageUrl;
 	
+	@Column(name="content_link_url")
+	private String contentLinkUrl;
+	
 	@Column(name="video_link")
 	private String videoLink;
 	
@@ -141,5 +144,13 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setContainsVideo(Boolean containsVideo) {
 		this.containsVideo = containsVideo;
+	}
+
+	public String getContentLinkUrl() {
+		return contentLinkUrl;
+	}
+
+	public void setContentLinkUrl(String contentLinkUrl) {
+		this.contentLinkUrl = contentLinkUrl;
 	}
 }
