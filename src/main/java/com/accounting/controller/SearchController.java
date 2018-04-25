@@ -1,5 +1,6 @@
 package com.accounting.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class SearchController {
 	@RequestMapping(value="/find/allContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId",produces="application/json")
 	public List<UserDocument> findAllContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId(Long userId) {
 		User user = userService.findUserById(userId);
-		return profileService.findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(user.getMyAccount().getMainCourseId(),user.getMyAccount().getSecondryCourseId());
+		if (user.getMyAccount() != null) {
+			return profileService.findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(user.getMyAccount().getMainCourseId(),user.getMyAccount().getSecondryCourseId());
+		} else {
+			return new ArrayList<>();
+		}
 	}
 }
