@@ -1,6 +1,7 @@
 package com.accounting.user.bo;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -76,9 +78,9 @@ public class User extends AccountingGeneral{
 	@Column(name="age")
 	private Integer age;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="created_by_id",insertable=false,updatable=false)
-	public MyAccount myAccount;
+	public List<MyAccount> myAccounts;
 	
 	public String getPhone() {
 		return phone;
@@ -229,11 +231,11 @@ public class User extends AccountingGeneral{
 		this.resetTokenCreatedAt = resetTokenCreatedAt;
 	}
 
-	public MyAccount getMyAccount() {
-		return myAccount;
+	public List<MyAccount> getMyAccounts() {
+		return myAccounts;
 	}
 
-	public void setMyAccount(MyAccount myAccount) {
-		this.myAccount = myAccount;
+	public void setMyAccounts(List<MyAccount> myAccounts) {
+		this.myAccounts = myAccounts;
 	}
 }
