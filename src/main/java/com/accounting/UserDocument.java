@@ -55,6 +55,9 @@ public class UserDocument extends AccountingGeneral {
 	@Column(name="contains_video")
 	private Boolean containsVideo = false;
 	
+	@Column(name="overall_rating")
+	private Integer overallRating;
+	
 	@Transient
 	private MultipartFile uploadFile;
 
@@ -152,5 +155,13 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setContentLinkUrl(String contentLinkUrl) {
 		this.contentLinkUrl = contentLinkUrl;
+	}
+
+	public Integer getOverallRating() {
+		return overallRating;
+	}
+
+	public void setOverallRating(Integer overallRating) {
+		this.overallRating = overallRating;
 	}
 }

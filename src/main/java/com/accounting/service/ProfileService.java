@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.accounting.DocumentRating;
 import com.accounting.UserDocument;
 import com.accounting.bo.MyAccount;
-import com.accounting.repository.DocumentRatingRepository;
 import com.accounting.repository.MyAccountRepository;
 import com.accounting.repository.UserDocumentRepository;
 
@@ -27,9 +25,6 @@ public class ProfileService {
 	
 	@Autowired
 	private MyAccountRepository myAccountRepository;
-	
-	@Autowired
-	private DocumentRatingRepository documentRatingRepository;
 	
 	@Value("${accounting.domain}")
 	private String domain;
@@ -54,10 +49,6 @@ public class ProfileService {
 	
 	public MyAccount saveMyAccount(MyAccount myAccount) {
 		return myAccountRepository.save(myAccount);
-	}
-	
-	public DocumentRating saveDocumentRating(DocumentRating documentRating) {
-		return documentRatingRepository.save(documentRating);
 	}
 	
 	public MyAccount findMyAccountByCreatedById(Long createdById) {
