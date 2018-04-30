@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accounting.UserDocument;
 import com.accounting.bo.MyAccount;
+import com.accounting.bo.ProfileCategory;
 import com.accounting.repository.MyAccountRepository;
 import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
@@ -42,4 +43,16 @@ public class SearchController {
 			return new ArrayList<>();
 		}
 	}
+	
+	@RequestMapping(value="/find/categories",produces="application/json")
+	public List<ProfileCategory> findMainCategories() {
+		return profileService.findProfileCategoryParentCategoryIdNull();
+	}
+	
+	@RequestMapping(value="/find/subCategories",produces="application/json")
+	public List<ProfileCategory> findSubCategories(Long parentCategoryId) {
+		return profileService.findProfileCategoryParentCategoryId(parentCategoryId);
+	}
+	
+	
 }

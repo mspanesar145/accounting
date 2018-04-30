@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.UserDocument;
 import com.accounting.bo.MyAccount;
+import com.accounting.bo.ProfileCategory;
 import com.accounting.repository.MyAccountRepository;
+import com.accounting.repository.ProfileCategoryRepository;
 import com.accounting.repository.UserDocumentRepository;
 
 @Service
@@ -25,6 +27,9 @@ public class ProfileService {
 	
 	@Autowired
 	private MyAccountRepository myAccountRepository;
+	
+	@Autowired
+	private ProfileCategoryRepository profileCategoryRepository;
 	
 	@Value("${accounting.domain}")
 	private String domain;
@@ -53,6 +58,15 @@ public class ProfileService {
 	
 	public MyAccount findMyAccountByCreatedById(Long createdById) {
 		return myAccountRepository.findByCreatedById(createdById);
+	}
+	
+	public List<ProfileCategory> findProfileCategoryParentCategoryIdNull() {
+		Long parentCateogryId = null;
+		return profileCategoryRepository.findByParentCategoryId(parentCateogryId);
+	}
+	
+	public List<ProfileCategory> findProfileCategoryParentCategoryId(Long parentCategoryId) {
+		return profileCategoryRepository.findByParentCategoryId(parentCategoryId);
 	}
 	
 	public String uploadUserDocument(MultipartFile uploadedFile) {
