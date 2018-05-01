@@ -13,7 +13,7 @@ public interface ProfileCategoryRepository extends JpaRepository<ProfileCategory
 
 	List<ProfileCategory> findByParentCategoryId(Long parentCategoryId);
 	
-	@Query("select pc from ParentCategory pc where pc.parentCategoryId is not null")
+	@Query("select pc from ProfileCategory pc where pc.parentCategoryId is not null")
 	List<ProfileCategory> findByParentCategoryIdNotNull();
 	
 	
