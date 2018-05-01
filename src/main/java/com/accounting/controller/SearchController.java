@@ -49,10 +49,14 @@ public class SearchController {
 		return profileService.findProfileCategoryParentCategoryIdNull();
 	}
 	
-	@RequestMapping(value="/find/subCategories",produces="application/json")
+	@RequestMapping(value="/find/subCategoriesByParentId",produces="application/json")
 	public List<ProfileCategory> findSubCategories(Long parentCategoryId) {
 		return profileService.findProfileCategoryParentCategoryId(parentCategoryId);
 	}
 	
+	@RequestMapping(value="/find/subCategories",produces="application/json")
+	public List<ProfileCategory> findSubCategories() {
+		return profileService.findProfileCategoryParentCategoryIdNotNull();
+	}
 	
 }

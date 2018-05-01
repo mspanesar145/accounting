@@ -69,6 +69,10 @@ public class ProfileService {
 		return profileCategoryRepository.findByParentCategoryId(parentCategoryId);
 	}
 	
+	public List<ProfileCategory> findProfileCategoryParentCategoryIdNotNull() {
+		return profileCategoryRepository.findByParentCategoryIdNotNull();
+	}
+	
 	public String uploadUserDocument(MultipartFile uploadedFile) {
 		String storagePathDir = "/home/accounting/garage/accounting/src/main/webapp/assets/uploads/";//imageUploadPath.replaceAll("\\[userId\\]", userId);
 		
