@@ -1,302 +1,136 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>Accounting App | Upload </title>
-	<!--/tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
-	<script type="application/x-javascript">
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<!--//tags -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.css" rel="stylesheet">
-	<!-- //for bootstrap working -->
-	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet">
-</head>
-
-<body>
-<div class="top_header" id="home">
-
-
-
-	<!-- Fixed navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="top_header" id="home">
-		<!-- Fixed navbar -->
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="nav_top_fx_w3ls_agileinfo">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					    aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-					<div class="logo-w3layouts-agileits">
-						<h1> <a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i> Accounting <span class="desc">For your Business</span></a></h1>
-					</div>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<div class="nav_right_top">
-                    
-                    
-                    
-						
-						<ul class="nav navbar-nav">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-                            <li><a href="signin.html">Login</a></li>
-                            <li><a href="signup.html">Sign Up</a></li>
-							<li><a href="contact.html">Contact</a></li>
-                            <li><a  href="my-account.html">My Account</a></li>
-                             <li><a  href="profile.html">Profile</a></li>
-                            
-							
-						</ul>
-                        
-                        
-                        
-                        
-					</div>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</nav>
-	</div>
-	</nav>
-	</div>
-    
-    <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="banner_bottom">
-		<div class="container" style="width:100%;">
-				
-			<div class="inner_sec_info_wthree_agile">
-				<div class="signin-form">
-					<div class="login-form-rec">
-						<form action="#" method="post">
-							Name : Abhishek Dubey
-                            <select name="">
-                            	<option value="">---Select Your File Type---</option>
-                                <option value="PDF">PDF</option>
-                                <option value="Word">Word</option>
-                                <option value="Excel">Excel</option>
-                                <option value="Videos">Videos</option>
-                            </select>
-                            
-                            <select name="">
-                            	<option value="">---Select Category---</option>
-                                <option value="">Category 1</option>
-                                <option value="">Category 2</option>
-                                <option value="">Category 3</option>
-                                <option value="">Category 4</option>
-                            </select>
-                            
-                            <select name="">
-                            	<option value="">---Select Sub Category---</option>
-                                <option value="">Sub Category 1</option>
-                                <option value="">Sub Category 2</option>
-                                <option value="">Sub Category 3</option>
-                                <option value="">Sub Category 4</option>
-                            </select>
-                            
-                            <input type="text" name="name" placeholder="Title of Document" required="">
-                            <input type="text" name="name" placeholder="Cover Image" required="">
-							<input type="text" name="name" placeholder="Uploading of file " required="">
-                            <textarea placeholder="Content of Article "></textarea>
-							
-							<input type="submit" value="Upload">
-						</form>
-					</div>
-					
-
-				</div>
-			</div>
+<div ng-controller="ProfileController">
+	<div class="banner-images">
+		<img src="app/images/banner-01.png" alt="" class="full-width" />
+		<div class="overlay-banner">
+			<div class="profile-img"><img src="app/images/t1.jpg" alt="" class="img-circle full-width" /></div>
+			<div class="profile-name">Lorem ipsum</div>
+			<div class="profile-email"><a href="javascript:void(0);">abc@gmail.com</a></div>
 		</div>
 	</div>
-      </div>
-      <!-- Modal content-->
-      
-    </div>
-  </div>
-	<!--/banner_info-->
-	<div class="banner_inner_con">
-	</div>
-	<div class="services-breadcrumb">
-		<div class="inner_breadcrumb">
-
-			<ul class="short">
-				
-				<li>Upload Screen</li>
-			</ul>
-		</div>
-	</div>
-	<!--//banner_info-->
-    
-    
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-
-	<!-- /inner_content -->
-<div class="banner_bottom">
-		<div class="container">
-				<div class="tittle-w3ls_head">
-				<h3 class="tittle-w3ls three">Upload  <span>Screen </span></h3>
-			</div>
-			<div class="inner_sec_info_wthree_agile">
-				<div class="signin-form">
-					<div class="login-form-rec">
-						<form action="#" method="post">
-							Name : Abhishek Dubey
-                            <select name="">
-                            	<option value="">---Select Your File Type---</option>
-                                <option value="PDF">PDF</option>
-                                <option value="Word">Word</option>
-                                <option value="Excel">Excel</option>
-                                <option value="Videos">Videos</option>
-                            </select>
-                            
-                            <select name="">
-                            	<option value="">---Select Category---</option>
-                                <option value="">Category 1</option>
-                                <option value="">Category 2</option>
-                                <option value="">Category 3</option>
-                                <option value="">Category 4</option>
-                            </select>
-                            
-                            <select name="">
-                            	<option value="">---Select Sub Category---</option>
-                                <option value="">Sub Category 1</option>
-                                <option value="">Sub Category 2</option>
-                                <option value="">Sub Category 3</option>
-                                <option value="">Sub Category 4</option>
-                            </select>
-                            
-                            <input type="text" name="name" placeholder="Title of Document" required="">
-                            <input type="text" name="name" placeholder="Cover Image" required="">
-							<input type="text" name="name" placeholder="Uploading of file " required="">
-                            <textarea placeholder="Content of Article "></textarea>
-							
-							<input type="submit" value="Upload">
-						</form>
-					</div>
-					
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- footer -->
-	<div class="footer">
-		<div class="footer_inner_info_w3ls_agileits">
+	<section class="content-zone white-bg">
+	<div class="container">
+			<h1 class="tittle-w3ls text-center">Main Content</h1><br clear="all" /><br />
 			
+			<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 myaccount">
+			<div class="row">		
+				<div class="col-md-6 col-sm-6 col-xs-12">	
+					<div class="form-group">
+						<label>Lorem ipsum</label>
+						<div class="custom-select">
+							<select class="form-control">
+								<option>Select</option>
+								<option>a</option>
+								<option>b</option>
+								<option>c</option>
+							</select>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-6 col-sm-6 col-xs-12">	
+					<div class="form-group">
+						<label>Lorem ipsum</label>
+						<div class="custom-select">
+							<select class="form-control">
+								<option>Select</option>
+								<option>a</option>
+								<option>b</option>
+								<option>c</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="row">		
+				<div class="col-md-6 col-sm-6 col-xs-12">	
+					<div class="form-group">
+						<label>Lorem ipsum</label>
+						<div class="custom-select">
+							<select class="form-control">
+								<option>Select</option>
+								<option>a</option>
+								<option>b</option>
+								<option>c</option>
+							</select>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-6 col-sm-6 col-xs-12">	
+					<div class="form-group">
+						<label>Lorem ipsum</label>
+						<div class="custom-select">
+							<select class="form-control">
+								<option>Select</option>
+								<option>a</option>
+								<option>b</option>
+								<option>c</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			 
+			<div class="row">		
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+					<label>Content Contains Any Video?</label>
+					 <div class="form-group custom-radio">
+					 
+						<label>
+							<input type="radio" name="a" alt="" checked />
+							<span>Yes</span>
+						</label>
+						<label>
+							<input type="radio" name="a" alt=""   />
+							<span>No</span>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">	
+					
+					 <div class="form-group">
+					  <label>Content Contains Any Video?</label>
+					  <input type="file" value="" alt=""   />
+					</div>
+				</div>
+				
+			</div>
+			<div class="row">		
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+					<label>Title</label>
+					 <div class="form-group">
+						<input type="text" class="form-control" value="" placeholder="Enter title here" />
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+					<label>Video link</label>
+					 <div class="form-group">
+						<input type="text" class="form-control" value="" placeholder="Enter video link here" />
+					</div>
+				</div>
+				
+			</div>
 			
-			<div class="clearfix"></div>
-			<p class="copy-right">&copy 2018 Accounting. All rights reserved | Design by <a href="http://abhishekdubey.in/" target="_blank">AD</a></p>
+			<div class="row">		
+				<div class="col-md-12 col-sm-12 col-xs-12 border-bottom-1">	
+					<label>Description</label>
+					 <div class="form-group">
+						<textarea class="form-control" col="" rows="5" placeholder="Enter description" ></textarea>
+					</div>
+				</div>
+				 
+				
+			</div>
+			
+			<br clear="all" /><br />
+			
+			<div class="row">		
+				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+					<button class="btn   btn-theme">SUBMIT <i class="fa fa-arrow-right"></i></button>
+				</div>
+			</div>
+			
 		</div>
-	</div>
-	</div>
-	<!-- //footer -->
-	<!-- js -->
-	<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<!-- start-smoth-scrolling -->
-	<script type="text/javascript" src="js/move-top.js"></script>
-	<script type="text/javascript" src="js/easing.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			$(".scroll").click(function (event) {
-				event.preventDefault();
-				$('html,body').animate({
-					scrollTop: $(this.hash).offset().top
-				}, 900);
-			});
-		});
-	</script>
-	<!-- start-smoth-scrolling -->
-
-	<script>
-		$('ul.dropdown-menu li').hover(function () {
-			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-		}, function () {
-			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-		});
-	</script>
-	<!-- password-script -->
-	<script type="text/javascript">
-		window.onload = function () {
-			document.getElementById("password1").onchange = validatePassword;
-			document.getElementById("password2").onchange = validatePassword;
-		}
-
-		function validatePassword() {
-			var pass2 = document.getElementById("password2").value;
-			var pass1 = document.getElementById("password1").value;
-			if (pass1 != pass2)
-				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-			else
-				document.getElementById("password2").setCustomValidity('');
-			//empty string means no validation error
-		}
-	</script>
-	<!-- //password-script -->
-	<script type="text/javascript">
-		$(document).ready(function () {
-			/*
-									var defaults = {
-							  			containerID: 'toTop', // fading element id
-										containerHoverID: 'toTopHover', // fading element hover id
-										scrollSpeed: 1200,
-										easingType: 'linear' 
-							 		};
-									*/
-
-			$().UItoTop({
-				easingType: 'easeOutQuart'
-			});
-
-		});
-	</script>
-
-
-</body>
-
-</html>
-
+		</div>
+	</section>
+</div>

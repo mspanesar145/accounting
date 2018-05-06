@@ -23,8 +23,6 @@ public class SaveController {
 	@Autowired
 	private DocumentService documentService;
 	
-	
-	
 	@RequestMapping(value="/save/userDocument",produces="application/json")
 	public UserDocument saveUserDocument(@RequestBody UserDocument userDocument) {
 		return profileService.saveUserDocument(userDocument);
