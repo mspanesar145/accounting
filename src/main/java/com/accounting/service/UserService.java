@@ -1,10 +1,13 @@
 package com.accounting.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.accounting.bo.FacebookProfile;
 import com.accounting.repository.UserRepository;
 import com.accounting.user.bo.User;
 
@@ -39,4 +42,26 @@ public class UserService {
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
+	
+	public User updateUserFromFacebookProfile(User user) {
+		FacebookService facebookService = new FacebookService();
+		FacebookProfile facebookProfile = facebookService.facebookProfile(user.getFacebookAuthToken());
+		if ( StringUtils.isEmpty(user.getFirstName()) && !StringUtils.isEmpty(facebookProfile.getName())) {
+			user.setFirstName(facebookProfile.getName());
+		}
+		if ( StringUtils.isEmpty(user.getEmail()) && !StringUtils.isEmpty(facebookProfile.getEmail())) {
+			user.setEmail(facebookProfile.getEmail());
+		}
+		if (user.getUserId() == null && facebookProfile.getPicture() != null) {
+			Map<String,Object> pictureMap = facebookProfile.getPicture();
+			Map<String,String> dataMap = (Map<String,String>)pictureMap.get("data");
+			user.setPhoto(dataMap.get("url"));
+		}
+		if (StringUtils.isEmpty(user.getUsername()) ) {
+			user.setUsername(user.getFirstName().toLowerCase().replaceAll(" ",".")+System.currentTimeMillis());
+		}
+
+		return user;
+	}
+	
 }

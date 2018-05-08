@@ -133,7 +133,29 @@ public class UserController {
 				return new ResponseEntity<User>(user, HttpStatus.PARTIAL_CONTENT);
 			}
 			
+			User fbUser = userService.findUserByFacebookId(user.getFacebookID());
+			if (fbUser == null) {
+				user = this.userService.updateUserFromFacebookProfile(user);
+			} else {
+				user = this.userService.updateUserFromFacebookProfile(fbUser);
+
+			}
+			user.setPassword(null);
+			if (user.getUsername() == null) {
+				String name = "";
+				if (user.getFirstName() == null) {
+					name = user.getEmail().split("@")[0];
+				} else {
+					name = user.getFirstName();
+				}
+				user.setUsername(name+System.currentTimeMillis());
+			}
+			if (httpServletResponse != null) {
+				user.setToken(establishUserAndLogin(httpServletResponse, user));
+			}
 			
+			// lets save the user
+			userInfo = userService.saveUser(user);
 			System.out.println("[ Date : "+new Date()+" ] ,UserType : Facebook, Message : User Details -> "+userInfo.toString());
 			return new ResponseEntity<User>(userInfo, HttpStatus.ACCEPTED);
 		}
