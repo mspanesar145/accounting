@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -43,13 +42,17 @@ public class User extends AccountingGeneral{
 	@Column(name="facebook_id")
 	private String facebookID;
 	
-	
 	@Transient
 	private AuthenticateType authType;
 	
-	
 	@Column(name="facebook_auth_token")
 	private String facebookAuthToken;
+	
+	@Column(name="google_id")
+	private String googleId;
+	
+	@Column(name="google_auth_token")
+	private String googleAuthToken;
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -237,5 +240,21 @@ public class User extends AccountingGeneral{
 
 	public void setMyAccounts(List<MyAccount> myAccounts) {
 		this.myAccounts = myAccounts;
+	}
+
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
+	}
+
+	public String getGoogleAuthToken() {
+		return googleAuthToken;
+	}
+
+	public void setGoogleAuthToken(String googleAuthToken) {
+		this.googleAuthToken = googleAuthToken;
 	}
 }

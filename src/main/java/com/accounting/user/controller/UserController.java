@@ -158,6 +158,29 @@ public class UserController {
 			userInfo = userService.saveUser(user);
 			System.out.println("[ Date : "+new Date()+" ] ,UserType : Facebook, Message : User Details -> "+userInfo.toString());
 			return new ResponseEntity<User>(userInfo, HttpStatus.ACCEPTED);
+		} else if (user.getAuthType() == AuthenticateType.google) {
+			User googleUser = userService.findUserByGoogleAccessToken(user.getGoogleAuthToken());
+			if (googleUser == null) {
+				user = this.userService.updateUserFromGoogleProfile(user);
+			} else {
+				user = this.userService.updateUserFromGoogleProfile(googleUser);
+			}
+			user.setPassword(null);
+
+			if (user.getUsername() == null) {
+				String name = "";
+				if (user.getFirstName() == null) {
+					name = user.getEmail().split("@")[0];
+				} else {
+					name = user.getFirstName();
+				}
+				user.setUsername(name+System.currentTimeMillis());
+			}
+			if (httpServletResponse != null) {
+				user.setToken(establishUserAndLogin(httpServletResponse, user));
+			}
+			userInfo = userService.saveUser(user);
+			System.out.println("[ Date : "+new Date()+" ] ,UserType : Google, Message : User Details -> "+userInfo.toString());
 		}
 		user.setErrorCode(ErrorCodes.InternalServerError.getErrorCode());
 		user.setErrorDetail(ErrorCodes.InternalServerError.toString());

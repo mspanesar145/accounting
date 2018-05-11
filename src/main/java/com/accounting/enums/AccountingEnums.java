@@ -7,7 +7,7 @@ public class AccountingEnums {
 	}
 	
 	public enum AuthenticateType{
-		email,facebook,phone
+		email,facebook,phone,google
 	}
 	
 	public enum FileType {

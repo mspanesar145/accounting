@@ -3,6 +3,8 @@ package com.accounting.service;
 import java.util.List;
 import java.util.Map;
 
+import org.primefaces.json.JSONException;
+import org.primefaces.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -64,4 +66,36 @@ public class UserService {
 		return user;
 	}
 	
+	public User updateUserFromGoogleProfile(User user) {
+		GoogleService googleService = new GoogleService();
+		JSONObject userJson = googleService.getUserInfo(user.getGoogleAuthToken());
+		try {
+			if ( StringUtils.isEmpty(user.getFirstName()) && userJson.has("name") && !StringUtils.isEmpty(userJson.getString("name")) ) {
+				user.setFirstName(userJson.getString("name"));
+			}
+			if ( StringUtils.isEmpty(user.getEmail()) && (userJson.has("email") && !StringUtils.isEmpty(userJson.getString("email")))) {
+				user.setEmail(userJson.getString("email"));
+			}
+			if (userJson.has("id") && userJson.get("id") != null) {
+				user.setGoogleId(userJson.getString("id"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	public User findUserByGoogleAccessToken(String googleAccessToken) {
+		GoogleService googleService = new GoogleService();
+		JSONObject userJson = googleService.getUserInfo(googleAccessToken);
+		String userEmail = null;
+		try {
+			userEmail = userJson.getString("email");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		User googleUser = this.findUserByEmail(userEmail);
+		return googleUser;
+	}
 }
