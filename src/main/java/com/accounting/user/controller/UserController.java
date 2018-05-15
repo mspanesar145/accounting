@@ -181,6 +181,7 @@ public class UserController {
 			}
 			userInfo = userService.saveUser(user);
 			System.out.println("[ Date : "+new Date()+" ] ,UserType : Google, Message : User Details -> "+userInfo.toString());
+			return new ResponseEntity<User>(userInfo, HttpStatus.ACCEPTED);
 		}
 		user.setErrorCode(ErrorCodes.InternalServerError.getErrorCode());
 		user.setErrorDetail(ErrorCodes.InternalServerError.toString());

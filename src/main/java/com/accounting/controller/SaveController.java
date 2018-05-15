@@ -30,6 +30,12 @@ public class SaveController {
 	
 	@RequestMapping(value="/save/myAccount",produces="application/json")
 	public MyAccount saveUserDocument(@RequestBody MyAccount myAccount) {
+		
+		MyAccount myAccntFromDatabase = profileService.findMyAccountByCreatedById(myAccount.getCreatedById());
+		if (myAccntFromDatabase != null) {
+			myAccount.setMyAccountId(myAccntFromDatabase.getMyAccountId());
+		}
+		
 		return profileService.saveMyAccount(myAccount);
 	}
 	
