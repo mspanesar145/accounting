@@ -8,6 +8,7 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 		
 		signupData['authType'] = 'email';
 		UserService.signup(signupData).then(function(response) {
+			console.log(response);
 			if (response.data.errorCode != 0) {
 				toastr["error"](response.data.errorDetail);
 				return;
@@ -19,6 +20,7 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 	$scope.login = function(loginData) {
 		loginData['authType'] = 'email';
 		UserService.login(loginData).then(function(response) {
+			console.log(response);
 			if (response.data.errorCode != 0) {
 				//console.log("error");
 				toastr["error"](response.data.errorDetail);

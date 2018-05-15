@@ -13,65 +13,81 @@
 	<section class="content-zone white-bg">
 	<div class="container">
 			<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 myaccount">
+			<form ng-submit="signup(signupData)">
 			<div class="row">		
 				<div class="col-md-6 col-sm-6 col-xs-12">	
 					<div class="form-group">
 						<label>First Name </label>
-						<input type="text" class="form-control" value="" placeholder="First Name" name="firstname"/>
+						<input type="text" class="form-control" value="" placeholder="First Name" name="firstname" required ng-model="signupData.firstName"/>
 					</div>
 				</div>	
 				<div class="col-md-6 col-sm-6 col-xs-12">	
 					<div class="form-group">
 						<label>Last Name </label>
-						<input type="text" class="form-control" value="" placeholder="Last Name" name="lastname"/>
+						<input type="text" class="form-control" value="" placeholder="Last Name" name="lastname" required ng-model="signupData.lastName"/>
 					</div>
 				</div>
 				
 			</div>
-			<div class="row">		
+			
+			 
+			<div class="row">
+
 				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
 					<label>Age</label>
+					 <input type="number" maxlength="3" class="form-control" value="" placeholder="Age" name="age" required ng-model="signupData.age" />
+				</div>
+				
+				
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+					<label>Gender</label>
 					 <div class="form-group custom-radio">
 					 
 						<label>
-							<input type="radio" name="a" alt="" checked />
+							<input type="radio" name="a" alt="" checked ng-model="signupData.gender"/>
 							<span>Male</span>
 						</label>
 						<label>
-							<input type="radio" name="a" alt=""   />
+							<input type="radio" name="a" alt=""  ng-model="signupData.gender" />
 							<span>Female</span>
 						</label>
 					</div>
 				</div>
+				
+				
+			</div>
+			<div class="row">	
 				<div class="col-md-6 col-sm-6 col-xs-12">	
 					<div class="form-group">
 						<label>Mobile Number</label>
-						<input type="text" class="form-control" value="" placeholder="Mobile Number" name="mobilenumber"/>
+						<input type="number" class="form-control" value="" placeholder="Mobile Number" name="mobilenumber" required ng-model="signupData.password"/>
 					</div>
 				</div>
-				
-			</div>
-			<div class="row">		
 				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
 					<label>Email Address</label>
 					 <div class="form-group">
-						<input type="text" class="form-control" value="" placeholder="Email Address" />
+						<input type="text" class="form-control" value="" placeholder="Email Address" required ng-model="signupData.email"/>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+				
+				
+			</div>
+			
+			<div class="row">	
+			<div class="col-md-12 col-sm-12 col-xs-12 border-bottom-1">	
 					<label>City</label>
 					 <div class="form-group">
-						<input type="text" class="form-control" value="" placeholder="City" />
+						<input type="text" class="form-control" value="" placeholder="City" required ng-model="signupData.city"/>
 					</div>
 				</div>
 				
 			</div>
 			<div class="row">		
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-					<button class="btn   btn-theme">SIGN UP <i class="fa fa-arrow-right"></i></button>
+					<button class="btn btn-theme" type="submit">SIGN UP <i class="fa fa-arrow-right"></i></button>
 				</div>
 			</div>
-			
+			</form>
 		</div>
 		</div>
 	</section>

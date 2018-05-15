@@ -5,14 +5,14 @@
                     <section class="col-lg-5 col-md-5 col-sm-6 col-xs-12 login-wrap">
                     
                     	<h2>Login</h2>
-                    	<form class="login-form">
+                    	<form class="login-form" ng-submit="login(loginData)">
                         <div class="form-group">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        	<input type="text" value="" placeholder="Name" name="name" class="form-control">
+                        	<input type="email" value="" placeholder="E-mail" name="name" class="form-control" required ng-model="loginData.email">
                         </div>
                          <div class="form-group">
                          <i class="fa fa-phone" aria-hidden="true"></i>
-                        	<input type="text" value="" placeholder="Mobile Number" name="Mobile" class="form-control">
+                        	<input type="text" value="" placeholder="Mobile Number" name="Mobile" class="form-control" required ng-model="loginData.password">
                         </div>
                          <div class="form-group">
                         	<input type="submit" value="SIGNIN" class="btn">
@@ -29,7 +29,7 @@
                         
                         
                         <div class="form-group">
-                        	<span class="account-links"><a href="#">Create Account</a></span>
+                        	<span class="account-links"><a href="#!/app/signup">Create Account</a></span>
                             <span class="account-links"><a href="#">Forgot Password?</a></span>
                         </div>
                         

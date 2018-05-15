@@ -23,10 +23,10 @@ angular.module("accounting").service('UserService', function($q, $http){
 	  
 	  var validateSignup = function(signup) {
 		  var validateResponse = {valid:true};
-		  if (signup.password != signup.confirmPassword) {
+		 /* if (signup.password != signup.confirmPassword) {
 			  validateResponse['valid'] = false;
 			  validateResponse['message'] = 'Password/Confirm Password did not match.';
-		  }
+		  } */
 		  return validateResponse;
 	  }
 	  
