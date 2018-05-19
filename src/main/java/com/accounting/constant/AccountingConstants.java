@@ -44,10 +44,10 @@ public class AccountingConstants {
 		errorMessages.put(ErrorCodes.UserNotFound, "User Not Found");
 		errorMessages.put(ErrorCodes.IncorrectPassword, "Incorrect Password");
 		errorMessages.put(ErrorCodes.UserNameOrEmailAlreadyTaken, "User Name Or Email Already Exist");
-		errorMessages.put(ErrorCodes.EmailLenghtMustBeSixCharater, "Email Lenght Must Be Six Charater");
-		errorMessages.put(ErrorCodes.NameLenghtMustBeSixCharater, "Name Lenght Must Be Six Charater");
-		errorMessages.put(ErrorCodes.PasswordLenghtMustBeSixCharater, "Password Lenght Must Be Six Charater");
-		errorMessages.put(ErrorCodes.UserNameLenghtMustBeSixCharater, "User Name Lenght Must Be Six Charater");
+		errorMessages.put(ErrorCodes.EmailLenghtMustBeSixCharater, "Email Length Must Be Six Character");
+		errorMessages.put(ErrorCodes.NameLenghtMustBeSixCharater, "Name Length Must Be Six Charater");
+		errorMessages.put(ErrorCodes.PasswordLenghtMustBeSixCharater, "Password Length Must Be Six Character");
+		errorMessages.put(ErrorCodes.UserNameLenghtMustBeSixCharater, "User Name Length Must Be Six Character");
 		errorMessages.put(ErrorCodes.RowNotFound, "Row Not Found"); 
 		errorMessages.put(ErrorCodes.FriendAlreadyNotYourFriend, "Friend Already Not Your Friend");
 		errorMessages.put(ErrorCodes.FriendAlreadyYourFriend, "Friend Already Your Friend");
@@ -56,7 +56,7 @@ public class AccountingConstants {
 		errorMessages.put(ErrorCodes.AuthTypeNotPresent, "Auth Type Not Present");
 		errorMessages.put(ErrorCodes.FacebookAcessTokenExpires, "Facebook Acess Token Expires");
 		errorMessages.put(ErrorCodes.EmailNotPresent, "Email Not Found");
-		errorMessages.put(ErrorCodes.IncorrectEmailOrPassword, "Incorrect Email Or Password");
+		errorMessages.put(ErrorCodes.IncorrectEmailOrPassword, "Incorrect Email Or Mobile Number");
 		errorMessages.put(ErrorCodes.EmailAlreadyTaken, "Email Already Exists");
 
 

@@ -22,4 +22,10 @@ angular.module("accounting").controller('DocumentController',function($scope, Do
 			
 		});
 	}
+	$scope.findAllDocumentsByUserId = function() {
+		DocumentService.findAllDocumentsByUserId().then(function(response){
+			console.log(response);
+			$scope.contents = response.data;
+		});
+	}
 });

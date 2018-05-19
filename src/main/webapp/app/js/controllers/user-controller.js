@@ -26,6 +26,22 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 				toastr["error"](response.data.errorDetail);
 				return;
 			}
+			localStorage.setItem("loggedInUser", JSON.stringify(response.data));
+
+			window.location.href="#!/app/home";
+		});
+	}
+	
+	$scope.myAccountData = function() {
+		UserService.login(loginData).then(function(response) {
+			console.log(response);
+			if (response.data.errorCode != 0) {
+				//console.log("error");
+				toastr["error"](response.data.errorDetail);
+				return;
+			}
+			localStorage.setItem("loggedInUser", JSON.stringify(response.data));
+
 			window.location.href="#!/app/home";
 		});
 	}
