@@ -1,10 +1,10 @@
-<div>
+<div ng-controller="ProfileController" ng-init="myAccountInit()">
 	<div class="banner-images">
 		<img src="app/images/banner-01.png" alt="" class="full-width" />
 		<div class="overlay-banner">
 			<div class="profile-img"><img src="app/images/t1.jpg" alt="" class="img-circle full-width" /></div>
-			<div class="profile-name">Lorem ipsum</div>
-			<div class="profile-email"><a href="javascript:void(0);">abc@gmail.com</a></div>
+			<div class="profile-name">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</div>
+			<div class="profile-email"><a href="javascript:void(0);">{{loggedInUser.email}}</a></div>
 		</div>
 	</div>
 	<section class="content-zone white-bg">
@@ -12,16 +12,15 @@
 			<h1 class="tittle-w3ls text-center">My Account</h1><br clear="all" /><br />
 			
 			<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 myaccount">
+			<form ng-submit="saveMyaccount(myAccountData)">
 			<div class="row">		
 				<div class="col-md-6 col-sm-6 col-xs-12">	
 					<div class="form-group">
 						<label>Main Course</label>
 						<div class="custom-select">
-							<select class="form-control">
-								<option>Select option 1</option>
-								<option>option 2</option>
-								<option>option 3</option>
-								<option>option 4</option>
+							<select class="form-control" required ng-model="myAccountData.mainCourseId" ng-change="findSubCategoriesByParentId(myAccountData.mainCourseId)">
+								<option value="{{cat.profileCategoryId}}" ng-repeat="cat in categories">{{cat.name}}</option>
+								
 							</select>
 						</div>
 					</div>
@@ -30,60 +29,26 @@
 					<div class="form-group">
 						<label>Secondary Course</label>
 						<div class="custom-select">
-							<select class="form-control">
-								<option value="">Select option 1</option>
-								<option>option 2</option>
-								<option>option 3</option>
-								<option>option 4</option>
+							<select class="form-control" required ng-model="myAccountData.secondryCourseId">
+								<option value="{{subCat.profileCategoryId}}" ng-repeat="subCat in subCategories">{{subCat.name}}</option>
 							</select>
 						</div>
 					</div>
 				</div>
 				
 			</div>
-			<!-- -<div class="row">		
-				<div class="col-md-6 col-sm-6 col-xs-12">	
-					<div class="form-group">
-						<label>Lorem ipsum</label>
-						<div class="custom-select">
-							<select class="form-control">
-								<option value="">---Select Category---</option>
-                                <option value="">Category 1</option>
-                                <option value="">Category 2</option>
-                                <option value="">Category 3</option>
-                                <option value="">Category 4</option>
-							</select>
-						</div>
-					</div>
-				</div>	
-				<div class="col-md-6 col-sm-6 col-xs-12">	
-					<div class="form-group">
-						<label>Lorem ipsum</label>
-						<div class="custom-select">
-							<select class="form-control">
-								<option value="">---Select Sub Category---</option>
-                                <option value="">Sub Category 1</option>
-                                <option value="">Sub Category 2</option>
-                                <option value="">Sub Category 3</option>
-                                <option value="">Sub Category 4</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				
-			</div>--->
 			<br clear="all" /><br />
 			<div class="row">		
 				<div class="col-md-6 col-sm-6 col-xs-12 toggle-box">	
 					<div class="form-group">
 						<label>Subscribe to Newsletters</label>
-						<input id="toggle-one" data-toggle="toggle" data-onstyle="success" data-offstyle="info" type="checkbox">
+						<input id="toggle-one" data-toggle="toggle" data-onstyle="success" data-offstyle="info" type="checkbox" ng-model="myAccountData.newsLetterSubscribed">
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12 toggle-box">	
 					<div class="form-group">
 						<label>Receive Notification</label>
-						<input id="toggle-one" data-toggle="toggle" data-onstyle="success" data-offstyle="info" type="checkbox">
+						<input id="toggle-one" data-toggle="toggle" data-onstyle="success" data-offstyle="info" type="checkbox" ng-model="myAccountData.isNotificationOn">
 					</div>
 				</div>
 			</div>
@@ -91,10 +56,10 @@
 			
 			<div class="row">		
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-					<button class="btn   btn-theme">SUBMIT <i class="fa fa-arrow-right"></i></button>
+					<button class="btn btn-theme" type="submit">SUBMIT<i class="fa fa-arrow-right"></i></button>
 				</div>
 			</div>
-			
+			</form>
 		</div>
 		</div>
 	</section>

@@ -27,5 +27,14 @@ app.config(function($routeProvider) {
 		templateUrl: "app/my-account.html"
 	});
 	
-	$routeProvider.otherwise('/app/home');
+	if (localStorage.getItem('loggedInUser')) {
+		var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    	if (loggedInUser.myAccounts.length > 0) {
+    		$routeProvider.otherwise('/app/home');
+    	} else {
+    		$routeProvider.otherwise('/app/my-account');
+    	}
+	} else {
+		$routeProvider.otherwise('/app/login');
+	}
 }); 

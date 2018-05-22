@@ -2,9 +2,12 @@ package com.accounting.bo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,10 @@ public class MyAccount extends AccountingGeneral{
 	
 	@Column(name="secondry_cource_id")
 	private Long secondryCourseId;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="secondry_cource_id",insertable=false, updatable=false)
+	private ProfileCategory secondryCourse;
 	
 	@Column(name="news_letter_subscribed")
 	private Boolean newsLetterSubscribed = false;
@@ -77,5 +84,13 @@ public class MyAccount extends AccountingGeneral{
 
 	public void setCreatedById(Long createdById) {
 		this.createdById = createdById;
+	}
+
+	public ProfileCategory getSecondryCource() {
+		return secondryCourse;
+	}
+
+	public void setSecondryCource(ProfileCategory secondryCourse) {
+		this.secondryCourse = secondryCourse;
 	}
 }

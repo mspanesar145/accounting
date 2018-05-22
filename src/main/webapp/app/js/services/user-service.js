@@ -21,18 +21,6 @@ angular.module("accounting").service('UserService', function($q, $http){
 	    });
 	  };
 	  
-	  var getMyAccountData = function(){
-		    return $q(function(resolve, reject) {
-		    	var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-		    	var myAccountAPI = '/find/myAccountByCreatedById?createdById='+loggedInUser.userId;
-			      $http.get(myAccountAPI).then(function(resp){
-			        resolve(resp);
-			      }, function(error){
-			        console.log(error)
-			      });
-		    });
-		  };
-	  
 	  var validateSignup = function(signup) {
 		  var validateResponse = {valid:true};
 		 /* if (signup.password != signup.confirmPassword) {
@@ -46,6 +34,5 @@ angular.module("accounting").service('UserService', function($q, $http){
 		  signup:signup,
 		  login:login,
 		  validateSignup:validateSignup,
-		  getMyAccountData : getMyAccountData
 	  }
 });

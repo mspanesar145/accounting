@@ -1,5 +1,10 @@
 angular.module("accounting").controller('DocumentController',function($scope, DocumentService) {
 	
+	$scope.initHomePage = function() {
+		
+		$scope.findAllDocuments();
+	}
+	
 	$scope.findAllDocuments = function() {
 		DocumentService.findAllDocuments().then(function(response){
 			console.log(response);
