@@ -10,14 +10,14 @@
 	<section class="content-zone white-bg">
 	<div class="container">
 			<h1 class="tittle-w3ls text-center">Main Content</h1><br clear="all" /><br />
-			<form ng-submit="saveUserDocument(userDocument)">
+			<div>
 			<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 myaccount">
 			<div class="row">		
 				<div class="col-md-6 col-sm-6 col-xs-12">	
 					<div class="form-group">
 						<label>Primary Course</label>
 						<div class="custom-select">
-							<select class="form-control" ng-model="userDocument.categoryId">
+							<select class="form-control" ng-model="userDocument.categoryId"  ng-change="findSubCategoriesByParentId(userDocument.categoryId)">
 								<option ng-repeat="cat in categories" value="{{cat.profileCategoryId}}">{{cat.name}}</option>
 							</select>
 						</div>
@@ -28,7 +28,7 @@
 						<label>Secondary Course</label>
 						<div class="custom-select">
 							<select class="form-control" ng-model="userDocument.subCategoryId">
-								<option ng-repeat="subCat in subCategories" value="subCat.profileCategoryId">{{subCat.name}}</option>
+								<option ng-repeat="subCat in subCategories" value="{{subCat.profileCategoryId}}">{{subCat.name}}</option>
 							</select>
 						</div>
 					</div>
@@ -40,13 +40,12 @@
 				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
 					<label>Content Contains Any Video?</label>
 					 <div class="form-group custom-radio">
-					 
 						<label>
-							<input type="radio" name="a" alt="" checked ng-model="userDocument.containsVideo"/>
+							<input type="radio" name="a" alt="" ng-click="containsVideoFun(true)"/>
 							<span>Yes</span>
 						</label>
 						<label>
-							<input type="radio" name="a" alt=""   />
+							<input type="radio" name="a" alt=""  ng-click="containsVideoFun(false)" />
 							<span>No</span>
 						</label>
 					</div>
@@ -60,7 +59,7 @@
 						<input type="text" class="form-control" value="" placeholder="Enter title here" ng-model="userDocument.title"/>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">	
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1" ng-if="userDocument.containsVideo">	
 					<label>Video link</label>
 					 <div class="form-group">
 						<input type="text" class="form-control" value="" placeholder="Enter video link here" ng-model="userDocument.videoLink"/>
@@ -68,7 +67,16 @@
 				</div>
 				
 			</div>
-			
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1">
+					Cover Image :  <input name="coverimage" type="file" onchange="onSelectCoverImage(this)" accept="image/*" image="image" required/>
+					<img id="cover-img-tag"/>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1" onchange="onSelectContentFile(this)" ng-show="userDocument.containsVideo == false">
+					Upload Content :  <input type="file" required/>
+					<img id="content-file-tag"/>
+				</div>
+			</div>
 			<div class="row">		
 				<div class="col-md-12 col-sm-12 col-xs-12 border-bottom-1">	
 					<label>Description</label>
@@ -83,13 +91,13 @@
 			<br clear="all" /><br />
 			
 			<div class="row">		
-				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-					<button class="btn   btn-theme">SUBMIT <i class="fa fa-arrow-right"></i></button>
+				<div class="col-md-12 col-sm-12 col-xs-12 text-center" ng-click="saveFinalDocument(userDocument)">
+					<button class="btn   btn-theme">SUBMIT <i class="fa fa-arrow-right" ></i></button>
 				</div>
 			</div>
 			
 		</div>
-		</form>
+		</div>
 		</div>
 	</section>
 </div>

@@ -34,6 +34,9 @@ public class ProfileService {
 	@Value("${accounting.domain}")
 	private String domain;
 	
+	@Value("${accounting.imageUploadPath}")
+	private String imageUploadPath;
+	
 	public UserDocument saveUserDocument(UserDocument userDocument) {
 		/*if (userDocument.getUploadFile() != null) {
 			String coverPhotoUrl = uploadUserDocument(userDocument);
@@ -73,12 +76,12 @@ public class ProfileService {
 		return profileCategoryRepository.findByParentCategoryIdNotNull();
 	}
 	
-	public String uploadUserDocument(MultipartFile uploadedFile) {
-		String storagePathDir = "/home/accounting/garage/accounting/src/main/webapp/assets/uploads/";//imageUploadPath.replaceAll("\\[userId\\]", userId);
+	public String uploadUserDocument(MultipartFile uploadedFile,Long userId) {
+		String storagePathDir = imageUploadPath.replaceAll("\\[userId\\]", userId+"");
 		
 		String fileName = uploadFile(uploadedFile,storagePathDir);
 		if (fileName != null) {
-	        return "http://159.203.95.8:8181/assets/uploads/"+fileName;
+	        return "http://159.203.95.8:8181/assets/uploads/"+userId+"/"+fileName;
 		}
 		return null;
 	}

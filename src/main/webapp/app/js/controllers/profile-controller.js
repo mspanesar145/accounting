@@ -1,3 +1,22 @@
+var coverImageFile = null;
+function onSelectCoverImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#cover-img-tag').attr('src', e.target.result);
+            }
+            
+            coverImageFile = input.files[0];
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+var contetFile = null;
+function onSelectContentFile(input) {
+    if (input.files && input.files[0]) {
+        coverImageFile = input.files[0];
+    }
+}
 angular.module("accounting").controller('ProfileController',function($scope, ProfileService) {
 	
 	$scope.createDocument = function(document) {
@@ -14,11 +33,6 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 			document.categorySubId = '';
 			return false;
 		}
-	}
-	
-	$scope.uploadInit = function() {
-		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-		$scope.findAllCategories();
 	}
 	
 	$scope.myAccountInit = function() {
@@ -67,7 +81,103 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 		},function(error){console.log(error);});	
 	}
 	
+	/************* Upload Content Screen ***********/
+	
+	$scope.uploadInit = function() {
+		$scope.userDocument = {};
+		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+		$scope.findAllCategories();
+	}
+	
+	$scope.saveFinalDocument = function(userDocumentData) {
+		$scope.userDocument = userDocumentData;
+		
+		if (!$scope.userDocument.categoryId) {
+			toastr["error"]("Please select Main Course");
+			return;
+		}
+		if (!$scope.userDocument.subCategoryId) {
+			toastr["error"]("Please select Secondary Course");
+			return;
+		}
+		if (!$scope.userDocument.title) {
+			toastr["error"]("Please enter title");
+			return;
+		}
+		if (!coverImageFile) {
+			toastr["error"]("Please upload Cover Image");
+			return;
+		}
+		if ($scope.userDocument.containsVideo && !$scope.userDocument.videoLink) {
+			toastr["error"]("Please paste video link");
+			return;
+		}
+		
+		if (coverImageFile) {
+			$scope.uploadCoverImage();
+		}
+	}
+	
+	$scope.uploadCoverImage = function() {
+        var data = new FormData();
+        data.append("mediaFile", coverImageFile);
+        data.append("userId", $scope.loggedInUser.userId);
+		
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/save/coverimage",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log("SUCCESS : ", data);
+                $scope.userDocument['coverImageUrl'] = data.coverImageUrl;
+                
+                if (contetFile) {
+                	$scope.uploadContentFile();
+                    
+                } else {
+                	$scope.saveUserDocument($scope.userDocument);
+                }
+                
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+	}
+	
+	$scope.uploadContentFile = function() {
+		
+        var data = new FormData();
+        data.append("mediaFile", contetFile);
+        data.append("userId", $scope.loggedInUser.userId);
+		
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/save/coverimage",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log("SUCCESS : ", data);
+                $scope.userDocument['contentLinkUrl'] = data.coverImageUrl;
+                $scope.saveUserDocument($scope.userDocument);
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+	}
+	
 	$scope.saveUserDocument = function(userDocumentData) {
+				
 		userDocumentData['createdById'] = $scope.loggedInUser.userId;
 		ProfileService.saveUserDocument(userDocumentData).then(function(response) {
 			console.log(response.data);
@@ -75,4 +185,7 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 		},function(error){console.log(error);});	
 	}
 	
+	$scope.containsVideoFun = function(containsVideo) {
+		$scope.userDocument.containsVideo = containsVideo;
+	}
 });

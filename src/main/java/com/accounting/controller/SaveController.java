@@ -45,10 +45,10 @@ public class SaveController {
 	}
 	
 	@RequestMapping(value="/save/coverimage",produces="application/json")
-	public String saveUserDocument(@RequestParam("mediaFile") MultipartFile uploadfile) {
+	public String saveUserDocument(@RequestParam("mediaFile") MultipartFile uploadfile,Long userId) {
 		JSONObject response = new JSONObject();
 		try {
-			response.put("coverImageUrl",profileService.uploadUserDocument(uploadfile));
+			response.put("coverImageUrl",profileService.uploadUserDocument(uploadfile,userId));
 			return response.toString();
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -1815,8 +1815,20 @@ p.copy-right a:hover {
     background: url(../images/top_move.png) no-repeat 0px 0px;
 }
 
-/*--responsive--*/
+#carousal-2 .item, #carousal-3 .item{ width:125px; height:125px; overflow:hidden; position:relative; }
+#carousal-2 .item img, #carousal-3 .item img{ position: absolute;
+top: 0;
+right: 0;
+left: 0;
+bottom: 0;
+margin: auto;
+min-height: 100%; }
 
+
+.video-description .media-left{ width:210px; height:210px; }
+.video-description .media-left .media-object{   height:100%; }
+
+/*--responsive--*/
 @media(max-width:1440px){
 	h3.tittle-w3ls {
         font-size: 2.5em;
@@ -1837,6 +1849,7 @@ p.copy-right a:hover {
     .banner_bottom_left h4 {
         font-size: 1.2em;
     }
+    
 }
 @media(max-width:1080px){
     .banner_bottom,.works,.banner_bottom,.blog_sec,.tesimonials {
