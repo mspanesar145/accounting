@@ -1,43 +1,47 @@
 <div ng-controller="UserController">
-<section class="content-zone white-bg">
-            <section class="container">
-                <section class="row">
-                    <section class="col-lg-5 col-md-5 col-sm-6 col-xs-12 login-wrap">
-                    
-                    	<h2>Login</h2>
-                    	<form class="login-form" ng-submit="login(loginData)">
-                        <div class="form-group">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        	<input type="email" value="" placeholder="E-mail" name="name" class="form-control" required ng-model="loginData.email">
-                        </div>
-                         <div class="form-group">
-                         <i class="fa fa-phone" aria-hidden="true"></i>
-                        	<input type="text" value="" placeholder="Mobile Number" name="Mobile" class="form-control" required ng-model="loginData.password">
-                        </div>
-                         <div class="form-group">
-                        	<input type="submit" value="SIGNIN" class="btn">
-                        </div>
-                        
-                        <div class="form-group">
-                        	<span class="share-txt">- Or Login With - </span>
-                        </div>
-                        
-                        <div class="form-group text-center">
-                        	<span class="media-icon"><a href="#"><img src="app/images/fb-media.png" alt="Facebook" title="Facebook"></a></span>
-                            <span class="media-icon"><a href="#"><img src="app/images/gplus-media.png" alt="Google Plus" title="Google Plus"></a></span>
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                        	<span class="account-links"><a href="#!/app/signup">Create Account</a></span>
-                            <span class="account-links"><a href="#">Forgot Password?</a></span>
-                        </div>
-                        
-                        </form>
-                        
-                    </section>
-                </section>
-            </section>
-    </section>
-    </section>
+	<section class="content-zone white-bg">
+		<section class="container">
+			<section class="row">
+				<section class="col-lg-5 col-md-5 col-sm-6 col-xs-12 login-wrap">
+
+					<h2>Login</h2>
+					<form class="login-form" ng-submit="login(loginData)">
+						<div class="form-group">
+							<i class="fa fa-user" aria-hidden="true"></i> <input type="email"
+								value="" placeholder="E-mail" name="name" class="form-control"
+								required ng-model="loginData.email">
+						</div>
+						<div class="form-group">
+							<i class="fa fa-phone" aria-hidden="true"></i> <input type="text"
+								value="" placeholder="Mobile Number" name="Mobile"
+								class="form-control" required ng-model="loginData.password">
+						</div>
+						<div class="form-group">
+							<input type="submit" value="SIGNIN" class="btn">
+						</div>
+
+						<div class="form-group">
+							<span class="share-txt">- Or Login With - </span>
+						</div>
+
+						<div class="form-group text-center">
+							<span class="media-icon">
+								<a href="#"><img src="app/images/fb-media.png" alt="Facebook" title="Facebook" ng-click="facebookLogin()"></a></span>
+							<span class="media-icon">
+								<a href="#"><img src="app/images/gplus-media.png" alt="Google Plus" title="Google Plus" ng-click="googleplusLogin()"></a></span>
+						</div>
+
+						<div class="form-group">
+							<span class="account-links"><a href="#!/app/signup">Create
+									Account</a></span> <span class="account-links"><a href="#">Forgot
+									Password?</a></span>
+						</div>
+
+					</form>
+
+				</section>
+			</section>
+		</section>
+	</section>
+	</section>
 </div>
