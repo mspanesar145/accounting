@@ -110,62 +110,17 @@
             <section class="image-section">
                 <h2 class="main-headline">Image Headline</h2>
                 <section id="demos">
-
-                    <div class="owl-carousel owl-theme" id="carousal-2">
+					<div ng-if="images.length == 0">
+						<h3>No Content</h3>
+					</div>
+                    <div class="owl-carousel owl-theme" id="carousal-2" ng-if="images.length > 0">
                         
                         <div class="item" ng-repeat="image in images">
                     <img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
                 </div>
-                        <!--  <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        -->
-
                     </div>
 
-                    <div class="col-xs-12 text-center">
+                    <div class="col-xs-12 text-center" ng-if="images.length > 0">
                         <a class="btn btn-theme" href="javascript:void(0);"><i class="fa fa-eye"></i> View all</a>
                     </div>
 
@@ -175,60 +130,16 @@
             <section class="video-section">
                 <h2 class="main-headline">Video Headline</h2>
                 <section id="demos">
-
-                    <div class="owl-carousel owl-theme" id="carousal-3">
+					<div ng-if="videos.length == 0">
+						<h3>No Content</h3>
+					</div>
+                    <div class="owl-carousel owl-theme" id="carousal-3" ng-if="videos.length > 0">
                         <div class="item" ng-repeat="video in videos">
                             <img src="{{video.coverImageUrl}}" alt="" class="img-responsive" />
                         </div>
-                        <!--  <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
-                        <div class="item">
-                            <img src="app/images/img-01.png" alt="" class="img-responsive" />
-                        </div>
- 						-->
                     </div>
 
-                    <div class="col-xs-12 text-center">
+                    <div class="col-xs-12 text-center" ng-if="videos.length > 0">
                         <a class="btn btn-theme" href="javascript:void(0);"><i class="fa fa-eye"></i> View all</a>
                     </div>
 
@@ -239,9 +150,12 @@
     <section class="content-zone white-bg">
         <section class="video-description">
             <section class="container">
-                <h3 class="tittle-w3ls">Lorem Ipsum</h3>
+                <h2 class="main-headline">Content Section</h2>
                 <section class="row">
-                    <section class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="content in contents">
+                 <div ng-if="contents.length == 0">
+						<h3>No Content</h3>
+					</div>
+                    <section ng-if="contents.length > 0" class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="content in contents">
                         <section class="media">
                             <section class="media-left media-middle">
                                 <img src="{{content.coverImageUrl}}" class="media-object" width="200">

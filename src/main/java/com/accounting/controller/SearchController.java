@@ -1,7 +1,9 @@
 package com.accounting.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accounting.UserDocument;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.ProfileCategory;
-import com.accounting.repository.MyAccountRepository;
 import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
-import com.accounting.user.bo.User;
 
 @RestController
 public class SearchController {
@@ -23,6 +23,23 @@ public class SearchController {
 	
 	@Autowired
 	UserService userService;
+	
+	@RequestMapping(value="/find/topTenDocuments",produces="application/json")
+	public Map<String,List<UserDocument>> findTopTenDocuments(Long userId) {
+		Map<String,List<UserDocument>> topTenDocMap = new HashMap<>();
+		
+		MyAccount myAccount = profileService.findMyAccountByCreatedById(userId);
+		if (myAccount != null) {
+			topTenDocMap.put("image", profileService.findTopTenImageDate(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
+			topTenDocMap.put("video", profileService.findTop10VideoData(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
+			topTenDocMap.put("content", profileService.findTop10ContentData(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
+		} else {
+			topTenDocMap.put("image", new ArrayList<>());
+			topTenDocMap.put("video",  new ArrayList<>());
+			topTenDocMap.put("content", new ArrayList<>());
+		}
+		return topTenDocMap;
+	}
 	
 	@RequestMapping(value="/find/allUserDocuments",produces="application/json")
 	public List<UserDocument> findAllUserDocument() {

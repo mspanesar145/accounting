@@ -1,5 +1,6 @@
 package com.accounting.user.bo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class User extends AccountingGeneral{
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="created_by_id",insertable=false,updatable=false)
-	public List<MyAccount> myAccounts;
+	public List<MyAccount> myAccounts = new ArrayList<>();
 	
 	public String getPhone() {
 		return phone;

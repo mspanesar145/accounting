@@ -1,7 +1,7 @@
 angular.module("accounting").service('DocumentService', function($q, $http){
-	var findAllDocuments = function(){
+	var findAllDocuments = function(userId){
 	    return $q(function(resolve, reject) {
-	    	var documentsAPI = '/find/allUserDocuments';
+	    	var documentsAPI = '/find/topTenDocuments?userId='+userId;
 		      $http.get(documentsAPI).then(function(resp){
 		        resolve(resp);
 		      }, function(error){

@@ -9,6 +9,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,6 +52,21 @@ public class ProfileService {
 	
 	public List<UserDocument> findAllUserDocuments() {
 		return userDocumentRepository.findAll();
+	}
+	
+	public List<UserDocument> findTopTenImageDate(Long categoryId, Long subCategoryId) {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC,"userDocumentId"));
+		return userDocumentRepository.findTop10ImageData(pageable,categoryId, subCategoryId);
+	}
+	public List<UserDocument> findTop10VideoData(Long categoryId,Long subCategoryId) {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC,"userDocumentId"));
+
+		return userDocumentRepository.findTo10VideoData(pageable,categoryId, subCategoryId);
+	}
+	public List<UserDocument> findTop10ContentData(Long categoryId,Long subCategoryId) {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC,"userDocumentId"));
+
+		return userDocumentRepository.findTo10ContentData(pageable,categoryId, subCategoryId);
 	}
 	
 	public List<UserDocument> findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(Long categoryId,Long subCategoryId) {

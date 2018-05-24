@@ -6,25 +6,24 @@ angular.module("accounting").controller('DocumentController',function($scope, Do
 	}
 	
 	$scope.findAllDocuments = function() {
-		DocumentService.findAllDocuments().then(function(response){
+		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+		DocumentService.findAllDocuments($scope.loggedInUser.userId).then(function(response){
 			console.log(response);
 			
 			$scope.images = [];
 			$scope.videos = [];
 			$scope.contents = [];
 			
-			var documents = response.data;
-			for (var idx in documents) {
-				var document = documents[idx];
-				if (document.containsVideo) {
-					$scope.videos.push(document);
-				} else if (document.contentLinkUrl) {
-					$scope.images.push(document);
-				} else {
-					$scope.contents.push(document);
-				}
+			var documentsMap = response.data;
+			if (documentsMap['image']) {
+				$scope.images = documentsMap['image'];
 			}
-			
+			if (documentsMap['video']) {
+				$scope.videos = documentsMap['video'];
+			}
+			if (documentsMap['content']) {
+				$scope.contents = documentsMap['content'];
+			}
 		});
 	}
 	$scope.findAllDocumentsByUserId = function() {
