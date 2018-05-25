@@ -1,15 +1,17 @@
 'use strict';
 
+//Google login
+function onLoadFunction() {
+	gapi.client.setApiKey('AIzaSyC86kvbRqA7b6SWZddrqzB89dOJIDAv9os');
+	gapi.client.load('plus', 'v1', function() {});
+}
+
 var app = angular.module("accounting", ['ngRoute','angular-loading-bar', 'facebook', 'googleplus']);
 
-app.config(['$routeProvider', 'FacebookProvider', 'GooglePlusProvider', function($routeProvider, FacebookProvider, GooglePlusProvider) {
+app.config(['$routeProvider', 'FacebookProvider', function($routeProvider, FacebookProvider) {
 	
 	console.log($routeProvider);
-	//FacebookProvider.init('1800088453391367');
-	//GooglePlusProvider.init({
-	//	clientId: '1079274333856-ljvunn45oc3snfu2v2u0obbb3va1vi8s.apps.googleusercontent.com',
-     //   apiKey: 'AIzaSyA-H3R9B0LalWi7mHkK7KOI2Xl7v1TUOX0'
-	//});
+	FacebookProvider.init('1800088453391367');
 	// Now set up the states 
 	$routeProvider
 	.when('/app', {

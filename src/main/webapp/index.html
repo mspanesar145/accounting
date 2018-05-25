@@ -35,7 +35,7 @@
     
     <script type="text/javascript" src="app/js/angular.min.js"></script>
     <!-- <script type="text/javascript" src="app/js/angular-facebook-phonegap.js"></script> -->
-    <script type="text/javascript" src="app/js/angular-google-plus.min.js"></script>
+    
 	<script type="text/javascript" src="app/js/angular-facebook.js"></script>
 	<script type="text/javascript" src="app/js/angular-facebook.min.js"></script>
 	<script type="text/javascript" src="app/js/loading-bar.js"></script>
@@ -45,9 +45,19 @@
 	<script type="text/javascript" src="app/js/toastr.js"></script>
 	<script type="text/javascript" src="app/js/owl.carousel.js"></script>
 	
-
+	<script type="text/javascript" src="app/js/angular-google-plus.min.js"></script>
 	<script type="text/javascript" src="app/js/app.js"></script>
-
+	<script type="text/javascript">
+		(function() {
+			debugger;
+			var p = document.createElement('script');
+			p.type = 'text/javascript';
+			p.async = true;
+			p.src = 'https://apis.google.com/js/client.js?onload=onLoadFunction';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(p, s);
+		})();
+	</script>
 	<script type="text/javascript" src="app/js/services/user-service.js"></script>
 	<script type="text/javascript" src="app/js/controllers/user-controller.js"></script>
 	
