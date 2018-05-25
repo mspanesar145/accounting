@@ -13,7 +13,7 @@ import com.accounting.UserDocument;
 @Repository
 public interface UserDocumentRepository extends JpaRepository<UserDocument, Long>{
 	
-	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.contentLinkUrl is null")
+	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.containsVideo = false")
 	public List<UserDocument> findByNullContentLinkAndCategoryIdAndSubcategoryId(@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId);
 
 	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.containsVideo = true")
