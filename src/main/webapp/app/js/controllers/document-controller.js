@@ -1,4 +1,4 @@
-angular.module("accounting").controller('DocumentController',function($scope, DocumentService) {
+angular.module("accounting").controller('DocumentController',function($scope,$rootScope,$routeParams, DocumentService) {
 	
 	$scope.initHomePage = function() {
 		
@@ -6,9 +6,9 @@ angular.module("accounting").controller('DocumentController',function($scope, Do
 	}
 	
 	$scope.findAllDocuments = function() {
+		window.localStorage.removeItem("selectedDocument");
 		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 		DocumentService.findAllDocuments($scope.loggedInUser.userId).then(function(response){
-			console.log(response);
 			
 			$scope.images = [];
 			$scope.videos = [];
@@ -26,10 +26,28 @@ angular.module("accounting").controller('DocumentController',function($scope, Do
 			}
 		});
 	}
-	$scope.findAllDocumentsByUserId = function() {
-		DocumentService.findAllDocumentsByUserId().then(function(response){
-			debugger;
-			console.log(response);
+	
+	
+	$scope.initContentPage = function() {
+		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+		if ($routeParams.type == 'content') {
+			var selectedUserDocument = JSON.parse(window.localStorage.getItem("selectedDocument"));
+			if (selectedUserDocument && selectedUserDocument['categoryId']) {
+				var qryStr = "?categoryId="+selectedUserDocument['categoryId']+"&subCategoryId="+selectedUserDocument['subCategoryId']+"&containsVideo=false"
+			} else {
+				if ($scope.loggedInUser.myAccounts != null && $scope.loggedInUser.myAccounts.length > 0) {
+					var myAccount  = $scope.loggedInUser.myAccounts[0];
+					var qryStr = "?categoryId="+myAccount.mainCourseId+"&subCategoryId="+myAccount.secondryCourseId+"&containsVideo=false"
+				}
+			}
+		} else if ($routeParams.type == 'video') {
+			console.log("videosss");
+		}
+		
+		$scope.findAllDocumentsByCatSubCatId(qryStr);
+	}
+	$scope.findAllDocumentsByCatSubCatId = function(qryStr) {
+		DocumentService.findAllDocumentsByCatSubCatId(qryStr).then(function(response){
 			$scope.contents = response.data;
 		});
 	}
@@ -59,6 +77,12 @@ angular.module("accounting").controller('DocumentController',function($scope, Do
     		console.log(response);
     	});
     }
+    
+    $scope.moveToListing = function(seelctedDocument) {
+    	window.localStorage.setItem("selectedDocument",JSON.stringify(seelctedDocument));
+    	window.location.hash = "#!/app/list/content"
+    }
+    
 }).directive('starRating', function () {
     return {
         restrict: 'A',

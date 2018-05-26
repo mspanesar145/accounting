@@ -121,7 +121,7 @@
                     </div>
 
                     <div class="col-xs-12 text-center" ng-if="images.length > 0">
-                        <a class="btn btn-theme" href="javascript:void(0);"><i class="fa fa-eye"></i> View all</a>
+                        <a class="btn btn-theme" href="#!app/list/content"><i class="fa fa-eye"></i> View all</a>
                     </div>
 
                 </section>
@@ -162,7 +162,7 @@
                             </section>
                             <section class="media-body media-middle">
                                 <h4 class="media-heading">{{content.title}}</h4>
-                                <p>{{content.content}} <a href="javascript:void(0);">Read More</a></p>
+                                <p>{{content.content}} <a href="javascript:void(0);" ng-click="moveToListing(content)">Read More</a></p>
                             </section>
                         </section>
                     </section>

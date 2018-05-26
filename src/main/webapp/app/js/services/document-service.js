@@ -1,4 +1,15 @@
 angular.module("accounting").service('DocumentService', function($q, $http){
+	
+	var selectedUserDocument = {};
+	
+	var setSelectedUserDocument = function(selectedUserDocument) {
+		selectedUserDocument = selectedUserDocument;
+	}
+	var getSelectedUserDocument = function(selectedUserDocument) {
+		return selectedUserDocument;
+	}
+	
+	
 	var findAllDocuments = function(userId){
 	    return $q(function(resolve, reject) {
 	    	var documentsAPI = '/find/topTenDocuments?userId='+userId;
@@ -23,6 +34,17 @@ angular.module("accounting").service('DocumentService', function($q, $http){
 		    });
 	  };
 	  
+	  var findAllDocumentsByCatSubCatId = function(qryStr){
+		    return $q(function(resolve, reject) {
+		    	var documentsAPI = '/find/allDocumentsByCategotyIdSubCategoryIdContainsVideo'+qryStr;
+			      $http.get(documentsAPI).then(function(resp){
+			        resolve(resp);
+			      }, function(error){
+			        console.log(error)
+			      });
+		    });
+	  };
+	  
 	  var saveDocumentRatting = function(postData) {
 		  return $q(function(resolve, reject) {
 		    	var rattingApi = '/save/documentRating';
@@ -36,6 +58,9 @@ angular.module("accounting").service('DocumentService', function($q, $http){
 	  return {
 		  findAllDocuments : findAllDocuments,
 		  findAllDocumentsByUserId : findAllDocumentsByUserId,
-		  saveDocumentRatting : saveDocumentRatting
+		  saveDocumentRatting : saveDocumentRatting,
+		  findAllDocumentsByCatSubCatId:findAllDocumentsByCatSubCatId,
+		  setSelectedUserDocument:setSelectedUserDocument,
+		  getSelectedUserDocument:getSelectedUserDocument
 	  }
 });

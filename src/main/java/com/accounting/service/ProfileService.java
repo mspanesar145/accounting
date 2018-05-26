@@ -73,6 +73,10 @@ public class ProfileService {
 		return userDocumentRepository.findByNullContentLinkAndCategoryIdAndSubcategoryId(categoryId, subCategoryId);
 	}
 	
+	public List<UserDocument> findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(Long categoryId,Long subCategoryId,Boolean containsVideo) {
+		return userDocumentRepository.findByCategoryIdAndSubcategoryIdAndContainsVideo(categoryId, subCategoryId,containsVideo);
+	}
+	
 	public MyAccount saveMyAccount(MyAccount myAccount) {
 		return myAccountRepository.save(myAccount);
 	}

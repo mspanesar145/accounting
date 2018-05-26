@@ -51,6 +51,7 @@ public class SearchController {
 		return profileService.findMyAccountByCreatedById(createdById);
 	}
 	
+	//UnUsed
 	@RequestMapping(value="/find/allContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId",produces="application/json")
 	public List<UserDocument> findAllContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId(Long userId) {
 		MyAccount myAccount = profileService.findMyAccountByCreatedById(userId);
@@ -59,6 +60,15 @@ public class SearchController {
 		} else {
 			return new ArrayList<>();
 		}
+	}
+	
+	@RequestMapping(value="/find/allDocumentsByCategotyIdSubCategoryIdContainsVideo",produces="application/json")
+	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,String type) {
+			Boolean containsVideo = false;
+			if ("video".equals(type)) {
+				containsVideo = true;
+			}
+			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(categoryId,subCategoryId,containsVideo);
 	}
 	
 	@RequestMapping(value="/find/categories",produces="application/json")
