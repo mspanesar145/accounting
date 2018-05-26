@@ -2552,3 +2552,33 @@ min-height: 100%; }
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+.rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+ul.rating {
+    display: inline-block;
+}
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size:20px;
+}
+.rating .filled {
+    color: orangered;
+}
+.clear{
+  margin-top:20px;
+}
+.modal-content {
+	text-align: center;
+}
+.modal-footer {
+	text-align: center;
+}

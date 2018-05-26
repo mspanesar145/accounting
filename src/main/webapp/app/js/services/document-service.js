@@ -21,10 +21,21 @@ angular.module("accounting").service('DocumentService', function($q, $http){
 			        console.log(error)
 			      });
 		    });
-		  };
-		  return {
-			  findAllDocuments : findAllDocuments,
-			  findAllDocumentsByUserId : findAllDocumentsByUserId,
-			  
-		  }
+	  };
+	  
+	  var saveDocumentRatting = function(postData) {
+		  return $q(function(resolve, reject) {
+		    	var rattingApi = '/save/documentRating';
+			      $http.post(rattingApi,postData).then(function(resp){
+			        resolve(resp);
+			      }, function(error){
+			        console.log(error)
+			      });
+		    });
+	  }
+	  return {
+		  findAllDocuments : findAllDocuments,
+		  findAllDocumentsByUserId : findAllDocumentsByUserId,
+		  saveDocumentRatting : saveDocumentRatting
+	  }
 });

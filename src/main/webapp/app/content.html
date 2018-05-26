@@ -18,7 +18,10 @@
                                 <p>{{content.content}}<a href="javascript:void(0);">Read More</a></p>
                                 
                                 <div class="share-section">
-                                	<a href="#" class="border-btn">Rate</a>
+                                	<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+									  Launch demo modal
+									</button> -->
+                                	<a class="border-btn" data-toggle="modal" data-target="#exampleModal">Rate</a>
                                     <ul class="share-icons-list">
                                     	<li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></i></a></li>
                                         <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
@@ -27,8 +30,43 @@
                                 </div>
                             </section>
                         </section>
+                        <!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 class="modal-title" id="exampleModalLabel"><strong>Rate This</strong></h3>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="row modal-body">
+										<div class=col-sm-12><h3>Overall Rating: {{content.overallRating}}</h3></div>
+										<div class=col-sm-12>
+	        								<div ng-repeat="rating in ratings">
+	        									<h3>{{rating.current}} / {{rating.max}}</h3>
+	            								<div star-rating rating-value="rating.current" max="rating.max" 
+	            									on-rating-selected="getSelectedRating(rating)"></div>
+	        								</div>
+	    								</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary" ng-click="saveRating(content.userDocumentId)">Save
+											changes</button>
+									</div>
+								</div>
+							</div>
+						</div>
                     </section>
 					</div>
+					
+					
+					
                    <!-- <section class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <section class="media">
                             <section class="media-left">
