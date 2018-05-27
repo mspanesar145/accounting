@@ -1815,7 +1815,13 @@ p.copy-right a:hover {
     background: url(../images/top_move.png) no-repeat 0px 0px;
 }
 
-#carousal-2 .item, #carousal-3 .item{ width:125px; height:125px; overflow:hidden; position:relative; }
+#carousal-2 .item, #carousal-3 .item {
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 125px;
+}
 #carousal-2 .item img, #carousal-3 .item img{ position: absolute;
 top: 0;
 right: 0;

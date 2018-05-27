@@ -1,64 +1,6 @@
 <div ng-controller="DocumentController" ng-init="initHomePage()">
     <!-- banner -->
    <!-- banner -->
-	<!--  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-		
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Lorem Ipsum Dolor Site</h3>
-						<p>Solutions made easy</p>
-						 
-					</div>
-				</div>
-			</div>
-			<div class="item item2">
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Lorem Ipsum Dolor Site</h3>
-						<p>You deserve the best</p>
-						
-					</div>
-				</div>
-			</div>
-			<div class="item item3">
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Lorem Ipsum Dolor Site</h3>
-						<p>Solutions made easy</p>
-						
-
-					</div>
-				</div>
-			</div>
-			<div class="item item4">
-				<div class="container">
-					<div class="carousel-caption">
-
-						<h3>Lorem Ipsum Dolor Site</h3>
-						<p>You deserve the best</p>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="fa fa-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-		
-	</div> -->
 	 <section id="demos" class="content-zone white-bg">
 		
         <div class="container">
@@ -114,10 +56,12 @@
 						<h3>No Content</h3>
 					</div>
                     <div class="owl-carousel owl-theme" id="carousal-2" ng-if="images.length > 0">
-                        <div class="item" ng-repeat="image in images" ng-click="openContent(image)">
-                    		<img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
-                    		<div class="title" ><p>{{image.title}}</p></div>
-                		</div>
+                        <div ng-repeat="image in images" ng-click="openContent(image)">
+	                        <div class="item">
+	                    		<img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
+	                		</div>
+	                		<div class="title"><p>{{image.title}}</p></div>
+                        </div>
                     </div>
 
                     <div class="col-xs-12 text-center" ng-if="images.length > 0">
@@ -134,10 +78,12 @@
 						<h3>No Content</h3>
 					</div>
                     <div class="owl-carousel owl-theme" id="carousal-3" ng-if="videos.length > 0">
-                        <div class="item" ng-repeat="video in videos" ng-click=openContent(video)>
-                            <img src="{{video.coverImageUrl}}" alt="" class="img-responsive" />
-                            <div class="title"><p>{{video.title}}</p></div>
-                        </div>
+	                     <div ng-repeat="video in videos" ng-click="openContent(video)">
+	                        <div class="item">
+	                            <img src="{{video.coverImageUrl}}" alt="" class="img-responsive" />
+	                        </div>
+	                        <div class="title"><p>{{video.title}}</p></div>
+	                    </div>    
                     </div>
 
                     <div class="col-xs-12 text-center" ng-if="videos.length > 0">

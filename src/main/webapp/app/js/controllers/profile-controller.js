@@ -55,6 +55,12 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 		if (!$scope.$$phase) $scope.$apply();
 	}
 	
+	$scope.showSelectedCategory = function(cat,myAccountData) {
+		setTimeout(function(){
+			return (cat.profileCategoryId == myAccountData.mainCourseId);
+		},4000);
+	}
+	
 	$scope.findAllCategories = function() {
 		ProfileService.findAllCategories().then(function(response) {
 			console.log(response.data);
