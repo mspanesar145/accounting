@@ -19,6 +19,9 @@ public interface UserDocumentRepository extends JpaRepository<UserDocument, Long
 	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.containsVideo = :containsVideo")
 	public List<UserDocument> findByCategoryIdAndSubcategoryIdAndContainsVideo(@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId,@Param("containsVideo") Boolean containsVideo);
 
+	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId")
+	public List<UserDocument> findByCategoryIdAndSubcategoryId(@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId);
+
 	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.containsVideo = true")
 	public List<UserDocument> findTo10VideoData(Pageable page,@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId);
 

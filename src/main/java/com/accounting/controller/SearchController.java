@@ -63,12 +63,11 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/find/allDocumentsByCategotyIdSubCategoryIdContainsVideo",produces="application/json")
-	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,String type) {
-			Boolean containsVideo = false;
-			if ("video".equals(type)) {
-				containsVideo = true;
-			}
-			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(categoryId,subCategoryId,containsVideo);
+	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,Boolean containsVideo) {
+		if (containsVideo == null) {
+			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryId(categoryId, subCategoryId);
+		}
+		return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(categoryId,subCategoryId,containsVideo);
 	}
 	
 	@RequestMapping(value="/find/categories",produces="application/json")
