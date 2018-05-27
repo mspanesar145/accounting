@@ -15,24 +15,28 @@
                             </section>
                             <section class="media-body">
                                 <h4 class="media-heading">{{content.title}}</h4>
-                                <p>{{content.content}}<a href="javascript:void(0);">Read More</a></p>
+                                <p style="overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+    height: 90px;
+    line-height: 2;">{{content.content}} <a href="javascript:void(0);" ng-click="openDescModal(content)"> Read More</a></p>
                                 
                                 <div class="share-section">
                                 	<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 									  Launch demo modal
 									</button> -->
-                                	<a class="border-btn" data-toggle="modal" data-target="#exampleModal">Rate</a>
+                                	<a class="border-btn" data-toggle="modal" ng-click="openRatingModal(content)">Rate</a>
                                 	<img src="app/images/attachment.png" ng-click="openContent(content)" style="height:30px;margin-left:10px;"/>
                                     <ul class="share-icons-list">
-                                    	<li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i></a></li>
+                                    	<li><a href="javascript:void(0);"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fa fa-comment-o" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                             </section>
                         </section>
                         <!-- Modal -->
-						<div class="modal fade" id="exampleModal" tabindex="-1"
+						<div class="modal" id="rating-modal" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -40,12 +44,12 @@
 									<div class="modal-header">
 										<h3 class="modal-title" id="exampleModalLabel"><strong>Rate This</strong></h3>
 										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
+											aria-label="Close" ng-click="closeRatingModal()">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="row modal-body">
-										<div class=col-sm-12><h3>Overall Rating: {{content.overallRating}}</h3></div>
+										<div class=col-sm-12><h3>Overall Rating: {{document.overallRating}}</h3></div>
 										<div class=col-sm-12>
 	        								<div ng-repeat="rating in ratings">
 	        									<h3>{{rating.current}} / {{rating.max}}</h3>
@@ -56,17 +60,38 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
+											data-dismiss="modal" ng-click="closeRatingModal()">Close</button>
 										<button type="button" class="btn btn-primary" ng-click="saveRating(content.userDocumentId)">Save
 											changes</button>
 									</div>
 								</div>
 							</div>
 						</div>
+						
+						
+						
                     </section>
 					</div>
 					
-					
+					<!--  Description Modal -->
+						<div class="modal desc-modal" role="dialog">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">{{document.title}}</h5>
+						        <button type="button" class="close" data-dismiss="modal" ng-click="closeDescModal()" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        <p>{{document.content}}</p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="closeDescModal()">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 					
                    <!-- <section class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <section class="media">

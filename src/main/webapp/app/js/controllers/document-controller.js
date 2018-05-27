@@ -74,24 +74,40 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	}
     	
     }
+
+    $scope.openRatingModal = function(document) {
+    	$scope.document = document;
+    	$("#rating-modal").toggle();
+    }
+    $scope.closeRatingModal = function() {
+    	$scope.document = null;
+    	$("#rating-modal").toggle();
+    }
+    
+    $scope.openDescModal = function(document) {
+    	$scope.document = document;
+    	$(".desc-modal").toggle();
+    }
+    
+    $scope.closeDescModal = function() {
+    	$scope.document = null;
+    	$(".desc-modal").toggle();
+    }
     
     $scope.getSelectedRating = function (rating) {
     	$scope.rating = rating;
-    	debugger;
         console.log(rating);
     }
     
     $scope.saveRating = function(userDocumentId) {
     	var userData = JSON.parse(localStorage.getItem("loggedInUser"));
-    	debugger;
     	var ratingCredentials = {
     		'score': $scope.rating,
     	    'ratedById': userData.userId,
     	    'userDocumentId': userDocumentId
     	}
     	DocumentService.saveDocumentRatting(ratingCredentials).then(function(response) {
-    		debugger;
-    		console.log(response);
+    		$("#rating-modal").toggle();
     	});
     }
     
