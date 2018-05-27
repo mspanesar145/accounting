@@ -72,8 +72,8 @@
 					Cover Image :  <input name="coverimage" type="file" onchange="onSelectCoverImage(this)" accept="image/*" image="image" required/>
 					<img id="cover-img-tag" style="max-height: 150px;"/>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1" onchange="onSelectContentFile(this)" ng-show="userDocument.containsVideo == false">
-					Upload Content :  <input type="file" required/>
+				<div class="col-md-6 col-sm-6 col-xs-12 border-bottom-1" ng-show="userDocument.containsVideo == false">
+					Upload Content :  <input type="file" onchange="onSelectContentFile(this)" required/>
 				</div>
 			</div>
 			<div class="row">		

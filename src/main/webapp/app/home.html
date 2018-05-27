@@ -114,10 +114,10 @@
 						<h3>No Content</h3>
 					</div>
                     <div class="owl-carousel owl-theme" id="carousal-2" ng-if="images.length > 0">
-                        
-                        <div class="item" ng-repeat="image in images">
-                    <img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
-                </div>
+                        <div class="item" ng-repeat="image in images" ng-click="openContent(image)">
+                    		<img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
+                    		<div class="title" ><p>{{image.title}}</p></div>
+                		</div>
                     </div>
 
                     <div class="col-xs-12 text-center" ng-if="images.length > 0">
@@ -134,13 +134,14 @@
 						<h3>No Content</h3>
 					</div>
                     <div class="owl-carousel owl-theme" id="carousal-3" ng-if="videos.length > 0">
-                        <div class="item" ng-repeat="video in videos">
+                        <div class="item" ng-repeat="video in videos" ng-click=openContent(video)>
                             <img src="{{video.coverImageUrl}}" alt="" class="img-responsive" />
+                            <div class="title"><p>{{video.title}}</p></div>
                         </div>
                     </div>
 
                     <div class="col-xs-12 text-center" ng-if="videos.length > 0">
-                        <a class="btn btn-theme" href="javascript:void(0);"><i class="fa fa-eye"></i> View all</a>
+                        <a class="btn btn-theme" href="#!/app/list/video"><i class="fa fa-eye"></i> View all</a>
                     </div>
 
                 </section>

@@ -33,7 +33,7 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 		if ($routeParams.type == 'content') {
 			var selectedUserDocument = JSON.parse(window.localStorage.getItem("selectedDocument"));
 			if (selectedUserDocument && selectedUserDocument['categoryId']) {
-				var qryStr = "?categoryId="+selectedUserDocument['categoryId']+"&subCategoryId="+selectedUserDocument['subCategoryId']+"&containsVideo=false"
+				var qryStr = "?categoryId="+selectedUserDocument['categoryId']+"&subCategoryId="+selectedUserDocument['subCategoryId'];
 			} else {
 				if ($scope.loggedInUser.myAccounts != null && $scope.loggedInUser.myAccounts.length > 0) {
 					var myAccount  = $scope.loggedInUser.myAccounts[0];
@@ -41,7 +41,10 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 				}
 			}
 		} else if ($routeParams.type == 'video') {
-			console.log("videosss");
+			if ($scope.loggedInUser.myAccounts != null && $scope.loggedInUser.myAccounts.length > 0) {
+				var myAccount  = $scope.loggedInUser.myAccounts[0];
+				var qryStr = "?categoryId="+myAccount.mainCourseId+"&subCategoryId="+myAccount.secondryCourseId+"&containsVideo=true"
+			}
 		}
 		
 		$scope.findAllDocumentsByCatSubCatId(qryStr);
@@ -58,6 +61,20 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
         max: 5
     }];
 
+    
+    $scope.openContent = function(document) {
+    	var url = '';
+    	if (document.containsVideo) {
+    		url = document.videoLink;
+    	} else if (!document.containsVideo) {
+    		url = document.contentLinkUrl;
+    	}
+    	if (url) {
+    		window.open(url,'_blank');
+    	}
+    	
+    }
+    
     $scope.getSelectedRating = function (rating) {
     	$scope.rating = rating;
     	debugger;

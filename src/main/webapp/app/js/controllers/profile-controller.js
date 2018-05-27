@@ -14,7 +14,7 @@ function onSelectCoverImage(input) {
 var contetFile = null;
 function onSelectContentFile(input) {
     if (input.files && input.files[0]) {
-        coverImageFile = input.files[0];
+    	contetFile = input.files[0];
     }
 }
 angular.module("accounting").controller('ProfileController',function($scope, ProfileService) {
