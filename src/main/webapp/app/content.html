@@ -15,11 +15,7 @@
                             </section>
                             <section class="media-body">
                                 <h4 class="media-heading">{{content.title}}</h4>
-                                <p style="overflow: hidden;
-    text-overflow: ellipsis;
-    width: 90%;
-    height: 90px;
-    line-height: 2;">{{content.content}} <a href="javascript:void(0);" ng-click="openDescModal(content)"> Read More</a></p>
+                                <p>{{content.content.substr(0,100)}} <a href="javascript:void(0);" ng-click="openDescModal(content)"> Read More</a></p>
                                 
                                 <div class="share-section">
                                 	<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

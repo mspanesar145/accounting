@@ -37,7 +37,12 @@ app.config(['$routeProvider', 'FacebookProvider', function($routeProvider, Faceb
 	if (localStorage.getItem('loggedInUser')) {
 		var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     	if (loggedInUser.myAccounts != null && loggedInUser.myAccounts.length > 0) {
-    		window.location.href = window.location.hash;
+    		if (window.location.hash) {
+    			window.location.href = window.location.hash;
+    		} else {
+    			window.location.href = "#!app/home";
+    		}
+    		
     	} else {
     		window.location.href = "#!app/my-account";
     	}
