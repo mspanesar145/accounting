@@ -31,5 +31,7 @@ public interface UserDocumentRepository extends JpaRepository<UserDocument, Long
 	@Query("select ud from UserDocument ud where ud.categoryId =:categoryId and ud.subCategoryId =:subCategoryId and ud.contentLinkUrl is not null")
 	public List<UserDocument> findTop10ImageData(Pageable page,@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId);
 
-	
+	@Query("select ud from UserDocument ud where ud.title like CONCAT(:title,'%')")
+	public List<UserDocument> findByTitleContainig(@Param("title") String title);
+
 }

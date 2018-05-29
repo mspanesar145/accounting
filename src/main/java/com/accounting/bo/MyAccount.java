@@ -19,11 +19,11 @@ public class MyAccount extends AccountingGeneral{
 	@Column(name="my_account_id")
 	private Long myAccountId;
 	
-	@Column(name="main_cource_id")
-	private Long mainCourseId;
+	@Column(name="main_course_ids")
+	private String mainCourseId;
 	
-	@Column(name="secondry_cource_id")
-	private Long secondryCourseId;
+	@Column(name="secondry_course_ids")
+	private String secondryCourseId;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="secondry_cource_id",insertable=false, updatable=false)
@@ -44,22 +44,6 @@ public class MyAccount extends AccountingGeneral{
 
 	public void setMyAccountId(Long myAccountId) {
 		this.myAccountId = myAccountId;
-	}
-
-	public Long getMainCourseId() {
-		return mainCourseId;
-	}
-
-	public void setMainCourseId(Long mainCourseId) {
-		this.mainCourseId = mainCourseId;
-	}
-
-	public Long getSecondryCourseId() {
-		return secondryCourseId;
-	}
-
-	public void setSecondryCourseId(Long secondryCourseId) {
-		this.secondryCourseId = secondryCourseId;
 	}
 
 	public Boolean getNewsLetterSubscribed() {
@@ -92,5 +76,21 @@ public class MyAccount extends AccountingGeneral{
 
 	public void setSecondryCource(ProfileCategory secondryCourse) {
 		this.secondryCourse = secondryCourse;
+	}
+
+	public String getMainCourseId() {
+		return mainCourseId;
+	}
+
+	public void setMainCourseId(String mainCourseId) {
+		this.mainCourseId = mainCourseId;
+	}
+
+	public String getSecondryCourseId() {
+		return secondryCourseId;
+	}
+
+	public void setSecondryCourseId(String secondryCourseId) {
+		this.secondryCourseId = secondryCourseId;
 	}
 }

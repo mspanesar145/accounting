@@ -82,9 +82,21 @@ public class User extends AccountingGeneral{
 	@Column(name="age")
 	private Integer age;
 	
+	@Transient
+	private String deviceToken;
+	
+	@Transient
+	private String deviceType;
+	
+	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="created_by_id",insertable=false,updatable=false)
 	public List<MyAccount> myAccounts = new ArrayList<>();
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_id",insertable=false,updatable=false)
+	public List<UserDevice> userDevices = new ArrayList<>();
+	
 	
 	public String getPhone() {
 		return phone;
@@ -257,5 +269,29 @@ public class User extends AccountingGeneral{
 
 	public void setGoogleAuthToken(String googleAuthToken) {
 		this.googleAuthToken = googleAuthToken;
+	}
+
+	public String getDeviceToken() {
+		return deviceToken;
+	}
+
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
+
+	public String getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public List<UserDevice> getUserDevices() {
+		return userDevices;
+	}
+
+	public void setUserDevices(List<UserDevice> userDevices) {
+		this.userDevices = userDevices;
 	}
 }

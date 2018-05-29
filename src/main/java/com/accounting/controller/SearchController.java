@@ -1,6 +1,7 @@
 package com.accounting.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accounting.UserDocument;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.ProfileCategory;
+import com.accounting.dao.DocumentDao;
+import com.accounting.service.DocumentService;
 import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
 
@@ -23,16 +26,51 @@ public class SearchController {
 	
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	DocumentService documentService;
+	
+	@Autowired
+	DocumentDao documentDao;
 	
 	@RequestMapping(value="/find/topTenDocuments",produces="application/json")
-	public Map<String,List<UserDocument>> findTopTenDocuments(Long userId) {
+	public Map<String,List<UserDocument>> findTopTenDocuments(Long userId,String title) {
+		
+		Map<Long,List<ProfileCategory>> categoriesMap = profileService.generateCatSubCategoryMap();
+		
+		
+		
+		Map<Long,List<ProfileCategory>> myAccountCategoiresMap = new HashMap<>();
+
+		
 		Map<String,List<UserDocument>> topTenDocMap = new HashMap<>();
 		
 		MyAccount myAccount = profileService.findMyAccountByCreatedById(userId);
-		if (myAccount != null) {
-			topTenDocMap.put("image", profileService.findTopTenImageDate(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
-			topTenDocMap.put("video", profileService.findTop10VideoData(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
-			topTenDocMap.put("content", profileService.findTop10ContentData(myAccount.getMainCourseId(), myAccount.getSecondryCourseId()));
+		if (myAccount != null && myAccount.getMainCourseId() != null && myAccount.getSecondryCourseId() != null) {
+			
+			List<String> mainCourseIds = Arrays.asList(myAccount.getMainCourseId().split(","));
+			
+			for (String mainCourseIdStr : mainCourseIds) {
+				
+				Long mainCourseId = Long.parseLong(mainCourseIdStr);
+				List<ProfileCategory> secondryCategories = null;
+				List<ProfileCategory> secondryCategoriesList = categoriesMap.get(mainCourseId);
+				for (ProfileCategory secondryCategory : secondryCategoriesList) {
+					if (myAccount.getSecondryCourseId().indexOf(secondryCategory.getProfileCategoryId().toString()) != -1) {
+						
+						secondryCategories = new ArrayList<>();
+						if (myAccountCategoiresMap.containsKey(mainCourseId)) {
+							secondryCategories = myAccountCategoiresMap.get(mainCourseId);
+						}
+						secondryCategories.add(secondryCategory);
+						myAccountCategoiresMap.put(mainCourseId, secondryCategories);
+					}
+				}
+			}
+			
+			topTenDocMap.put("image",documentDao.findTop10ImageDocuments(myAccountCategoiresMap));
+			topTenDocMap.put("video", documentDao.findTop10VideoDocuments(myAccountCategoiresMap));
+			topTenDocMap.put("content", documentDao.findTop10ContentDocuments(myAccountCategoiresMap));
 		} else {
 			topTenDocMap.put("image", new ArrayList<>());
 			topTenDocMap.put("video",  new ArrayList<>());
@@ -56,7 +94,8 @@ public class SearchController {
 	public List<UserDocument> findAllContentUserDocumentsForNullPdfAndCategoryIdSubCategoryId(Long userId) {
 		MyAccount myAccount = profileService.findMyAccountByCreatedById(userId);
 		if (myAccount != null) {
-			return profileService.findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(myAccount.getMainCourseId(),myAccount.getSecondryCourseId());
+			return null;
+			//return profileService.findUserDocumentsByCategoryIdAndSubCategoryIdAndContentLinkIsNull(myAccount.getMainCourseId(),myAccount.getSecondryCourseId());
 		} else {
 			return new ArrayList<>();
 		}
@@ -83,6 +122,11 @@ public class SearchController {
 	@RequestMapping(value="/find/subCategories",produces="application/json")
 	public List<ProfileCategory> findSubCategories() {
 		return profileService.findProfileCategoryParentCategoryIdNotNull();
+	}
+	
+	@RequestMapping(value="/find/documentsByTitle",produces="application/json")
+	public List<UserDocument> findUserDocumentsByTitle(String title) {
+		return documentService.findUserDocumentByTitle(title);
 	}
 	
 }

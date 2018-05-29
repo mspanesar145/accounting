@@ -1,18 +1,24 @@
 package com.accounting;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.bo.AccountingGeneral;
+import com.accounting.bo.DocumentComment;
 import com.accounting.enums.AccountingEnums.FileType;
 
 @Entity
@@ -57,6 +63,10 @@ public class UserDocument extends AccountingGeneral {
 	
 	@Column(name="overall_rating")
 	private Integer overallRating;
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
+	private List<DocumentComment> documentComments;
 	
 	@Transient
 	private MultipartFile uploadFile;
@@ -163,5 +173,13 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setOverallRating(Integer overallRating) {
 		this.overallRating = overallRating;
+	}
+
+	public List<DocumentComment> getDocumentComments() {
+		return documentComments;
+	}
+
+	public void setDocumentComments(List<DocumentComment> documentComments) {
+		this.documentComments = documentComments;
 	}
 }

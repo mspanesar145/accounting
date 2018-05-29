@@ -19,7 +19,7 @@
 						<label>Main Course</label>
 						<div class="custom-select">
 							<select class="form-control" required ng-model="myAccountData.mainCourseId" ng-change="findSubCategoriesByParentId(myAccountData.mainCourseId)">
-								<option value="{{cat.profileCategoryId}}" ng-repeat="cat in categories">{{cat.name}}</option>
+								<option value="{{cat.profileCategoryId}}" ng-repeat="cat in categories" ng-selected="showSelectedCategory(cat,myAccountData)">{{cat.name}}</option>
 								
 							</select>
 						</div>

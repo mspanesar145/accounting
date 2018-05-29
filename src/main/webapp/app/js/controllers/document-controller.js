@@ -6,10 +6,11 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 	}
 	
 	$scope.findAllDocuments = function() {
+		showLoader();
 		window.localStorage.removeItem("selectedDocument");
 		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 		DocumentService.findAllDocuments($scope.loggedInUser.userId).then(function(response){
-			
+			hideLoader();
 			$scope.images = [];
 			$scope.videos = [];
 			$scope.contents = [];
@@ -50,7 +51,9 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 		$scope.findAllDocumentsByCatSubCatId(qryStr);
 	}
 	$scope.findAllDocumentsByCatSubCatId = function(qryStr) {
+		showLoader();
 		DocumentService.findAllDocumentsByCatSubCatId(qryStr).then(function(response){
+			hideLoader();
 			$scope.contents = response.data;
 		});
 	}
@@ -106,7 +109,9 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	    'ratedById': userData.userId,
     	    'userDocumentId': userDocumentId
     	}
+		showLoader();
     	DocumentService.saveDocumentRatting(ratingCredentials).then(function(response) {
+    		hideLoader();
     		$("#rating-modal").toggle();
     	});
     }

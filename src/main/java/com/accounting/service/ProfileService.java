@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +89,40 @@ public class ProfileService {
 	
 	public MyAccount findMyAccountByCreatedById(Long createdById) {
 		return myAccountRepository.findByCreatedById(createdById);
+	}
+	
+	public Map<Long,List<ProfileCategory>> generateCatSubCategoryMap() {
+		
+		Map<Long,List<ProfileCategory>> catSubCatMap = new HashMap<>();
+		
+		List<ProfileCategory> profileCategories =  profileCategoryRepository.findAll();
+		
+		List<ProfileCategory> categories = new ArrayList<>();
+		for (ProfileCategory profileCategory : profileCategories) {
+			if (profileCategory.getParentCategoryId() == null) {
+				categories.add(profileCategory);
+			}
+		}	
+		
+		for (ProfileCategory mainCategory : categories) {
+			
+			for (ProfileCategory profileCategory : profileCategories) {
+				
+				List<ProfileCategory> profileCategoryList = null;
+				if (!catSubCatMap.containsKey(mainCategory.getProfileCategoryId())) {
+					profileCategoryList = new ArrayList<>();
+				} else {
+					profileCategoryList = catSubCatMap.get(mainCategory.getProfileCategoryId());
+				}
+				
+				if (mainCategory.getProfileCategoryId().equals(profileCategory.getParentCategoryId())) {
+					profileCategoryList.add(profileCategory);
+				}
+				catSubCatMap.put(mainCategory.getProfileCategoryId(), profileCategoryList);
+			}
+			
+		}
+		return catSubCatMap;
 	}
 	
 	public List<ProfileCategory> findProfileCategoryParentCategoryIdNull() {

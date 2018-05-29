@@ -10,14 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.accounting.bo.FacebookProfile;
+import com.accounting.repository.UserDeviceRepository;
 import com.accounting.repository.UserRepository;
 import com.accounting.user.bo.User;
+import com.accounting.user.bo.UserDevice;
 
 @Service
 public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	UserDeviceRepository userDeviceRepository;
 	
 	/***********  USER BLOCK STARTS *****************/
 	public User findUserById(Long userId) {
@@ -28,6 +33,18 @@ public class UserService {
 		return (List<User>) userRepository.findAll();
 	}
 	/***********  USER BLOCK ENDS *****************/
+	
+	public UserDevice saveUserDeviceInfo(UserDevice userDevice) {
+		return userDeviceRepository.save(userDevice);
+	}
+	
+	public List<UserDevice> findUserDevicesByUserId(Long userId) {
+		return userDeviceRepository.findByUserId(userId);
+	}
+	
+	public List<User> findUsersByMainCourseIdsAndSecondryCourseIds(String mainCourseIds,String secondryCourseIds) {
+		return userRepository.findByMainCourseIdsAndSecondryCourseIds(mainCourseIds, secondryCourseIds);
+	}
 	
 	public User findUserByFacebookId(String facebookId) {
 		return userRepository.findUserByFacebookID(facebookId);

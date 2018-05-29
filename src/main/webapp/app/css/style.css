@@ -2588,3 +2588,32 @@ ul.rating {
 .modal-footer {
 	text-align: center;
 }
+
+#loader-container {
+	
+}
+#loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  z-index: 999;
+}
+#loader-container {
+    background: #000;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.7;
+    z-index: 999;
+}    

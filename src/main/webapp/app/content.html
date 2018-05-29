@@ -1,4 +1,7 @@
 <div ng-controller="DocumentController" ng-init="initContentPage()">
+    <div id="loader-container" style="display:none;">
+    	<div id="loader" ></div>
+    </div>
     <section class="content-zone white-bg">
         <section class="video-description content-desc">
             <section class="container">
@@ -45,7 +48,7 @@
 										</button>
 									</div>
 									<div class="row modal-body">
-										<div class=col-sm-12><h3>Overall Rating: {{document.overallRating}}</h3></div>
+										<div class=col-sm-12><h3>Overall Rating: {{document.overallRating == null ? 0 : document.overallRating}}</h3></div>
 										<div class=col-sm-12>
 	        								<div ng-repeat="rating in ratings">
 	        									<h3>{{rating.current}} / {{rating.max}}</h3>

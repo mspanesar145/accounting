@@ -21,4 +21,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	@Query("select u from User u where name LIKE CONCAT(:name,'%')")
 	List<User> findUserByName(@Param("name") String name);
+	
+	@Query("select u from User u JOIN u.myAccounts ma where ma.mainCourseId like CONCAT('%',:mainCourseIds,'%') and ma.secondryCourseId like CONCAT('%',:secondryCourseIds,'%')")
+	List<User> findByMainCourseIdsAndSecondryCourseIds(@Param("mainCourseIds") String mainCourseIds,@Param("secondryCourseIds") String secondryCourseIds);
+	
 }
