@@ -87,6 +87,10 @@ public class ProfileService {
 		return myAccountRepository.save(myAccount);
 	}
 	
+	public List<MyAccount> saveMyAccounts(List<MyAccount> myAccounts) {
+		return myAccountRepository.save(myAccounts);
+	}
+	
 	public MyAccount findMyAccountByCreatedById(Long createdById) {
 		return myAccountRepository.findByCreatedById(createdById);
 	}

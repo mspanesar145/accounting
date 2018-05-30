@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.Banner;
+import com.accounting.bo.Banner.BannerScreen;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.ProfileCategory;
 import com.accounting.dao.DocumentDao;
+import com.accounting.service.BannerService;
 import com.accounting.service.DocumentService;
 import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
@@ -32,6 +35,9 @@ public class SearchController {
 	
 	@Autowired
 	DocumentDao documentDao;
+	
+	@Autowired
+	BannerService bannerService;
 	
 	@RequestMapping(value="/find/topTenDocuments",produces="application/json")
 	public Map<String,List<UserDocument>> findTopTenDocuments(Long userId,String title) {
@@ -129,4 +135,8 @@ public class SearchController {
 		return documentService.findUserDocumentByTitle(title);
 	}
 	
+	@RequestMapping(value="/find/bannersByScreen",produces="application/json")
+	public List<Banner> findBannersByScreen(BannerScreen screen) {
+		return bannerService.findActiveBannersByScreen(screen);
+	}
 }

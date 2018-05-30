@@ -30,11 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.bo.FacebookProfile;
+import com.accounting.bo.MyAccount;
 import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 import com.accounting.repository.UserRepository;
 import com.accounting.service.FacebookService;
+import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
 import com.accounting.stateless.security.TokenAuthenticationService;
 import com.accounting.user.bo.User;
@@ -51,6 +53,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProfileService profileService;
+    
     @Value("${accounting.imageUploadPath}")
     private String imageUploadPath;
 
@@ -460,16 +465,53 @@ public class UserController {
 	return responseEntity;
     }
 
-    @RequestMapping(value = "/auth/validateResetToken", method = RequestMethod.GET)
-    public User validateResetToken(String resetToken) {
-	try {
-	    User user = userService.findUserByResetToken(resetToken);
-	    return user;
-	} catch (Exception e) {
-	    e.printStackTrace();
+	@RequestMapping(value = "/auth/validateResetToken", method = RequestMethod.GET)
+	public User validateResetToken(String resetToken) {
+		try {
+			User user = userService.findUserByResetToken(resetToken);
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	return null;
-    }
+	
+	@RequestMapping(value = "/api/users/update", method = RequestMethod.POST)
+	public Map<String,Object> updateUserProfile(HttpServletResponse response,@RequestBody User user) {
+		
+		Map<String,Object> reposne = new HashMap<>();
+		reposne.put("success", true);
+		
+		//Checking if there is alreay email present for any other user
+		User dbUser = userService.findUserByEmail(user.getEmail());
+		if (dbUser != null && !dbUser.getUserId().equals(user.getUserId())) {
+			reposne.put("success", false);
+			reposne.put("message", "Email Already Exists");
+			return reposne;
+		}
+		
+		List<MyAccount> myAccounts = user.getMyAccounts();
+		if (myAccounts != null && myAccounts.size() > 0) {
+			myAccounts = profileService.saveMyAccounts(myAccounts);
+		}
+		
+		//Email User
+		if (user.getFacebookID() == null && user.getGoogleAuthToken() == null) {
+			//Incase phone is updated chnage the password
+			if (user.getPhone() != null) {
+				user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPhone(), salt));
+			}
+			//If Email is changes generate api token again
+			if (user.getEmail() != null) {
+				user.setToken(establishUserAndLogin(response, user));
+			}
+		}
+		
+		user.setMyAccounts(myAccounts);
+		user = userService.saveUser(user);
+		reposne.put("data", user);
+		return reposne;
+	}
 
     @Autowired
     TokenAuthenticationService tokenAuthenticationService;

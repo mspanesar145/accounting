@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.DocumentComment;
+import com.accounting.bo.DocumentStats.DocumentStatsSource;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.Rating;
 import com.accounting.service.DocumentService;
@@ -56,4 +58,16 @@ public class SaveController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(value="/save/documentComment",produces="application/json")
+	public UserDocument saveUserDocument(@RequestBody DocumentComment documentComment) {
+		return documentService.saveDocumentComment(documentComment);
+	}
+	
+	@RequestMapping(value="/save/documentStats",produces="application/json")
+	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
+		return documentService.updateDocumentStats(userDocumentId, source);
+	}
+	
+	
 }

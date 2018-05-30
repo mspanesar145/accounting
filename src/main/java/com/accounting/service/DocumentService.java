@@ -9,7 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.DocumentComment;
+import com.accounting.bo.DocumentStats;
+import com.accounting.bo.DocumentStats.DocumentStatsSource;
 import com.accounting.bo.Rating;
+import com.accounting.repository.DocumentCommentRepository;
+import com.accounting.repository.DocumentStatsRepository;
 import com.accounting.repository.RatingRepository;
 import com.accounting.repository.UserDocumentRepository;
 import com.accounting.user.bo.User;
@@ -29,7 +34,12 @@ public class DocumentService {
 	
 	@Autowired
 	NotificationService notificationService;
+
+	@Autowired
+	DocumentCommentRepository documentCommentRepository;
 	
+	@Autowired
+	DocumentStatsRepository documentStatsRepository;
 	
 	public Rating saveRating(Rating rating) {		
 		return ratingRepository.save(rating);
@@ -73,5 +83,29 @@ public class DocumentService {
 	
 	public List<UserDocument> findUserDocumentByTitle(String title) {
 		return userDocumentRepository.findByTitleContainig(title);
+	}
+	
+	public UserDocument saveDocumentComment(DocumentComment documentComment) {
+		documentComment = documentCommentRepository.save(documentComment);
+		return userDocumentRepository.findOne(documentComment.getUserDocumentId());
+	}
+	
+	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
+		
+		DocumentStats documentStats = documentStatsRepository.findByUserDocumentId(userDocumentId);
+		
+		if (source.equals(DocumentStatsSource.content)) {
+			long contentStats = documentStats.getContentCounts() + 1;
+			documentStats.setContentCounts(contentStats);
+		} else  if (source.equals(DocumentStatsSource.attachment)) {
+			long attachmentStats = documentStats.getAttachmentCounts() + 1;
+			documentStats.setAttachmentCounts(attachmentStats);
+		}
+		
+		long totalCounts = documentStats.getContentCounts() + documentStats.getAttachmentCounts();
+		documentStats.setTotalCounts(totalCounts);
+		documentStatsRepository.save(documentStats);
+		
+		return userDocumentRepository.findOne(userDocumentId);
 	}
 }

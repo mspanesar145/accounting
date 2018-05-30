@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.bo.AccountingGeneral;
 import com.accounting.bo.DocumentComment;
+import com.accounting.bo.DocumentStats;
 import com.accounting.enums.AccountingEnums.FileType;
 
 @Entity
@@ -67,6 +69,10 @@ public class UserDocument extends AccountingGeneral {
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
 	private List<DocumentComment> documentComments;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
+	private DocumentStats documentStats;
 	
 	@Transient
 	private MultipartFile uploadFile;
@@ -181,5 +187,13 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setDocumentComments(List<DocumentComment> documentComments) {
 		this.documentComments = documentComments;
+	}
+
+	public DocumentStats getDocumentStats() {
+		return documentStats;
+	}
+
+	public void setDocumentStats(DocumentStats documentStats) {
+		this.documentStats = documentStats;
 	}
 }
