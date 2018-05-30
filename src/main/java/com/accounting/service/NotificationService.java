@@ -15,7 +15,7 @@ import com.google.android.gcm.server.Sender;
 @Service
 public class NotificationService {
 
-	public final static String AUTH_KEY_FCM = "your key ";
+	public final static String AUTH_KEY_FCM = "AIzaSyAwiAcLIXMYjS5B1dQTLe3yBP48I7-cuNA";
 	public final static String API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
 
 	public static void sendPushNotification(List<String> deviceTokenList,Map<String,Object> payload) {
