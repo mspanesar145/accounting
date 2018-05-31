@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accounting.UserDocument;
 import com.accounting.bo.Banner;
 import com.accounting.bo.Banner.BannerScreen;
+import com.accounting.bo.DocumentComment;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.ProfileCategory;
 import com.accounting.dao.DocumentDao;
@@ -135,8 +136,15 @@ public class SearchController {
 		return documentService.findUserDocumentByTitle(title);
 	}
 	
+	@RequestMapping(value="/find/documentsCommentsByDocumentId",produces="application/json")
+	public List<DocumentComment> findCommentsByDocumentId(Long documentId) {
+		return documentService.findDocumentCommentsByDocumentId(documentId);
+	}
+	
 	@RequestMapping(value="/find/bannersByScreen",produces="application/json")
 	public List<Banner> findBannersByScreen(BannerScreen screen) {
 		return bannerService.findActiveBannersByScreen(screen);
 	}
 }
+
+

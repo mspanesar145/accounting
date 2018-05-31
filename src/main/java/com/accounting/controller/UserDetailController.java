@@ -69,7 +69,8 @@ public class UserDetailController {
 			userDevice = new UserDevice();
 			userDevice.setDeviceToken(user.getDeviceToken());
 			userDevice.setDeviceType(user.getDeviceType());
-			
+		}
+		
 		System.out.println("[ Date : "+new Date()+", UserType : Email, Message : Creating new user");
 		if (user.getAuthType() == AuthenticateType.email && user.getEmail() != null) {
 			String password = new Md5PasswordEncoder().encodePassword(user.getPassword(), salt);

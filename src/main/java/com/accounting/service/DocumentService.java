@@ -108,4 +108,8 @@ public class DocumentService {
 		
 		return userDocumentRepository.findOne(userDocumentId);
 	}
+	
+	public List<DocumentComment> findDocumentCommentsByDocumentId(Long documentId) {
+		return documentCommentRepository.findByUserDocumentId(documentId);
+	}
 }

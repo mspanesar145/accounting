@@ -42,16 +42,21 @@ compile group: 'com.google.guava', name: 'guava', version: 'r05'
 
     compile('io.jsonwebtoken:jjwt:0.4')    
     testCompile("junit:junit")
+   	
+   	// https://mvnrepository.com/artifact/com.google.gcm/gcm-server
+	compile group: 'com.google.gcm', name: 'gcm-server', version: '1.0.0'
+   	
+   	
    	compile group: 'net.sf.flexjson', name: 'flexjson', version:'2.1'
-    	compile group: 'org.springframework', name: 'spring-jdbc', version:'3.2.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version:'3.2.6.RELEASE'
     compile group: "org.primefaces", name: "primefaces", version: "5.0"
 	compile group: "com.sun.faces", name: "jsf-api", version: "2.+"
 	compile group: "com.sun.faces", name: "jsf-impl", version: "2.+"
-	 compile("org.springframework.boot:spring-boot-starter-data-mongodb:1.2.0.RELEASE")
-	  compile('com.google.code.gson:gson:1.7.2')
-	   compile('com.jayway.jsonpath:json-path:2.2.0')
-	 compile('org.mockito:mockito-all:1.9.5')
-	  compile("junit:junit")    
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb:1.2.0.RELEASE")
+	compile('com.google.code.gson:gson:1.7.2')
+	compile('com.jayway.jsonpath:json-path:2.2.0')
+	compile('org.mockito:mockito-all:1.9.5')
+	compile("junit:junit")    
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     compile('com.google.code.gson:gson:1.7.2')
