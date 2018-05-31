@@ -61,6 +61,15 @@ public class UserDetailController {
 			HttpServletResponse response,
 			@RequestBody User user) {
 		
+		System.out.println("Feting Device Token");
+		UserDevice userDevice = null;
+		if (user.getDeviceToken() != null) {
+			System.out.println("Feting Device Tokken ");
+			System.out.println("Device Token : "+user.getDeviceToken());
+			userDevice = new UserDevice();
+			userDevice.setDeviceToken(user.getDeviceToken());
+			userDevice.setDeviceType(user.getDeviceType());
+			
 		System.out.println("[ Date : "+new Date()+", UserType : Email, Message : Creating new user");
 		if (user.getAuthType() == AuthenticateType.email && user.getEmail() != null) {
 			String password = new Md5PasswordEncoder().encodePassword(user.getPassword(), salt);
@@ -80,13 +89,7 @@ public class UserDetailController {
 		user.setPassword(null);
 		
 		
-		UserDevice userDevice = null;
-		if (user.getDeviceToken() != null) {
-			System.out.println("Feting Device Tokken ");
-			System.out.println("Device Token : "+user.getDeviceToken());
-			userDevice = new UserDevice();
-			userDevice.setDeviceToken(user.getDeviceToken());
-			userDevice.setDeviceType(user.getDeviceType());
+		if (userDevice != null) {
 			userDevice.setUserId(user.getUserId());
 			userDeviceRepository.save(userDevice);
 		}
