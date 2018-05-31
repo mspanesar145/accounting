@@ -1,4 +1,22 @@
-angular.module("accounting").controller('UserController',function($scope, UserService, Facebook) {
+var bannerImg = null;
+function onSelectBannerImage(input) {
+    if (input.files && input.files[0]) {
+    	var mimeType=input.files[0]['type'];//mimeType=image/jpeg or application/pdf etc...
+    	//ie image/jpeg will be ['image','jpeg'] and we keep the first value
+	    if(mimeType.split('/')[0] != 'image'){
+	       alert("Please upload images only.");
+	       window.location.reload();
+	    }
+	    bannerImg = input.files[0];
+    }
+}
+
+angular.module("accounting").controller('UserController',function($scope, $rootScope,UserService, Facebook) {
+	
+	$scope.ngNotLoggedIn = function() {
+		$rootScope.showNavigationLinks = false;
+	}
+	
 	$scope.signup = function(signupData) {
 		var validateResponse = UserService.validateSignup(signupData);
 		if (!validateResponse['valid']) {
@@ -123,7 +141,6 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 		};
 		gapi.auth.signIn(params);
 		
-		debugger;
 		/*GooglePlus.login().then(function (authResult) {
 			debugger;
             console.log(authResult);
@@ -136,4 +153,27 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
         });*/
 	}
 	
+	$scope.uploadBanner = function() {
+		var data = new FormData();
+        data.append("mediaFile", bannerImg);
+		
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/api/banner/upload",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+               alert("Banner Uploaded Successfully.");
+               window.location.reload();
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+                alert("Error : "+e);
+            }
+        });	
+	}
 });

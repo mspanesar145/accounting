@@ -32,6 +32,8 @@ app.config(['$routeProvider', 'FacebookProvider', function($routeProvider, Faceb
 		templateUrl: "app/upload.html"
 	}).when('/app/my-account', {
 		templateUrl: "app/my-account.html"
+	}).when('/app/admin', {
+		templateUrl: "app/admin/upload-banner.html"
 	});
 	
 	if (localStorage.getItem('loggedInUser')) {
@@ -47,6 +49,6 @@ app.config(['$routeProvider', 'FacebookProvider', function($routeProvider, Faceb
     		window.location.href = "#!app/my-account";
     	}
 	} else {
-		$routeProvider.otherwise('/app/login');
+		window.location.href = "#!app/login";
 	}
 }]); 

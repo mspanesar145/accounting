@@ -2617,3 +2617,8 @@ ul.rating {
     opacity: 0.7;
     z-index: 999;
 }    
+#upload-banner-form {
+	width: 400px;
+    margin-left: 400px;
+    margin-top: 100px;
+}

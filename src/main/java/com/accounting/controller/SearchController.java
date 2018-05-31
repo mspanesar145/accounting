@@ -45,10 +45,7 @@ public class SearchController {
 		
 		Map<Long,List<ProfileCategory>> categoriesMap = profileService.generateCatSubCategoryMap();
 		
-		
-		
 		Map<Long,List<ProfileCategory>> myAccountCategoiresMap = new HashMap<>();
-
 		
 		Map<String,List<UserDocument>> topTenDocMap = new HashMap<>();
 		
@@ -75,9 +72,9 @@ public class SearchController {
 				}
 			}
 			
-			topTenDocMap.put("image",documentDao.findTop10ImageDocuments(myAccountCategoiresMap));
-			topTenDocMap.put("video", documentDao.findTop10VideoDocuments(myAccountCategoiresMap));
-			topTenDocMap.put("content", documentDao.findTop10ContentDocuments(myAccountCategoiresMap));
+			topTenDocMap.put("image",documentDao.findTop10ImageDocuments(myAccountCategoiresMap,title));
+			topTenDocMap.put("video", documentDao.findTop10VideoDocuments(myAccountCategoiresMap,title));
+			topTenDocMap.put("content", documentDao.findTop10ContentDocuments(myAccountCategoiresMap,title));
 		} else {
 			topTenDocMap.put("image", new ArrayList<>());
 			topTenDocMap.put("video",  new ArrayList<>());

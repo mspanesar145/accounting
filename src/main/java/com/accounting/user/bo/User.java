@@ -6,19 +6,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.accounting.bo.AccountingGeneral;
 import com.accounting.bo.MyAccount;
+import com.accounting.bo.Roles;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 
 
@@ -90,6 +91,9 @@ public class User extends AccountingGeneral{
 	@Transient
 	private String deviceType;
 	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	List<Roles> roles;
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="created_by_id",insertable=false,updatable=false)
@@ -295,5 +299,13 @@ public class User extends AccountingGeneral{
 
 	public void setUserDevices(List<UserDevice> userDevices) {
 		this.userDevices = userDevices;
+	}
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
 }

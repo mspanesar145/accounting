@@ -1,7 +1,7 @@
 angular.module("accounting").controller('DocumentController',function($scope,$rootScope,$routeParams, DocumentService) {
 	
 	$scope.initHomePage = function() {
-		
+		$rootScope.showNavigationLinks = true;
 		$scope.findAllDocuments();
 	}
 	

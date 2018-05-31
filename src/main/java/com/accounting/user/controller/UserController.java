@@ -29,6 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accounting.bo.Banner;
+import com.accounting.bo.Banner.BannerScreen;
+import com.accounting.bo.Banner.BannerStatus;
 import com.accounting.bo.FacebookProfile;
 import com.accounting.bo.MyAccount;
 import com.accounting.constant.AccountingConstants;
@@ -56,8 +59,8 @@ public class UserController {
     @Autowired
     ProfileService profileService;
     
-    @Value("${accounting.imageUploadPath}")
-    private String imageUploadPath;
+    @Value("${accounting.bannerUploadPath}")
+    private String bannerUploadPath;
 
     @Value("${accounting.domain}")
     private String domain;
@@ -304,12 +307,10 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/api/profile/upload", method = RequestMethod.POST)
-	public ResponseEntity<User> uploadImages(@RequestParam("mediaFile") MultipartFile uploadfile,
-			@RequestParam("userId") String userId) {
+	@RequestMapping(value = "/api/banner/upload", method = RequestMethod.POST)
+	public void uploadImages(@RequestParam("mediaFile") MultipartFile uploadfile) {
 
-		User user = userRepository.findOne(Long.valueOf(userId));
-		String dirPath = imageUploadPath.replaceAll("\\[userId\\]", userId);
+		String dirPath = bannerUploadPath;
 
 		File file = new File(dirPath);
 		if (file != null) {
@@ -357,18 +358,20 @@ public class UserController {
 				outputStream.write(bytes, 0, read);
 			}
 
-			String profilePicUrl = "http://" + domain + "/assets/uploads/" + userId + "/profile/" + fileName;
-			user.setPhoto(profilePicUrl);
-			userService.saveUser(user);
+			
+			String bannerImg = "/assets/banners/"+ fileName;
+			
+			Banner banner = new Banner();
+			banner.setBannerAtScreen(BannerScreen.login);
+			banner.setBannerStatus(BannerStatus.Active);
+			banner.setCreatedAt(new Date());
+			banner.setUpdateAt(new Date());
+			banner.setPath(bannerImg);
+			userService.saveBanner(banner);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			user = new User();
-			user.setErrorCode(HttpStatus.BAD_REQUEST.ordinal());
-			user.setErrorDetail(HttpStatus.BAD_REQUEST.toString());
-			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
-		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
     @RequestMapping(value = "/api/user/friends", method = RequestMethod.GET)

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.accounting.bo.Banner;
 import com.accounting.bo.FacebookProfile;
+import com.accounting.repository.BannerRepository;
 import com.accounting.repository.UserDeviceRepository;
 import com.accounting.repository.UserRepository;
 import com.accounting.user.bo.User;
@@ -23,6 +25,9 @@ public class UserService {
 	
 	@Autowired
 	UserDeviceRepository userDeviceRepository;
+	
+	@Autowired
+	BannerRepository bannerRepository;
 	
 	/***********  USER BLOCK STARTS *****************/
 	public User findUserById(Long userId) {
@@ -114,5 +119,9 @@ public class UserService {
 		}
 		User googleUser = this.findUserByEmail(userEmail);
 		return googleUser;
+	}
+	
+	public Banner saveBanner(Banner banner) {
+		return bannerRepository.save(banner);
 	}
 }

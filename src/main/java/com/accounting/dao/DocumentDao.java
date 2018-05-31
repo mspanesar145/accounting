@@ -20,7 +20,7 @@ public class DocumentDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public List<UserDocument> findTop10ImageDocuments(Map<Long,List<ProfileCategory>> myAccountCategories) {
+	public List<UserDocument> findTop10ImageDocuments(Map<Long,List<ProfileCategory>> myAccountCategories,String title) {
 		
 		StringBuffer sb = new StringBuffer();
 		
@@ -33,7 +33,12 @@ public class DocumentDao {
 		
 		String catCustomQry = sb.toString().substring(0,sb.toString().lastIndexOf(" or "));
 		
-		String sql = "SELECT * from user_documents where content_link_url is not null and "+catCustomQry+" order by user_document_id desc limit 10";
+		String titleQry = "";
+		if (title != null && title.length() > 0) {
+			titleQry = " and title like '"+title+"%' ";
+		}
+		
+		String sql = "SELECT * from user_documents where content_link_url is not null and "+catCustomQry+" "+titleQry+" order by user_document_id desc limit 10";
 		System.out.println("image sql : "+sql);
 
 		return jdbcTemplate.query(sql, new RowMapper<UserDocument>() {
@@ -58,7 +63,7 @@ public class DocumentDao {
 		});
 	}	
 	
-	public List<UserDocument> findTop10ContentDocuments(Map<Long,List<ProfileCategory>> myAccountCategories) {
+	public List<UserDocument> findTop10ContentDocuments(Map<Long,List<ProfileCategory>> myAccountCategories,String title) {
 		
 		StringBuffer sb = new StringBuffer();
 		
@@ -71,7 +76,12 @@ public class DocumentDao {
 		
 		String catCustomQry = sb.toString().substring(0,sb.toString().lastIndexOf(" or "));
 		
-		String sql = "SELECT * from user_documents where contains_video = false and "+catCustomQry+" order by user_document_id desc limit 10";
+		String titleQry = "";
+		if (title != null && title.length() > 0) {
+			titleQry = " and title like '"+title+"%' ";
+		}
+		
+		String sql = "SELECT * from user_documents where contains_video = false and "+catCustomQry+" "+titleQry+" order by user_document_id desc limit 10";
 		System.out.println("vide sql : "+sql);
 		return jdbcTemplate.query(sql, new RowMapper<UserDocument>() {
 			@Override
@@ -95,7 +105,7 @@ public class DocumentDao {
 		});
 	}	
 
-	public List<UserDocument> findTop10VideoDocuments(Map<Long,List<ProfileCategory>> myAccountCategories) {
+	public List<UserDocument> findTop10VideoDocuments(Map<Long,List<ProfileCategory>> myAccountCategories,String title) {
 	
 		StringBuffer sb = new StringBuffer();
 		
@@ -108,7 +118,12 @@ public class DocumentDao {
 		
 		String catCustomQry = sb.toString().substring(0,sb.toString().lastIndexOf(" or "));
 		
-		String sql = "SELECT * from user_documents where contains_video = true and content_link_url is null and "+catCustomQry+" order by user_document_id desc limit 10";
+		String titleQry = "";
+		if (title != null && title.length() > 0) {
+			titleQry = " and title like '"+title+"%' ";
+		}
+		
+		String sql = "SELECT * from user_documents where contains_video = true and content_link_url is null and "+catCustomQry+" "+titleQry+" order by user_document_id desc limit 10";
 		System.out.println("Content sql : "+sql);
 		return jdbcTemplate.query(sql, new RowMapper<UserDocument>() {
 			@Override

@@ -77,7 +77,13 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 	
 	$scope.saveMyaccount = function(myAccountData) {
 		myAccountData['createdById'] = $scope.loggedInUser.userId;
-		ProfileService.saveMyAccountData(myAccountData).then(function(response) {
+		
+		var myAccounts = [];
+		myAccounts.push(myAccountData);
+		
+		$scope.loggedInUser['myAccounts'] = myAccounts;
+		
+		ProfileService.saveMyAccountData($scope.loggedInUser).then(function(response) {
 			console.log(response.data);
 			var myAccounts = [];
 			myAccounts.push(response.data);

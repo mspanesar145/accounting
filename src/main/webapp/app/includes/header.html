@@ -1,4 +1,4 @@
-<header class="top_header" id="home">
+<header class="top_header" id="home" ng-controller="UserController">
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="nav_top_fx_w3ls_agileinfo container-fluid">
@@ -13,9 +13,8 @@
                         <h1> <a class="navbar-brand" href="#!/app/home"><i class="fa fa-clone" style="color:#fff;" aria-hidden="true"></i> Logo</a></h1>
                     </div>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse" ng-if="showNavigationLinks">
                     <div class="nav_right_top">
-
                         <ul class="nav navbar-nav">
                             <li><a href="#!/app/home">Home</a></li>
 							<li><a >Bookmarks</a></li>
@@ -24,9 +23,7 @@
                             <li><a href="#!/app/signup">Signup</a></li>  -->
                             <li><a href="#!/app/my-account">My Account</a></li>
                             <li><a href="#!/app/upload">Upload</a></li>
-
                         </ul>
-
                     </div>
                 </div>
                 <!--/.nav-collapse -->
