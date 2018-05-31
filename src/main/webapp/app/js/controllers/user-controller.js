@@ -30,7 +30,18 @@ angular.module("accounting").controller('UserController',function($scope, UserSe
 			window.location.href="#!/app/home";
 		});
 	}
-	
+	$scope.loginBanner = function(loginBannerData) {
+		UserService.getLoginBanner(loginBannerData).then(function(response) {
+			console.log(response);
+			if (response.data.errorCode != 0) {
+				//console.log("error");
+				toastr["error"](response.data.errorDetail);
+				return;
+			}
+			$scope.loginBannerImages = response.data;
+
+		});
+	}
 
 	$scope.facebookLogin = function() {
 		debugger;

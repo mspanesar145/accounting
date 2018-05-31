@@ -30,9 +30,22 @@ angular.module("accounting").service('UserService', function($q, $http){
 		  return validateResponse;
 	  }
 	  
+	  var getLoginBanner = function(postData){
+		    return $q(function(resolve, reject) {
+		    	var loginBannerApi = '/find/bannersByScreen?screen=login';
+			      $http.post(loginBannerApi,postData).then(function(resp){
+			        resolve(resp);
+			      }, function(error){
+			        console.log(error)
+			      });
+		    });
+		  };
+	  
 	  return {
 		  signup:signup,
 		  login:login,
 		  validateSignup:validateSignup,
+		  getLoginBanner:getLoginBanner
 	  }
+	  
 });
