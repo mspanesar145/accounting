@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
+import com.accounting.repository.UserDeviceRepository;
 import com.accounting.repository.UserRepository;
 import com.accounting.stateless.security.TokenAuthenticationService;
 import com.accounting.stateless.security.UserService;
 import com.accounting.user.bo.User;
+import com.accounting.user.bo.UserDevice;
 import com.google.common.collect.Sets;
 
 @RestController
@@ -37,6 +39,10 @@ public class UserDetailController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+
+	@Autowired
+	UserDeviceRepository userDeviceRepository;
 	
 	@Autowired
 	TokenAuthenticationService tokenAuthenticationService;
@@ -72,6 +78,19 @@ public class UserDetailController {
 		}
 		System.out.println("[ Date : "+new Date()+", UserType : Email, Message : Creating new user "+user.toString());	
 		user.setPassword(null);
+		
+		
+		UserDevice userDevice = null;
+		if (user.getDeviceToken() != null) {
+			System.out.println("Feting Device Tokken ");
+			System.out.println("Device Token : "+user.getDeviceToken());
+			userDevice = new UserDevice();
+			userDevice.setDeviceToken(user.getDeviceToken());
+			userDevice.setDeviceType(user.getDeviceType());
+			userDevice.setUserId(user.getUserId());
+			userDeviceRepository.save(userDevice);
+		}
+		
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
