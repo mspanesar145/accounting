@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,21 +63,37 @@ public class DocumentService {
 		
 		List<User> users = userService.findUsersByMainCourseIdsAndSecondryCourseIds(userDocument.getCategoryId()+"",userDocument.getSubCategoryId()+"");
 		if (users != null && users.size() > 0) {
-			List<String> deviceTokens = new ArrayList<>();
+			JSONArray toArr = new JSONArray();
 			for (User user : users) {
 				List<UserDevice> userDevices = user.getUserDevices();
 				if (userDevices != null && userDevices.size() > 0) {
 					for (UserDevice userDevice : userDevices) {
-						deviceTokens.add(userDevice.getDeviceToken());
+						try {
+							toArr.put(userDevice.getDeviceToken());
+						} catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						}	
 					}
 				}
 			}
 			
-			if (deviceTokens.size() > 0) {
-				Map<String,Object> payload = new HashMap<>();
-				payload.put("message", "New Document Uploaded By "+documentOwner.getFirstName());
-				notificationService.sendPushNotification(deviceTokens, payload);
+			if (toArr.length() > 0) {
 				
+				JSONObject notifyObj = new JSONObject();
+				try {
+					
+					notifyObj.put("title", "New Document Uploaded");
+					notifyObj.put("body", " New Document Uploaded By "+documentOwner.getFirstName());
+					
+					JSONObject json = new JSONObject();
+				    json.put("notification",notifyObj);
+				    json.put("registration_ids", toArr);
+				    
+				    NotificationService.pushFCMNotification(json.toString());
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
  		}
 		return userDocument;

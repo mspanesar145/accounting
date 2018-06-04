@@ -106,12 +106,20 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/find/allDocumentsByCategotyIdSubCategoryIdContainsVideo",produces="application/json")
-	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,Boolean containsVideo) {
-		if (containsVideo == null) {
-			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryId(categoryId, subCategoryId);
+	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,Boolean containsVideo,String title) {
+		
+		if (title == null || title.length() == 0) {
+			if (containsVideo == null) {
+				return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryId(categoryId, subCategoryId);
+			}
+			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(categoryId,subCategoryId,containsVideo);
+		} else {
+			if (containsVideo == null) {
+				return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndTitle(categoryId, subCategoryId,title);
+			}
+			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideoAndTitle(categoryId,subCategoryId,containsVideo,title);
 		}
-		return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideo(categoryId,subCategoryId,containsVideo);
-	}
+	}	
 	
 	@RequestMapping(value="/find/categories",produces="application/json")
 	public List<ProfileCategory> findMainCategories() {

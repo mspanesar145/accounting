@@ -83,6 +83,14 @@ public class ProfileService {
 		return userDocumentRepository.findByCategoryIdAndSubcategoryIdAndContainsVideo(categoryId, subCategoryId,containsVideo);
 	}
 	
+	//Contains title
+	public List<UserDocument> findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndTitle(Long categoryId,Long subCategoryId,String title) {
+		return userDocumentRepository.findByCategoryIdAndSubcategoryIdAndTitleContaining(categoryId, subCategoryId,title);
+	}
+	public List<UserDocument> findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideoAndTitle(Long categoryId,Long subCategoryId,Boolean containsVideo,String title) {
+		return userDocumentRepository.findByCategoryIdAndSubcategoryIdAndContainsVideoAndTitleContaining(categoryId, subCategoryId,containsVideo,title);
+	}
+	
 	public MyAccount saveMyAccount(MyAccount myAccount) {
 		return myAccountRepository.save(myAccount);
 	}
