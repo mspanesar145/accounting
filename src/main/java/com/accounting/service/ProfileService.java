@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,8 @@ import com.accounting.bo.ProfileCategory;
 import com.accounting.repository.MyAccountRepository;
 import com.accounting.repository.ProfileCategoryRepository;
 import com.accounting.repository.UserDocumentRepository;
+import com.accounting.user.bo.User;
+import com.accounting.user.bo.UserDevice;
 
 @Service
 public class ProfileService {
@@ -36,6 +40,9 @@ public class ProfileService {
 	
 	@Autowired
 	private ProfileCategoryRepository profileCategoryRepository;
+	
+	@Autowired
+	UserService userService;
 	
 	@Value("${accounting.domain}")
 	private String domain;
@@ -50,6 +57,46 @@ public class ProfileService {
 				userDocument.setCoverImageUrl(coverPhotoUrl);
 			}
 		}*/
+		
+		User documentOwner = userService.findUserById(userDocument.getCreatedById());
+		
+		List<User> users = userService.findUsersByMainCourseIdsAndSecondryCourseIds(userDocument.getCategoryId()+"",userDocument.getSubCategoryId()+"");
+		if (users != null && users.size() > 0) {
+			JSONArray toArr = new JSONArray();
+			for (User user : users) {
+				List<UserDevice> userDevices = user.getUserDevices();
+				if (userDevices != null && userDevices.size() > 0) {
+					for (UserDevice userDevice : userDevices) {
+						try {
+							toArr.put(userDevice.getDeviceToken());
+						} catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						}	
+					}
+				}
+			}
+			
+			if (toArr.length() > 0) {
+				
+				JSONObject notifyObj = new JSONObject();
+				try {
+					
+					notifyObj.put("title", "New Document Uploaded");
+					notifyObj.put("body", " New Document Uploaded By "+documentOwner.getFirstName());
+					
+					JSONObject json = new JSONObject();
+				    json.put("notification",notifyObj);
+				    json.put("registration_ids", toArr);
+				    
+				    NotificationService.pushFCMNotification(json.toString());
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+ 		}
+		
+		
 		return userDocumentRepository.save(userDocument);
 	}
 	
