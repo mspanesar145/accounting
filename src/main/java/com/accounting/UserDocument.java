@@ -2,6 +2,7 @@ package com.accounting;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -70,8 +71,7 @@ public class UserDocument extends AccountingGeneral {
 	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
 	private List<DocumentComment> documentComments;
 	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
+	@OneToOne(fetch=FetchType.EAGER,mappedBy = "userDocument", cascade = CascadeType.ALL)
 	private DocumentStats documentStats;
 	
 	@Transient

@@ -2,10 +2,15 @@ package com.accounting.bo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.accounting.UserDocument;
 
 @Entity
 @Table(name="document_stats")
@@ -29,6 +34,10 @@ public class DocumentStats extends AccountingGeneral {
 	
 	@Column(name="total_counts",nullable = false, columnDefinition = "int default 0")
 	private Long totalCounts;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private UserDocument userDocument;
 
 	public Long getDocumentStatsId() {
 		return documentStatsId;
@@ -68,5 +77,13 @@ public class DocumentStats extends AccountingGeneral {
 
 	public void setTotalCounts(Long totalCounts) {
 		this.totalCounts = totalCounts;
+	}
+
+	public UserDocument getUserDocument() {
+		return userDocument;
+	}
+
+	public void setUserDocument(UserDocument userDocument) {
+		this.userDocument = userDocument;
 	}
 }
