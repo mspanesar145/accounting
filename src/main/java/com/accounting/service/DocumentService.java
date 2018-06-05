@@ -1,5 +1,6 @@
 package com.accounting.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,13 @@ public class DocumentService {
 	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
 		
 		DocumentStats documentStats = documentStatsRepository.findByUserDocumentId(userDocumentId);
+		if (documentStats == null) {
+			documentStats = new DocumentStats();
+			documentStats.setAttachmentCounts(0l);
+			documentStats.setContentCounts(0l);
+			documentStats.setUserDocumentId(userDocumentId);
+			documentStats.setCreatedAt(new Date());
+		}
 		System.out.println("Document Found : "+documentStats.getUserDocumentId());
 		if (source.equals(DocumentStatsSource.content)) {
 			long contentStats = documentStats.getContentCounts() + 1;
