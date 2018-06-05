@@ -71,8 +71,9 @@ public class UserDocument extends AccountingGeneral {
 	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
 	private List<DocumentComment> documentComments;
 	
-	@OneToOne(fetch=FetchType.EAGER,mappedBy = "userDocument", cascade = CascadeType.ALL)
-	private DocumentStats documentStats;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
+	private List<DocumentStats> documentStats;
 	
 	@Transient
 	private MultipartFile uploadFile;
@@ -190,10 +191,13 @@ public class UserDocument extends AccountingGeneral {
 	}
 
 	public DocumentStats getDocumentStats() {
-		return documentStats;
+		if (documentStats != null && documentStats.size() > 0) {
+			return documentStats.get(0);
+		}
+		return null;
 	}
 
-	public void setDocumentStats(DocumentStats documentStats) {
+	public void setDocumentStats(List<DocumentStats> documentStats) {
 		this.documentStats = documentStats;
 	}
 }
