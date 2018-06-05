@@ -65,7 +65,7 @@ public class DocumentService {
 	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
 		
 		DocumentStats documentStats = documentStatsRepository.findByUserDocumentId(userDocumentId);
-		
+		System.out.println("Document Found : "+documentStats.getUserDocumentId());
 		if (source.equals(DocumentStatsSource.content)) {
 			long contentStats = documentStats.getContentCounts() + 1;
 			documentStats.setContentCounts(contentStats);

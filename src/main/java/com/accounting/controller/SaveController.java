@@ -66,6 +66,7 @@ public class SaveController {
 	
 	@RequestMapping(value="/save/documentStats",produces="application/json")
 	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
+		System.out.println("UserDocumentID : "+userDocumentId+", Document Stat Source  ; "+source);
 		return documentService.updateDocumentStats(userDocumentId, source);
 	}
 	
