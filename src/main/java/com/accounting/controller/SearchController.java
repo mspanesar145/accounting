@@ -106,9 +106,9 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/find/allDocumentsByCategotyIdSubCategoryIdContainsVideo",produces="application/json")
-	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(Long categoryId,Long subCategoryId,Boolean containsVideo,String title) {
+	public List<UserDocument> findAllDocumentsByContainsVideoYesNo(String categoryId,String subCategoryId,Boolean containsVideo,String title) {
 		
-		if (title == null || title.length() == 0) {
+		/*if (title == null || title.length() == 0) {
 			if (containsVideo == null) {
 				return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryId(categoryId, subCategoryId);
 			}
@@ -118,7 +118,34 @@ public class SearchController {
 				return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndTitle(categoryId, subCategoryId,title);
 			}
 			return profileService.findAllContentDocumentsByCategoryIdAndSubCtaeogryIdAndContainsVideoAndTitle(categoryId,subCategoryId,containsVideo,title);
+		}*/
+		if (containsVideo == null) {
+			containsVideo = false;
 		}
+		Map<Long,List<ProfileCategory>> categoriesMap = profileService.generateCatSubCategoryMap();
+		Map<Long,List<ProfileCategory>> myAccountCategoiresMap = new HashMap<>();
+
+		List<String> mainCourseIds = Arrays.asList(categoryId.split(","));
+		
+		for (String mainCourseIdStr : mainCourseIds) {
+			
+			Long mainCourseId = Long.parseLong(mainCourseIdStr);
+			List<ProfileCategory> secondryCategories = null;
+			List<ProfileCategory> secondryCategoriesList = categoriesMap.get(mainCourseId);
+			for (ProfileCategory secondryCategory : secondryCategoriesList) {
+				if (subCategoryId.indexOf(secondryCategory.getProfileCategoryId().toString()) != -1) {
+					
+					secondryCategories = new ArrayList<>();
+					if (myAccountCategoiresMap.containsKey(mainCourseId)) {
+						secondryCategories = myAccountCategoiresMap.get(mainCourseId);
+					}
+					secondryCategories.add(secondryCategory);
+					myAccountCategoiresMap.put(mainCourseId, secondryCategories);
+				}
+			}
+		}
+		
+		return documentDao.findUserDocumentsListByCategoryIdSubCategoryIdContainsVideoTitle(myAccountCategoiresMap, containsVideo, title);
 	}	
 	
 	@RequestMapping(value="/find/categories",produces="application/json")
