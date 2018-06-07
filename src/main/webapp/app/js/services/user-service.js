@@ -41,11 +41,23 @@ angular.module("accounting").service('UserService', function($q, $http){
 	    });
 	  };
 	  
+	  var getAllCities = function(){
+		    return $q(function(resolve, reject) {
+		    	var citiesApi = '/fetch/all/cities';
+			      $http.get(citiesApi).then(function(resp){
+			        resolve(resp);
+			      }, function(error){
+			        console.log(error)
+			      });
+		    });
+		  };
+	  
 	  return {
 		  signup:signup,
 		  login:login,
 		  validateSignup:validateSignup,
-		  getLoginBanner:getLoginBanner
+		  getLoginBanner:getLoginBanner,
+		  getAllCities:getAllCities
 	  }
 	  
 });

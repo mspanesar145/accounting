@@ -1,6 +1,8 @@
 package com.accounting.controller;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
+import com.accounting.dao.AccountingReportDao;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 import com.accounting.repository.UserDeviceRepository;
 import com.accounting.repository.UserRepository;
@@ -46,6 +49,9 @@ public class UserDetailController {
 	
 	@Autowired
 	TokenAuthenticationService tokenAuthenticationService;
+	
+	@Autowired
+	AccountingReportDao accountingReportDao;
 
 	@Value("${accounting.salt}")
 	private String salt;
@@ -133,6 +139,21 @@ public class UserDetailController {
 		user.setErrorCode(ErrorCodes.RowNotFound.getErrorCode());
 		user.setErrorDetail(ErrorCodes.RowNotFound.toString());
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/fetch/all/cities", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Map<String,String>>> fetchAllCities() {
+		try {
+			
+			List<Map<String,String>> cityList = accountingReportDao.getAllCities();
+			
+			return new ResponseEntity<List<Map<String,String>>>(cityList,
+					HttpStatus.OK);
+		} catch (Exception ex) {
+
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	private String establishUserAndLogin(HttpServletResponse response,
