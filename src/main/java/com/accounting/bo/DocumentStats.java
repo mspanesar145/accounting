@@ -35,10 +35,6 @@ public class DocumentStats extends AccountingGeneral {
 	@Column(name="total_counts",nullable = false, columnDefinition = "int default 0")
 	private Long totalCounts;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private UserDocument userDocument;
-
 	public Long getDocumentStatsId() {
 		return documentStatsId;
 	}
@@ -79,11 +75,4 @@ public class DocumentStats extends AccountingGeneral {
 		this.totalCounts = totalCounts;
 	}
 
-	public UserDocument getUserDocument() {
-		return userDocument;
-	}
-
-	public void setUserDocument(UserDocument userDocument) {
-		this.userDocument = userDocument;
-	}
 }
