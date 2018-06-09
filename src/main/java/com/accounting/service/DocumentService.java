@@ -1,16 +1,20 @@
 package com.accounting.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.BookmarkDocument;
 import com.accounting.bo.DocumentComment;
 import com.accounting.bo.DocumentStats;
 import com.accounting.bo.DocumentStats.DocumentStatsSource;
 import com.accounting.bo.Rating;
+import com.accounting.repository.BookmarkDocumentRepository;
 import com.accounting.repository.DocumentCommentRepository;
 import com.accounting.repository.DocumentStatsRepository;
 import com.accounting.repository.RatingRepository;
@@ -36,6 +40,9 @@ public class DocumentService {
 	
 	@Autowired
 	DocumentStatsRepository documentStatsRepository;
+	
+	@Autowired
+	BookmarkDocumentRepository bookmarkDocumentRepository;
 	
 	public Rating saveRating(Rating rating) {		
 		return ratingRepository.save(rating);
@@ -91,5 +98,22 @@ public class DocumentService {
 	
 	public List<DocumentComment> findDocumentCommentsByDocumentId(Long documentId) {
 		return documentCommentRepository.findByUserDocumentId(documentId);
+	}
+	
+	public List<UserDocument> findBookmarkedDocumentsByUserId(Long userId) {
+		return userDocumentRepository.findByBookmarkedById(userId);
+	}
+	
+	public Map<String,String> updateBookMarkedDocumentStatus(BookmarkDocument bookmarkDocument) {
+		Map<String,String> responseMap = new HashMap<>();
+		responseMap.put("status","success");
+		if (bookmarkDocument.getBookmarkDocumentId() != null) {
+			bookmarkDocumentRepository.delete(bookmarkDocument.getBookmarkDocumentId());
+			responseMap.put("message","");
+		} else {
+			bookmarkDocumentRepository.save(bookmarkDocument);
+			responseMap.put("message","Bookmarked..!!");
+		}
+		return responseMap;
 	}
 }

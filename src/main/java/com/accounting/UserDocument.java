@@ -2,7 +2,6 @@ package com.accounting;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,13 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.bo.AccountingGeneral;
+import com.accounting.bo.BookmarkDocument;
 import com.accounting.bo.DocumentComment;
 import com.accounting.bo.DocumentStats;
 import com.accounting.enums.AccountingEnums.FileType;
@@ -74,6 +73,10 @@ public class UserDocument extends AccountingGeneral {
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
 	private List<DocumentStats> documentStats;
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_document_id",insertable=false,updatable=false)
+	private List<BookmarkDocument> bookmarkDocuments;
 	
 	@Transient
 	private MultipartFile uploadFile;
@@ -199,5 +202,16 @@ public class UserDocument extends AccountingGeneral {
 
 	public void setDocumentStats(List<DocumentStats> documentStats) {
 		this.documentStats = documentStats;
+	}
+
+	public BookmarkDocument getBookmarkDocuments() {
+		if (bookmarkDocuments != null && bookmarkDocuments.size() > 0) {
+			return bookmarkDocuments.get(0);
+		}
+		return null;
+	}
+
+	public void setBookmarkDocuments(List<BookmarkDocument> bookmarkDocuments) {
+		this.bookmarkDocuments = bookmarkDocuments;
 	}
 }
