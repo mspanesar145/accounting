@@ -6,7 +6,7 @@ function onLoadFunction() {
 	gapi.client.load('plus', 'v1', function() {});
 }
 
-var app = angular.module("accounting", ['ngRoute','angular-loading-bar', 'facebook', 'googleplus']);
+var app = angular.module("accounting", ['ngRoute','angular-loading-bar', 'facebook', 'googleplus','angucomplete-alt']);
 
 app.config(['$routeProvider', 'FacebookProvider', function($routeProvider, FacebookProvider) {
 	

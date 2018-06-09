@@ -13,8 +13,10 @@ function onSelectBannerImage(input) {
 
 angular.module("accounting").controller('UserController',function($scope, $rootScope,UserService, Facebook) {
 	
+	
 	$scope.ngNotLoggedIn = function() {
 		$rootScope.showNavigationLinks = false;
+		$scope.allCities();
 	}
 	
 	$scope.signup = function(signupData) {
@@ -58,6 +60,12 @@ angular.module("accounting").controller('UserController',function($scope, $rootS
 			}
 			$scope.loginBannerImages = response.data;
 
+		});
+	}
+	
+	$scope.allCities = function() {
+		UserService.getAllCities().then(function(response) {
+			$scope.cities = response.data;
 		});
 	}
 
