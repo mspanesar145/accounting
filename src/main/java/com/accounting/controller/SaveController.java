@@ -1,5 +1,7 @@
 package com.accounting.controller;
 
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accounting.UserDocument;
+import com.accounting.bo.BookmarkDocument;
 import com.accounting.bo.DocumentComment;
 import com.accounting.bo.DocumentStats.DocumentStatsSource;
 import com.accounting.bo.MyAccount;
@@ -70,5 +73,8 @@ public class SaveController {
 		return documentService.updateDocumentStats(userDocumentId, source);
 	}
 	
-	
+	@RequestMapping(value="/save/updateBookmarkDocument",produces="application/json")
+	public Map<String,String> updateBookMarkedDocumentStatus(@RequestBody BookmarkDocument bookmarkDocument) {
+		return documentService.updateBookMarkedDocumentStatus(bookmarkDocument);
+	}
 }

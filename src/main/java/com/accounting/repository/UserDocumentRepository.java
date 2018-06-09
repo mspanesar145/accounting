@@ -42,4 +42,7 @@ public interface UserDocumentRepository extends JpaRepository<UserDocument, Long
 	@Query("select ud from UserDocument ud where ud.title like CONCAT(:title,'%')")
 	public List<UserDocument> findByTitleContainig(@Param("title") String title);
 
+	@Query("select ud from UserDocument ud JOIN ud.bookmarkDocuments bd where bd.bookmarkedById = :userId")
+	public List<UserDocument> findByBookmarkedById(@Param("userId") Long userId);
+	
 }
