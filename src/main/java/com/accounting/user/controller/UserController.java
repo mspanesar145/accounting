@@ -33,11 +33,13 @@ import com.accounting.bo.Banner;
 import com.accounting.bo.Banner.BannerScreen;
 import com.accounting.bo.Banner.BannerStatus;
 import com.accounting.bo.FacebookProfile;
+import com.accounting.bo.Feedback;
 import com.accounting.bo.MyAccount;
 import com.accounting.constant.AccountingConstants;
 import com.accounting.constant.AccountingConstants.ErrorCodes;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
 import com.accounting.repository.UserRepository;
+import com.accounting.service.EmailService;
 import com.accounting.service.FacebookService;
 import com.accounting.service.ProfileService;
 import com.accounting.service.UserService;
@@ -67,6 +69,8 @@ public class UserController {
 
     @Value("${accounting.salt}")
     private String salt;
+    
+    private EmailService emailService;
 
     @RequestMapping(value = "/api/users/", method = RequestMethod.POST)
     @ResponseBody
@@ -513,6 +517,21 @@ public class UserController {
 		user.setMyAccounts(myAccounts);
 		user = userService.saveUser(user);
 		reposne.put("data", user);
+		return reposne;
+	}
+	
+	
+	@RequestMapping(value = "/api/users/sendFeedback", method = RequestMethod.POST)
+	public Map<String,Object> sendFeedbackToAdmin(Feedback feedBack) {
+		
+		Map<String,Object> reposne = new HashMap<>();
+		reposne.put("success", true);
+		
+		//Checking if there is already email present for any other user
+		User dbUser = userService.findUserById(feedBack.getUserId());
+		feedBack.setUser(dbUser);
+		emailService.sendUserFeedback(feedBack);
+		reposne.put("message", "Thankyou for your feedback.");
 		return reposne;
 	}
 
