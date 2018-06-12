@@ -522,7 +522,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/api/users/sendFeedback", method = RequestMethod.POST)
-	public Map<String,Object> sendFeedbackToAdmin(Feedback feedBack) {
+	public Map<String,Object> sendFeedbackToAdmin(@RequestBody Feedback feedBack) {
 		
 		Map<String,Object> reposne = new HashMap<>();
 		reposne.put("success", true);
