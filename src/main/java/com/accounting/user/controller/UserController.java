@@ -70,6 +70,7 @@ public class UserController {
     @Value("${accounting.salt}")
     private String salt;
     
+    @Autowired
     private EmailService emailService;
 
     @RequestMapping(value = "/api/users/", method = RequestMethod.POST)

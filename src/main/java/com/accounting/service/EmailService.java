@@ -9,9 +9,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Service;
+
 import com.accounting.bo.Feedback;
 import com.accounting.user.bo.User;
 
+@Service
 public class EmailService {
 	
     // Sender's email ID needs to be mentioned
