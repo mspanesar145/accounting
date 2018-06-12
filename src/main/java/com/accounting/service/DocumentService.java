@@ -104,6 +104,10 @@ public class DocumentService {
 		return userDocumentRepository.findByBookmarkedById(userId);
 	}
 	
+	public UserDocument findUserDocumentById(Long userId) {
+		return userDocumentRepository.findOne(userId);
+	}
+	
 	public Map<String,String> updateBookMarkedDocumentStatus(BookmarkDocument bookmarkDocument) {
 		Map<String,String> responseMap = new HashMap<>();
 		responseMap.put("status","success");

@@ -145,7 +145,13 @@ public class SearchController {
 			}
 		}
 		
-		return documentDao.findUserDocumentsListByCategoryIdSubCategoryIdContainsVideoTitle(myAccountCategoiresMap, containsVideo, title);
+		List<UserDocument> userDocuments = documentDao.findUserDocumentsListByCategoryIdSubCategoryIdContainsVideoTitle(myAccountCategoiresMap, containsVideo, title);
+		List<UserDocument> populatedUserDocuments = new ArrayList<>();
+		for (UserDocument userDocument : userDocuments) {
+			userDocument = documentService.findUserDocumentById(userDocument.getUserDocumentId());
+			populatedUserDocuments.add(userDocument);
+		}
+		return populatedUserDocuments;
 	}	
 	
 	@RequestMapping(value="/find/categories",produces="application/json")
