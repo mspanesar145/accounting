@@ -120,4 +120,10 @@ public class DocumentService {
 		}
 		return responseMap;
 	}
+	
+	public BookmarkDocument findBookmarkDocumentByUserDocumentId(Long userDocumentId){
+		
+		return bookmarkDocumentRepository.findByUserDocumentId(userDocumentId);
+		
+	}
 }

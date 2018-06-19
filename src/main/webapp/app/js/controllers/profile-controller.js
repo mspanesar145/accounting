@@ -69,15 +69,22 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 	}
 	
 	$scope.findSubCategoriesByParentId = function(parentCategoryId) {
-		ProfileService.findSubCategoriesByCategoryId(parentCategoryId).then(function(response) {
-			console.log(response.data);
-			$scope.subCategories = response.data;
-		},function(error){console.log(error);});	
+		console.log(parentCategoryId);
+		$scope.subCategories =[];
+		for(idx in parentCategoryId){
+			ProfileService.findSubCategoriesByCategoryId(parentCategoryId[idx]).then(function(response) {
+				for(subIdx in response.data){
+					$scope.subCategories.push(response.data[subIdx]);	
+				}
+			},function(error){console.log(error);});		
+		}
+		
 	}
 	
 	$scope.saveMyaccount = function(myAccountData) {
 		myAccountData['createdById'] = $scope.loggedInUser.userId;
-		
+		myAccountData.mainCourseId = myAccountData.mainCourseId.toString();
+		myAccountData.secondryCourseId = myAccountData.secondryCourseId.toString();
 		var myAccounts = [];
 		myAccounts.push(myAccountData);
 		

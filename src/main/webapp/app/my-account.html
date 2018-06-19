@@ -18,7 +18,7 @@
 					<div class="form-group">
 						<label>Main Course</label>
 						<div class="custom-select">
-							<select class="form-control" required ng-model="myAccountData.mainCourseId" ng-change="findSubCategoriesByParentId(myAccountData.mainCourseId)">
+							<select class="form-control" multiple required ng-model="myAccountData.mainCourseId" ng-change="findSubCategoriesByParentId(myAccountData.mainCourseId)">
 								<option value="{{cat.profileCategoryId}}" ng-repeat="cat in categories" ng-selected="showSelectedCategory(cat,myAccountData)">{{cat.name}}</option>
 								
 							</select>
@@ -29,7 +29,7 @@
 					<div class="form-group">
 						<label>Secondary Course</label>
 						<div class="custom-select">
-							<select class="form-control" required ng-model="myAccountData.secondryCourseId">
+							<select class="form-control" multiple required ng-model="myAccountData.secondryCourseId">
 								<option value="{{subCat.profileCategoryId}}" ng-repeat="subCat in subCategories">{{subCat.name}}</option>
 							</select>
 						</div>

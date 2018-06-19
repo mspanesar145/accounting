@@ -6,6 +6,7 @@
 		
         <div class="container">
 			<!-- <h2 class="main-headline">Latest Video</h2><br clear="all" /> -->
+			<input type="text" ng-model="searchTitle" ng-keyup="loadDocumentsByTitle()" placeholder="Search"/>
             <div class="owl-carousel owl-theme" id="carousal-1">
                 <div class="item">
                     <img src="app/images/banner-001.jpg" alt="" class="img-responsive" />
@@ -49,7 +50,6 @@
 	<!--//banner -->    <!--//banner -->
 
     <section class="content-zone">
-        <div class="container">
             <section class="image-section">
                 <h2 class="main-headline">Image Headline</h2>
                 <section id="demos">
@@ -59,7 +59,7 @@
                     <div class="owl-carousel owl-theme" id="carousal-2" ng-if="images.length > 0">
                         <div ng-repeat="image in images" ng-click="openContent(image)">
 	                        <div class="item">
-	                    		<img src="{{image.coverImageUrl}}" alt="" class="img-responsive" />
+	                    		<img src="{{image.coverImageUrl}}"  alt="" class="img-responsive" />
 	                		</div>
 	                		<div class="title"><p>{{image.title}}</p></div>
                         </div>
@@ -72,7 +72,7 @@
                 </section>
             </section>
 
-            <section class="video-section">
+            <section class="video-section" ng-show="myAccountData.newsLetterSubscribed">
                 <h2 class="main-headline">Video Headline</h2>
                 <section id="demos">
 					<div ng-if="videos.length == 0">
@@ -94,6 +94,30 @@
                 </section>
             </section>
     </section>
+    
+   
+
+		<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						<p>Some text in the modal.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 
     <section class="content-zone white-bg">
         <section class="video-description">
@@ -153,6 +177,5 @@
                 </section>
             </section>
         </section>
-    </section>
     </section>
 </div>

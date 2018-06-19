@@ -3,13 +3,15 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 	$scope.initHomePage = function() {
 		$rootScope.showNavigationLinks = true;
 		$scope.findAllDocuments();
+		$scope.findMyAccountDetail();
 	}
 	
-	$scope.findAllDocuments = function() {
+	$scope.findAllDocuments = function(title) {
 		showLoader();
 		window.localStorage.removeItem("selectedDocument");
 		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-		DocumentService.findAllDocuments($scope.loggedInUser.userId).then(function(response){
+		var qry = "?userId="+$scope.loggedInUser.userId+"&title="+title;
+		DocumentService.findAllDocuments(qry).then(function(response){
 			hideLoader();
 			$scope.images = [];
 			$scope.videos = [];
@@ -27,6 +29,23 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 			}
 		});
 	}
+	
+	$scope.findMyAccountDetail = function(){
+		showLoader();
+		var qry = "?createdById="+$scope.loggedInUser.userId;
+		DocumentService.findMyAccountData(qry).then(function(response){
+			hideLoader();
+			$scope.myAccountData = response.data;
+			
+		});
+	}
+	
+	$scope.loadDocumentsByTitle =function(){
+		showLoader();
+		$scope.findAllDocuments($scope.searchTitle);
+		
+	}
+	
 	
 	
 	$scope.initContentPage = function() {
@@ -47,11 +66,11 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 				var qryStr = "?categoryId="+myAccount.mainCourseId+"&subCategoryId="+myAccount.secondryCourseId+"&containsVideo=true"
 			}
 		}
-		
+		//qryStr = "?categoryId=1&subCategoryId=10&containsVideo=false"
 		$scope.findAllDocumentsByCatSubCatId(qryStr);
 	}
 	$scope.findAllDocumentsByCatSubCatId = function(qryStr) {
-		showLoader();
+		//showLoader();
 		DocumentService.findAllDocumentsByCatSubCatId(qryStr).then(function(response){
 			hideLoader();
 			$scope.contents = response.data;
@@ -66,7 +85,7 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 
     
     $scope.openContent = function(document) {
-    	var url = '';
+   /* 	var url = '';
     	if (document.containsVideo) {
     		url = document.videoLink;
     	} else if (!document.containsVideo) {
@@ -74,7 +93,8 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	}
     	if (url) {
     		window.open(url,'_blank');
-    	}
+    	}*/
+    	window.location.href="#!/app/list/content"
     	
     }
 
@@ -102,6 +122,42 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
         console.log(rating);
     }
     
+
+    $scope.openCommentModal = function(document) {
+    	//$scope.document = document;
+    	$("#comment-modal").toggle();
+    	$scope.documentComment={};
+
+    }
+    $scope.closeCommentModal = function() {
+    	$("#comment-modal").toggle();
+    }
+    $scope.saveDocumentComment = function(userDocumentId){
+    	showLoader();
+    	$scope.documentComment.userDocumentId = userDocumentId;
+    	$scope.documentComment.commentedById = JSON.parse(localStorage.getItem('loggedInUser')).userId;
+    	DocumentService.saveDocumentComment($scope.documentComment).then(function(response) {
+    		hideLoader();
+    		$scope.initContentPage();
+    		$("#comment-modal").toggle();
+    	});
+    }
+   
+    $scope.openCommentListModal = function(userDocumentId) {
+    	$scope.documentComments = [];
+    	var qryStr = "?documentId="+userDocumentId;
+    	DocumentService.findAllDocumentsCommentsByDocumentId(qryStr).then(function(response) {
+    		hideLoader();
+    		$scope.documentComments = response.data;
+    		$("#comment-list-modal").toggle();
+    	});
+    	
+
+    }
+    $scope.closeCommentListModal = function() {
+    	$("#comment-list-modal").toggle();
+    }
+    
     $scope.saveRating = function(userDocumentId) {
     	var userData = JSON.parse(localStorage.getItem("loggedInUser"));
     	var ratingCredentials = {
@@ -115,6 +171,31 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     		$("#rating-modal").toggle();
     	});
     }
+    
+    $scope.toggleBookmark = function(document){
+
+    	
+    	var qryStr = "?userDocumentId="+document.userDocumentId;
+    	DocumentService.findBookmarkDocumentByDocumentId(qryStr).then(function(response) {
+    		hideLoader();
+    		if(response.data == ''){
+    			var bookmarkDocument = {
+    					'userDocumentId' : 	document.userDocumentId,
+    					'bookmarkedById' :  document.createdById
+    			}
+    		}else{
+    			var bookmarkDocument = {
+    					'bookmarkDocumentId' :  response.data.bookmarkDocumentId
+    			}
+    		}
+    		DocumentService.saveBookmarkDocument(bookmarkDocument).then(function(response) {
+    		
+    		console.log(response);
+    		});
+    	});
+    	
+    }
+    
     
     $scope.moveToListing = function(seelctedDocument) {
     	window.localStorage.setItem("selectedDocument",JSON.stringify(seelctedDocument));

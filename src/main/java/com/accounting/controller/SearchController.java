@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accounting.UserDocument;
 import com.accounting.bo.Banner;
+import com.accounting.bo.BookmarkDocument;
 import com.accounting.bo.Banner.BannerScreen;
 import com.accounting.bo.DocumentComment;
 import com.accounting.bo.MyAccount;
@@ -39,6 +40,7 @@ public class SearchController {
 	
 	@Autowired
 	BannerService bannerService;
+	
 	
 	@RequestMapping(value="/find/topTenDocuments",produces="application/json")
 	public Map<String,List<UserDocument>> findTopTenDocuments(Long userId,String title) {
@@ -182,6 +184,11 @@ public class SearchController {
 	@RequestMapping(value="/find/bannersByScreen",produces="application/json")
 	public List<Banner> findBannersByScreen(BannerScreen screen) {
 		return bannerService.findActiveBannersByScreen(screen);
+	}
+	
+	@RequestMapping(value="/find/bookmarkDocument",produces="application/json")
+	public BookmarkDocument findBannersByScreen(Long userDocumentId) {
+		return documentService.findBookmarkDocumentByUserDocumentId(userDocumentId);
 	}
 }
 

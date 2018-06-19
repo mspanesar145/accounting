@@ -10,5 +10,7 @@ import com.accounting.bo.BookmarkDocument;
 @Repository
 public interface BookmarkDocumentRepository extends JpaRepository<BookmarkDocument, Long>{
 
-	public List<BookmarkDocument> findByBookmarkedById(Long bookmarkedById);
+	public BookmarkDocument findByBookmarkedById(Long bookmarkedById);
+	
+	public BookmarkDocument findByUserDocumentId(Long documentId);
 }

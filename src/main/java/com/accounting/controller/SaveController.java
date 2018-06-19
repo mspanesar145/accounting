@@ -16,6 +16,7 @@ import com.accounting.bo.DocumentComment;
 import com.accounting.bo.DocumentStats.DocumentStatsSource;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.Rating;
+import com.accounting.service.DocumentCommentService;
 import com.accounting.service.DocumentService;
 import com.accounting.service.ProfileService;
 
@@ -27,6 +28,9 @@ public class SaveController {
 	
 	@Autowired
 	private DocumentService documentService;
+	
+	@Autowired
+	DocumentCommentService documentCommentService;
 	
 	@RequestMapping(value="/save/userDocument",produces="application/json")
 	public UserDocument saveUserDocument(@RequestBody UserDocument userDocument) {
@@ -49,6 +53,11 @@ public class SaveController {
 		return documentService.saveRating(rating);
 	}
 	
+	@RequestMapping(value="/save/documentComment",produces="application/json")
+	public DocumentComment saveDocumentComment(@RequestBody DocumentComment documentComment) {
+		return documentCommentService.saveDocumentComment(documentComment);
+	}
+	
 	@RequestMapping(value="/save/coverimage",produces="application/json")
 	public String saveUserDocument(@RequestParam("mediaFile") MultipartFile uploadfile,Long userId) {
 		JSONObject response = new JSONObject();
@@ -62,10 +71,10 @@ public class SaveController {
 		return null;
 	}
 	
-	@RequestMapping(value="/save/documentComment",produces="application/json")
+	/*@RequestMapping(value="/save/documentComment",produces="application/json")
 	public UserDocument saveUserDocument(@RequestBody DocumentComment documentComment) {
 		return documentService.saveDocumentComment(documentComment);
-	}
+	}*/
 	
 	@RequestMapping(value="/save/documentStats",produces="application/json")
 	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {

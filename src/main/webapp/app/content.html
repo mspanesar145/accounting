@@ -6,6 +6,7 @@
         <section class="video-description content-desc">
             <section class="container">
                 <h3 class="tittle-w3ls">Documents</h3>
+                <input type="text" ng-model="searchTitle" ng-keyup="loadDocumentsByTitle()" placeholder="Search"/>
                 <section class="row divider">
                 	<div ng-if="contents.length == 0">
                 		<h2>No Content Available</h2>
@@ -28,8 +29,9 @@
                                 	<img src="app/images/attachment.png" ng-click="openContent(content)" style="height:30px;margin-left:10px;"/>
                                     <ul class="share-icons-list">
                                     	<li><a href="javascript:void(0);"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-comment-o" aria-hidden="true"></i></a></li>
+                                        <li><a ng-click="toggleBookmark(content)" href="javascript:void(0);"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                        <li><a ng-click="openCommentModal()"  href="javascript:void(0);"><i class="fa fa-comment-o" aria-hidden="true"></i></a></li>
+                                        <li><a ng-click="openCommentListModal(content.userDocumentId)"href="javascript:void(0);"><i class="fa  fa-comments" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                             </section>
@@ -67,10 +69,68 @@
 							</div>
 						</div>
 						
+								
+						<!-- Comment Modal -->
+						<div class="modal" id="comment-modal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h3 class="modal-title" id="exampleModalComment"><strong>Type your comments</strong></h3>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close" ng-click="closeCommentModal()">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="row modal-body">
+										<textarea ng-model="documentComment.comment" class="form-control" style="min-width: 100%"></textarea>
+										<div class=col-sm-12>
+	        								<div>
+	        									
+	        								</div>
+	    								</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal" ng-click="closeCommentModal()">Close</button>
+										<button type="button" class="btn btn-primary" ng-click="saveDocumentComment(content.userDocumentId)">Save
+											changes</button>
+									</div>
+								</div>
+							</div>
+						</div>	
 						
+				
 						
                     </section>
 					</div>
+					
+							<!-- Comment List Modal -->
+						<div class="modal" id="comment-list-modal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h3 class="modal-title" id="exampleModalComment"><strong>User Document Comments</strong></h3>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close" ng-click="closeCommentListModal()">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="row modal-body">
+										<ul ng-repeat="comment in documentComments"><li>{{comment.comment}}</li></ul>
+										<div class=col-sm-12>
+	        								<div>
+	        									
+	        								</div>
+	    								</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
 					
 					<!--  Description Modal -->
 						<div class="modal desc-modal" role="dialog">
@@ -91,7 +151,7 @@
 						    </div>
 						  </div>
 						</div>
-					
+				
                    <!-- <section class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <section class="media">
                             <section class="media-left">
