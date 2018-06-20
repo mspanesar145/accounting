@@ -10,7 +10,10 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 		showLoader();
 		window.localStorage.removeItem("selectedDocument");
 		$scope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-		var qry = "?userId="+$scope.loggedInUser.userId+"&title="+title;
+		var qry = "?userId="+$scope.loggedInUser.userId;
+		if (title) {
+			qry = qry+"&title="+title;
+		}
 		DocumentService.findAllDocuments(qry).then(function(response){
 			hideLoader();
 			$scope.images = [];
@@ -40,10 +43,9 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
 		});
 	}
 	
-	$scope.loadDocumentsByTitle =function(){
+	$scope.loadDocumentsByTitle =function(searchTitle){
 		showLoader();
-		$scope.findAllDocuments($scope.searchTitle);
-		
+		$scope.findAllDocuments(searchTitle);
 	}
 	
 	
