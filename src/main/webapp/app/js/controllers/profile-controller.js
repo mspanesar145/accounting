@@ -93,7 +93,7 @@ angular.module("accounting").controller('ProfileController',function($scope, Pro
 		ProfileService.saveMyAccountData($scope.loggedInUser).then(function(response) {
 			console.log(response.data);
 			var myAccounts = [];
-			myAccounts.push(response.data);
+			myAccounts.push(response.data.data.myAccounts[0]);
 			$scope.loggedInUser.myAccounts = myAccounts;
 			localStorage.setItem("loggedInUser", JSON.stringify($scope.loggedInUser));
 			window.location.href = "#!/app/home"
