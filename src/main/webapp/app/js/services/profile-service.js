@@ -45,7 +45,7 @@ angular.module("accounting").service('ProfileService', function($q, $http){
 	  
 	  var saveMyAccountData = function(myAccountData){
 		    return $q(function(resolve, reject) {
-		    	var myAccountSaveAPI = '/api/user/update/';
+		    	var myAccountSaveAPI = '/api/users/update/';
 		    	$http.post(myAccountSaveAPI,myAccountData).then(function(resp){
 			        resolve(resp);
 			      }, function(error){
