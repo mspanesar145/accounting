@@ -99,6 +99,20 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	window.location.href="#!/app/list/content"
     	
     }
+    
+    $scope.openContentInListPage = function(document) {
+    	    	var url = '';
+    	    	if (document.containsVideo) {
+    	    		url = document.videoLink;
+    	    	} else if (!document.containsVideo) {
+    	    		url = document.contentLinkUrl;
+    	    	}
+    	    	if (url) {
+    	    		window.open(url,'_blank');
+    	    	}
+    	    	window.location.href="#!/app/list/content"
+    	    	
+    	    }
 
     $scope.openRatingModal = function(document) {
     	$scope.document = document;
