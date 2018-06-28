@@ -112,6 +112,20 @@ angular.module("accounting").service('DocumentService', function($q, $http){
 			    });
 		  };
 		  
+		  var updateDocumentStats = function(userDocumentId,source){
+			 
+		  
+			    return $q(function(resolve, reject) {
+			    	var documentStatsSource = {};
+			    	var documentsAPI = '/save/documentStats?userDocumentId='+userDocumentId+'&source='+source;
+				      $http.get(documentsAPI,).then(function(resp){
+				        resolve(resp);
+				      }, function(error){
+				        console.log(error)
+				      });
+			    });
+		  };
+		  
 	
 	  
 	  
@@ -128,5 +142,6 @@ angular.module("accounting").service('DocumentService', function($q, $http){
 		  findBookmarkDocumentByDocumentId:findBookmarkDocumentByDocumentId,
 		  saveBookmarkDocument:saveBookmarkDocument,
 		  findMyAccountData:findMyAccountData,
+		  updateDocumentStats:updateDocumentStats,
 	  }
 });

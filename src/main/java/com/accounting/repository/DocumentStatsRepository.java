@@ -9,4 +9,6 @@ import com.accounting.bo.DocumentStats;
 public interface DocumentStatsRepository extends JpaRepository<DocumentStats, Long>{
 	
 	public DocumentStats findByUserDocumentId(Long userDocumentId);
+	
+	public DocumentStats findByUserId(Long userId);
 }

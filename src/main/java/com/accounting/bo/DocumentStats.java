@@ -35,6 +35,9 @@ public class DocumentStats extends AccountingGeneral {
 	@Column(name="total_counts",nullable = false, columnDefinition = "int default 0")
 	private Long totalCounts;
 	
+	@Column(name="user_id",nullable = false)
+	private Long userId;
+	
 	public Long getDocumentStatsId() {
 		return documentStatsId;
 	}
@@ -75,4 +78,13 @@ public class DocumentStats extends AccountingGeneral {
 		this.totalCounts = totalCounts;
 	}
 
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	
 }

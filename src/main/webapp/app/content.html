@@ -19,14 +19,14 @@
                             </section>
                             <section class="media-body">
                                 <h4 class="media-heading">{{content.title}}</h4>
-                                <p>{{content.content.substr(0,100)}} <a href="javascript:void(0);" ng-click="openDescModal(content)"> Read More</a></p>
+                                <p>{{content.content.substr(0,100)}} <a href="javascript:void(0);" ng-click="openDescModal(content,'content')"> Read More</a></p>
                                 
                                 <div class="share-section">
                                 	<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 									  Launch demo modal
 									</button> -->
                                 	<a class="border-btn" data-toggle="modal" ng-click="openRatingModal(content)">Rate</a>
-                                	<img src="app/images/attachment.png" ng-click="openContentInListPage(content)" style="height:30px;margin-left:10px;"/>
+                                	<img src="app/images/attachment.png" ng-click="openContentInListPage(content,'attachment')" style="height:30px;margin-left:10px;"/>
                                     <ul class="share-icons-list">
                                     	<li><a href="javascript:void(0);"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
                                         <li><a ng-click="toggleBookmark(content)" href="javascript:void(0);"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>

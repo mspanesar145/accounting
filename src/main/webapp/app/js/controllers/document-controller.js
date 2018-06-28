@@ -100,7 +100,8 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	
     }
     
-    $scope.openContentInListPage = function(document) {
+    $scope.openContentInListPage = function(document,source) {
+    	$scope.updateDocumentStats(document,source);
     	    	var url = '';
     	    	if (document.containsVideo) {
     	    		url = document.videoLink;
@@ -123,9 +124,26 @@ angular.module("accounting").controller('DocumentController',function($scope,$ro
     	$("#rating-modal").toggle();
     }
     
-    $scope.openDescModal = function(document) {
+    $scope.openDescModal = function(document,source) {
     	$scope.document = document;
     	$(".desc-modal").toggle();
+    	$scope.updateDocumentStats(document,source);
+    }
+    
+    $scope.updateDocumentStats = function(document,source){
+    	var sourceType = Object.freeze({"content":'content', "attachment":'attachment'})
+    
+    	 var type = '';
+    	 if(source == sourceType.content){
+    		  type = sourceType.content;
+    	 }else{
+    		 type = sourceType.attachment;
+    	 }
+    	showLoader();
+    	DocumentService.updateDocumentStats(document.userDocumentId,type).then(function(response) {
+    		hideLoader();
+    		
+    	});
     }
     
     $scope.closeDescModal = function() {

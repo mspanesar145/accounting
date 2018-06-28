@@ -72,20 +72,22 @@ public class DocumentService {
 	
 	public UserDocument updateDocumentStats(Long userDocumentId,DocumentStatsSource source) {
 		
-		DocumentStats documentStats = documentStatsRepository.findByUserDocumentId(userDocumentId);
+		UserDocument document = userDocumentRepository.findOne(userDocumentId);
+		DocumentStats documentStats = documentStatsRepository.findByUserId(document.getCreatedById());
 		if (documentStats == null) {
 			documentStats = new DocumentStats();
 			documentStats.setAttachmentCounts(0l);
 			documentStats.setContentCounts(0l);
 			documentStats.setUserDocumentId(userDocumentId);
+			documentStats.setUserId(document.getCreatedById());
 			documentStats.setCreatedAt(new Date());
 		}
 		System.out.println("Document Found : "+documentStats.getUserDocumentId());
 		if (source.equals(DocumentStatsSource.content)) {
-			long contentStats = documentStats.getContentCounts() + 1;
+			long contentStats = 1;
 			documentStats.setContentCounts(contentStats);
 		} else  if (source.equals(DocumentStatsSource.attachment)) {
-			long attachmentStats = documentStats.getAttachmentCounts() + 1;
+			long attachmentStats = 1;
 			documentStats.setAttachmentCounts(attachmentStats);
 		}
 		
