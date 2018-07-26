@@ -63,6 +63,64 @@ public class DocumentDao {
 		});
 	}	
 	
+	public List<UserDocument> findAllUserDocumentOfAdmin(){
+		
+		String sql = "select doc.* from users usr join user_documents doc on usr.user_id = doc.created_by_id where usr.type = 'admin'";
+		System.out.println("image sql : "+sql);
+		
+		return jdbcTemplate.query(sql, new RowMapper<UserDocument>() {
+			@Override
+			public UserDocument mapRow(ResultSet rs, int rownumber) throws SQLException {
+				UserDocument userDocument = new UserDocument();
+				userDocument.setUserDocumentId(rs.getLong("user_document_id"));
+				userDocument.setCategoryId(rs.getLong("category_id"));
+				userDocument.setSubCategoryId(rs.getLong("sub_category_id"));
+				userDocument.setContainsVideo(rs.getBoolean("contains_video"));
+				userDocument.setContent(rs.getString("content"));
+				userDocument.setContentLinkUrl(rs.getString("content_link_url"));
+				userDocument.setCoverImageUrl(rs.getString("cover_image_url"));
+				userDocument.setPath(rs.getString("cover_image_url"));
+				userDocument.setCreatedAt(rs.getDate("created_at"));
+				userDocument.setCreatedById(rs.getLong("created_by_id"));
+				userDocument.setOverallRating(rs.getInt("overall_rating"));
+				userDocument.setTitle(rs.getString("title"));
+				userDocument.setVideoLink(rs.getString("video_link"));
+				
+				return userDocument;
+			}
+		});
+		
+	}
+	
+public List<UserDocument> findAllUserDocumentOfSpecial(){
+		
+		String sql = "select doc.* from users usr join user_documents doc on usr.user_id = doc.created_by_id where usr.type = 'special'";
+		System.out.println("image sql : "+sql);
+		
+		return jdbcTemplate.query(sql, new RowMapper<UserDocument>() {
+			@Override
+			public UserDocument mapRow(ResultSet rs, int rownumber) throws SQLException {
+				UserDocument userDocument = new UserDocument();
+				userDocument.setUserDocumentId(rs.getLong("user_document_id"));
+				userDocument.setCategoryId(rs.getLong("category_id"));
+				userDocument.setSubCategoryId(rs.getLong("sub_category_id"));
+				userDocument.setContainsVideo(rs.getBoolean("contains_video"));
+				userDocument.setContent(rs.getString("content"));
+				userDocument.setContentLinkUrl(rs.getString("content_link_url"));
+				userDocument.setCoverImageUrl(rs.getString("cover_image_url"));
+				userDocument.setPath(rs.getString("cover_image_url"));
+				userDocument.setCreatedAt(rs.getDate("created_at"));
+				userDocument.setCreatedById(rs.getLong("created_by_id"));
+				userDocument.setOverallRating(rs.getInt("overall_rating"));
+				userDocument.setTitle(rs.getString("title"));
+				userDocument.setVideoLink(rs.getString("video_link"));
+				
+				return userDocument;
+			}
+		});
+		
+	}
+	
 	public List<UserDocument> findTop10ContentDocuments(Map<Long,List<ProfileCategory>> myAccountCategories,String title) {
 		
 		StringBuffer sb = new StringBuffer();

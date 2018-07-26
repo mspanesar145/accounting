@@ -73,8 +73,13 @@ public class SearchController {
 					}
 				}
 			}
-			
-			topTenDocMap.put("image",documentDao.findTop10ImageDocuments(myAccountCategoiresMap,title));
+			List<UserDocument> docList = documentDao.findAllUserDocumentOfSpecial();
+			if(docList != null && docList.size() >0){
+				topTenDocMap.put("image",docList);
+			}else{
+				topTenDocMap.put("image",new ArrayList<>());
+			}
+			//topTenDocMap.put("image",documentDao.findTop10ImageDocuments(myAccountCategoiresMap,title));
 			topTenDocMap.put("video", documentDao.findTop10VideoDocuments(myAccountCategoiresMap,title));
 			topTenDocMap.put("content", documentDao.findTop10ContentDocuments(myAccountCategoiresMap,title));
 		} else {
@@ -182,8 +187,13 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/find/bannersByScreen",produces="application/json")
-	public List<Banner> findBannersByScreen(BannerScreen screen) {
-		return bannerService.findActiveBannersByScreen(screen);
+	public List<UserDocument> findBannersByScreen(BannerScreen screen) {
+		List<UserDocument> docList = documentDao.findAllUserDocumentOfAdmin();
+		if(docList != null && docList.size() >0){
+			return docList;
+		}else{
+			return new ArrayList<>();
+		}
 	}
 	
 	@RequestMapping(value="/find/bookmarkDocument",produces="application/json")

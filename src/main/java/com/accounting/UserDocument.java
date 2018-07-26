@@ -82,6 +82,9 @@ public class UserDocument extends AccountingGeneral {
 	
 	@Transient
 	private MultipartFile uploadFile;
+	
+	@Transient
+	private String path;
 
 	public Long getUserDocumentId() {
 		return userDocumentId;
@@ -216,4 +219,13 @@ public class UserDocument extends AccountingGeneral {
 	public void setBookmarkDocuments(List<BookmarkDocument> bookmarkDocuments) {
 		this.bookmarkDocuments = bookmarkDocuments;
 	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
 }

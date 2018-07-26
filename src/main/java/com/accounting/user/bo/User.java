@@ -64,6 +64,9 @@ public class User extends AccountingGeneral{
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Column(name="type")
+	private String type;
+	
 	@Column(name="photo")
 	private String photo;
 	
@@ -308,4 +311,13 @@ public class User extends AccountingGeneral{
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 }

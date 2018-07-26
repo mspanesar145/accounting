@@ -28,6 +28,7 @@ angular.module("accounting").controller('UserController',function($scope, $rootS
 		signupData['city'] = signupData['cityObj']['title'];
 		
 		signupData['authType'] = 'email';
+		signupData['type'] = 'special';
 		UserService.signup(signupData).then(function(response) {
 			console.log(response);
 			if (response.data.errorCode != 0) {
