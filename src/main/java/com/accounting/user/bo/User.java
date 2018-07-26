@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,7 @@ import com.accounting.bo.AccountingGeneral;
 import com.accounting.bo.MyAccount;
 import com.accounting.bo.Roles;
 import com.accounting.enums.AccountingEnums.AuthenticateType;
+import com.accounting.enums.AccountingEnums.UserType;
 
 
 @Entity
@@ -64,8 +67,9 @@ public class User extends AccountingGeneral{
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="type")
-	private String type;
+	private UserType type = UserType.user;
 	
 	@Column(name="photo")
 	private String photo;
@@ -312,12 +316,11 @@ public class User extends AccountingGeneral{
 		this.roles = roles;
 	}
 
-	public String getType() {
+	public UserType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(UserType type) {
 		this.type = type;
 	}
-	
 }

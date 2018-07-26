@@ -13,4 +13,8 @@ public class AccountingEnums {
 	public enum FileType {
 		PDF, WORD, EXCEL, VIDEOS
 	}
+	
+	public enum UserType {
+		admin,special,user
+	}
 }
